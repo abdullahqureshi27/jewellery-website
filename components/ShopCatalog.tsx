@@ -19,6 +19,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from '@/components/ui/sheet';
 
 interface ShopCatalogProps {
   initialProducts: JewelleryProduct[];
@@ -474,98 +482,132 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
         </div>
       </div>
 
-      {/* Mobile Filter Drawer */}
-      {mobileFilterOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0D1117]/60 backdrop-blur-sm lg:hidden animate-fadeIn">
-          <div className="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-[#E8E2D7]">
-                <h3 className="font-serif text-base font-bold uppercase tracking-wider text-[#0D1117]">
-                  Filter Pieces
-                </h3>
-                <button
-                  onClick={() => setMobileFilterOpen(false)}
-                  className="p-1 text-[#5C6270] hover:text-[#0D1117]"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+      {/* Mobile Filter Drawer via shadcn Sheet */}
+      <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
+        <SheetContent
+          side="right"
+          className="w-full max-w-sm sm:max-w-md bg-[#FAF8F5] border-l border-[#E8E2D7] p-0 flex flex-col justify-between"
+        >
+          <div className="p-6 border-b border-[#E8E2D7] bg-white">
+            <SheetHeader className="p-0 space-y-1 text-left">
+              <SheetTitle className="font-serif text-lg font-bold uppercase tracking-wider text-[#0D1117] flex items-center gap-2">
+                <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
+                <span>Filter Pieces</span>
+              </SheetTitle>
+              <SheetDescription className="text-xs text-[#5C6270]">
+                Refine by precious metal, gemstone &amp; availability
+              </SheetDescription>
+            </SheetHeader>
+          </div>
 
-              {/* Metal */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2">
-                  Metal Purity
-                </label>
-                <div className="space-y-1">
-                  {metals.map((m) => (
-                    <button
-                      key={m.value}
-                      onClick={() => setSelectedMetal(m.value)}
-                      className={`w-full text-left text-xs py-2 px-3 rounded-lg ${
-                        selectedMetal === m.value
-                          ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
-                          : 'text-[#5C6270] hover:bg-[#FAF8F5]'
-                      }`}
-                    >
-                      {m.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Gemstone */}
-              <div className="pt-4 border-t border-[#E8E2D7]">
-                <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2">
-                  Gemstone
-                </label>
-                <div className="space-y-1">
-                  {gemstones.map((g) => (
-                    <button
-                      key={g.value}
-                      onClick={() => setSelectedGemstone(g.value)}
-                      className={`w-full text-left text-xs py-2 px-3 rounded-lg ${
-                        selectedGemstone === g.value
-                          ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
-                          : 'text-[#5C6270] hover:bg-[#FAF8F5]'
-                      }`}
-                    >
-                      {g.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* In Stock */}
-              <div className="pt-4 border-t border-[#E8E2D7]">
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-[#12141A]">
-                  <input
-                    type="checkbox"
-                    checked={inStockOnly}
-                    onChange={(e) => setInStockOnly(e.target.checked)}
-                    className="rounded border-[#E8E2D7] text-[#C5A059] focus:ring-[#C5A059] w-4 h-4"
-                  />
-                  <span>Ready to Ship Only</span>
-                </label>
+          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            {/* Category */}
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+                Category
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {categories.map((c) => (
+                  <button
+                    key={c.value}
+                    type="button"
+                    onClick={() => handleCategoryChange(c.value)}
+                    className={`text-left text-xs py-2 px-3 rounded-xl border transition-all cursor-pointer ${
+                      selectedCategory === c.value
+                        ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold border-[#0D1117]'
+                        : 'bg-white text-[#5C6270] border-[#E8E2D7] hover:border-[#C5A059]'
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[#E8E2D7] flex gap-3">
-              <button
-                onClick={handleResetFilters}
-                className="flex-1 border border-[#E8E2D7] py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#5C6270]"
-              >
-                Reset
-              </button>
-              <button
-                onClick={() => setMobileFilterOpen(false)}
-                className="flex-1 bg-[#0D1117] text-[#FAF8F5] py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider"
-              >
-                View {filteredProducts.length}
-              </button>
+            {/* Metal Purity */}
+            <div className="pt-4 border-t border-[#E8E2D7]">
+              <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+                Metal Purity
+              </label>
+              <div className="space-y-1.5">
+                {metals.map((m) => (
+                  <button
+                    key={m.value}
+                    type="button"
+                    onClick={() => setSelectedMetal(m.value)}
+                    className={`w-full text-left text-xs py-2.5 px-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
+                      selectedMetal === m.value
+                        ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold border-[#0D1117]'
+                        : 'bg-white text-[#5C6270] border-[#E8E2D7] hover:border-[#C5A059]'
+                    }`}
+                  >
+                    <span>{m.label}</span>
+                    {selectedMetal === m.value && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Gemstone */}
+            <div className="pt-4 border-t border-[#E8E2D7]">
+              <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+                Gemstone
+              </label>
+              <div className="space-y-1.5">
+                {gemstones.map((g) => (
+                  <button
+                    key={g.value}
+                    type="button"
+                    onClick={() => setSelectedGemstone(g.value)}
+                    className={`w-full text-left text-xs py-2.5 px-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
+                      selectedGemstone === g.value
+                        ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold border-[#0D1117]'
+                        : 'bg-white text-[#5C6270] border-[#E8E2D7] hover:border-[#C5A059]'
+                    }`}
+                  >
+                    <span>{g.label}</span>
+                    {selectedGemstone === g.value && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* In Stock */}
+            <div className="pt-4 border-t border-[#E8E2D7]">
+              <label className="flex items-center gap-2.5 cursor-pointer text-xs font-medium text-[#12141A] p-2.5 bg-white rounded-xl border border-[#E8E2D7]">
+                <input
+                  type="checkbox"
+                  checked={inStockOnly}
+                  onChange={(e) => setInStockOnly(e.target.checked)}
+                  className="rounded border-[#E8E2D7] text-[#C5A059] focus:ring-[#C5A059] w-4 h-4 cursor-pointer"
+                />
+                <span>Ready to Ship Only (In Stock)</span>
+              </label>
             </div>
           </div>
-        </div>
-      )}
+
+          <SheetFooter className="p-4 bg-white border-t border-[#E8E2D7] flex-row gap-3">
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="flex-1 border border-[#E8E2D7] hover:border-[#0D1117] py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-[#5C6270] hover:text-[#0D1117] transition-colors cursor-pointer"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileFilterOpen(false)}
+              className="flex-1 bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
+            >
+              View {filteredProducts.length} Pieces
+            </button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       {/* Quick View Modal */}
       {selectedQuickView && (
