@@ -73,11 +73,6 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   sizes="(max-width: 1024px) 100vw, 600px"
                   className="object-cover transition-all duration-500"
                 />
-                {product.badge && (
-                  <span className="absolute top-4 left-4 bg-[#0D1117] text-[#FAF8F5] text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-[#C5A059]/40">
-                    {product.badge}
-                  </span>
-                )}
               </div>
 
               {/* Thumbnails */}

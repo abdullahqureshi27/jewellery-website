@@ -107,19 +107,14 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </button>
         </div>
 
-        {/* Top-Right Badge (Signature / Best Seller / Made to order) */}
-        <div className="absolute top-3.5 right-3.5 z-10 flex flex-col items-end gap-1">
-          {product.badge && (
-            <span className="bg-[#0D1117]/85 backdrop-blur-sm text-[#FAF8F5] border border-[#C5A059]/40 text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-sm">
-              {product.badge}
-            </span>
-          )}
-          {!product.inStock && (
+        {/* Top-Right In-Stock / Made to order status */}
+        {!product.inStock && (
+          <div className="absolute top-3.5 right-3.5 z-10">
             <span className="bg-amber-900/80 backdrop-blur-sm text-amber-200 text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
               Made to Order
             </span>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* 2. BOTTOM OVERLAY: [View Detail] & [Quick View] Pill Buttons (Matching Shared Screenshot) */}
         {/* On desktop: fades and slides up on hover. On mobile: clearly visible for instant touch action */}

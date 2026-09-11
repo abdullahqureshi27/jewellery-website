@@ -12,7 +12,6 @@ export interface JewelleryProduct {
   priceOnRequest?: boolean;
   inStock: boolean;
   isFeatured: boolean;
-  badge?: string;
   images: {
     url: string;
     alt: string;
@@ -34,7 +33,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     originalPrice: 42000,
     inStock: true,
     isFeatured: true,
-    badge: 'Signature Piece',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80',
@@ -61,7 +59,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     originalPrice: 56000,
     inStock: true,
     isFeatured: true,
-    badge: 'Best Seller',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
@@ -87,7 +84,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     price: 52000,
     inStock: true,
     isFeatured: true,
-    badge: 'New Arrival',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1000&q=80',
@@ -114,7 +110,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     originalPrice: 79000,
     inStock: true,
     isFeatured: true,
-    badge: 'Limited Edition',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1611591475836-8158c54c379a?auto=format&fit=crop&w=1000&q=80',
@@ -141,7 +136,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     priceOnRequest: false,
     inStock: false,
     isFeatured: true,
-    badge: 'Signature Piece',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1000&q=80',
@@ -167,7 +161,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     price: 26000,
     inStock: true,
     isFeatured: false,
-    badge: 'Best Seller',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=1000&q=80',

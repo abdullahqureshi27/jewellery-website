@@ -112,14 +112,6 @@ export const productType = {
       initialValue: false,
     },
     {
-      name: 'badge',
-      title: 'Badge Tag',
-      type: 'string',
-      options: {
-        list: ['Best Seller', 'New Arrival', 'Signature Piece', 'Limited Edition'],
-      },
-    },
-    {
       name: 'images',
       title: 'Product Images Gallery',
       type: 'array',

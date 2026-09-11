@@ -38,7 +38,6 @@ export async function getProducts(): Promise<JewelleryProduct[]> {
       priceOnRequest,
       inStock,
       isFeatured,
-      badge,
       "images": images[]{
         "url": asset->url,
         "alt": alt

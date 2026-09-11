@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import CartDrawer from "@/components/CartDrawer";
-import { CartProvider } from "@/context/CartContext";
+import StoreLayoutWrapper from "@/components/StoreLayoutWrapper";
 import "./globals.css";
 
 /**
  * Server Component: Root application layout providing luxury typography,
- * CartProvider context, CartDrawer, and global SEO metadata.
+ * StoreLayoutWrapper (isolating /studio from storefront UI), and global SEO metadata.
  */
 
 const playfair = Playfair_Display({
@@ -58,13 +54,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${jakarta.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#12141A]">
-        <CartProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
-          <CartDrawer />
-        </CartProvider>
+        <StoreLayoutWrapper>{children}</StoreLayoutWrapper>
       </body>
     </html>
   );

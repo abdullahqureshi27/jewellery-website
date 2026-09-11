@@ -10,7 +10,7 @@ import config from '../../../sanity.config';
 
 export default function StudioPage() {
   return (
-    <div className="h-screen w-full">
+    <div className="fixed inset-0 z-50 h-screen w-screen overflow-hidden bg-white">
       <NextStudio config={config} />
     </div>
   );

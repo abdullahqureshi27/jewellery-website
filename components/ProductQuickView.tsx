@@ -78,11 +78,6 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                 sizes="(max-width: 768px) 100vw, 400px"
                 className="object-cover transition-all duration-500"
               />
-              {product.badge && (
-                <span className="absolute top-3 left-3 bg-[#0D1117] text-[#FAF8F5] text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border border-[#C5A059]/40">
-                  {product.badge}
-                </span>
-              )}
             </div>
 
             {/* Thumbnails */}
