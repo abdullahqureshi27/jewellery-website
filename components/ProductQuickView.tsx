@@ -4,9 +4,10 @@
  * Client Component: Quick View Modal for inspecting high-res images,
  * detailed specifications (purity, carat, certification), adding to inquiry bag,
  * or triggering the customer details inquiry modal.
+ * Built with shadcn Dialog with Lenis isolation and outside-click dismiss.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ShieldCheck, ShoppingCart, Check, ArrowRight } from 'lucide-react';
@@ -14,6 +15,12 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
 import CustomerInquiryModal from './CustomerInquiryModal';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
 interface ProductQuickViewProps {
   product: JewelleryProduct | null;
@@ -25,15 +32,33 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
   const [isInquiryFormOpen, setIsInquiryFormOpen] = useState(false);
   const { addToCart, removeFromCart, isInCart, setIsCartDrawerOpen } = useCart();
 
+  // Reset selected image when product changes
+  useEffect(() => {
+    setSelectedImgIndex(0);
+  }, [product]);
+
+  // Lock Lenis and window scroll when quick view is open
+  useEffect(() => {
+    if (product) {
+      (window as any).__lenis?.stop();
+      document.body.style.overflow = 'hidden';
+    } else {
+      (window as any).__lenis?.start();
+      document.body.style.overflow = '';
+    }
+    return () => {
+      (window as any).__lenis?.start();
+      document.body.style.overflow = '';
+    };
+  }, [product]);
+
   if (!product) return null;
 
   const inCart = isInCart(product._id);
-  const activeImage =
-    product.images?.[selectedImgIndex] ||
-    product.images?.[0] || {
-      url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e',
-      alt: product.title || 'Jewellery piece',
-    };
+  const activeImage = product.images?.[selectedImgIndex] || product.images?.[0] || {
+    url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e',
+    alt: product.title,
+  };
 
   const formattedPrice = new Intl.NumberFormat('en-PK', {
     style: 'currency',
@@ -60,22 +85,22 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0D1117]/70 backdrop-blur-sm animate-fadeIn">
-        <div
-          className="relative w-full max-w-4xl bg-[#FAF8F5] rounded-2xl shadow-2xl overflow-hidden border border-[#E8E2D7] max-h-[90vh] flex flex-col md:flex-row"
-          onClick={(e) => e.stopPropagation()}
+      <Dialog open={Boolean(product)} onOpenChange={(open) => { if (!open) onClose(); }}>
+        <DialogContent
+          showCloseButton={false}
+          className="max-w-4xl bg-[#FAF8F5] p-0 border border-[#E8E2D7] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[88vh]"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/80 hover:bg-white text-[#12141A] shadow-sm transition-all"
+            className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/80 hover:bg-white text-[#12141A] shadow-sm transition-all cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Left Column: Image Gallery with thumbnail switcher */}
-          <div className="w-full md:w-1/2 p-6 bg-[#F5F2EC] flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#E8E2D7]">
+          <div className="w-full md:w-1/2 p-5 sm:p-6 bg-[#F5F2EC] flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#E8E2D7] shrink-0">
             <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-[#E8E2D7] shadow-sm">
               <Image
                 src={activeImage.url}
@@ -93,7 +118,7 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                   <button
                     key={idx}
                     onClick={() => setSelectedImgIndex(idx)}
-                    className={`relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all ${
+                    className={`relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all cursor-pointer ${
                       selectedImgIndex === idx
                         ? 'border-[#C5A059] ring-2 ring-[#C5A059]/30'
                         : 'border-[#E8E2D7] hover:border-[#C5A059]/60 opacity-70 hover:opacity-100'
@@ -106,17 +131,23 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
             )}
           </div>
 
-          {/* Right Column: Jewellery Specifications & Actions */}
-          <div className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
+          {/* Right Column: Jewellery Specifications & Actions (Scrollable container) */}
+          <div
+            data-lenis-prevent="true"
+            className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between overflow-y-auto overscroll-contain scrollbar-thin"
+          >
             <div>
               <div className="flex items-center justify-between gap-2 text-xs text-[#5C6270] mb-2 uppercase tracking-widest font-medium">
                 <span>{product.category}</span>
                 <span className="text-[#C5A059] font-mono">{product.itemCode}</span>
               </div>
 
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117] leading-tight mb-3">
+              <DialogTitle className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117] leading-tight mb-2">
                 {product.title}
-              </h3>
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                {product.description}
+              </DialogDescription>
 
               {/* Price section */}
               <div className="flex items-baseline gap-3 mb-6">
@@ -137,7 +168,7 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                   </>
                 )}
                 <span
-                  className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ml-auto ${
+                  className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ml-auto whitespace-nowrap ${
                     product.inStock
                       ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                       : 'bg-amber-50 text-amber-700 border border-amber-200'
@@ -214,8 +245,8 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Customer Details Inquiry Form for this single product */}
       <CustomerInquiryModal
