@@ -125,11 +125,11 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                   </span>
                 ) : (
                   <>
-                    <span className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117]">
+                    <span className="font-sans text-2xl sm:text-3xl font-bold text-[#0D1117] tracking-tight tabular-nums lining-nums">
                       {formattedPrice}
                     </span>
                     {formattedOriginalPrice && (
-                      <span className="text-sm text-[#8A90A0] line-through">
+                      <span className="text-sm text-[#8A90A0] line-through font-sans tabular-nums lining-nums">
                         {formattedOriginalPrice}
                       </span>
                     )}

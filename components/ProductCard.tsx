@@ -168,19 +168,19 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         </div>
 
         {/* Pricing & Stock Footer */}
-        <div className="pt-3 border-t border-[#E8E2D7]/60 flex items-center justify-between">
-          <div>
+        <div className="pt-3 border-t border-[#E8E2D7]/60 flex items-center justify-between gap-2">
+          <div className="min-w-0">
             {product.priceOnRequest ? (
               <span className="font-serif text-sm font-bold text-[#0D1117]">
                 Price on Request
               </span>
             ) : (
-              <div className="flex items-baseline gap-2">
-                <span className="font-serif text-base sm:text-lg font-bold text-[#0D1117]">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-sans text-base sm:text-lg font-bold text-[#0D1117] tracking-tight tabular-nums lining-nums">
                   {formattedPrice}
                 </span>
                 {formattedOriginalPrice && (
-                  <span className="text-xs text-[#8A90A0] line-through">
+                  <span className="text-xs text-[#8A90A0] line-through tabular-nums lining-nums font-sans">
                     {formattedOriginalPrice}
                   </span>
                 )}
@@ -188,7 +188,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             )}
           </div>
 
-          <span className="text-[11px] font-semibold text-[#C5A059] uppercase tracking-wider">
+          <span className="text-[10px] sm:text-[11px] font-semibold text-[#C5A059] uppercase tracking-wider whitespace-nowrap shrink-0">
             {product.inStock ? 'Ready to Ship' : 'Made to Order'}
           </span>
         </div>
