@@ -152,9 +152,9 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
             href="https://wa.me/923001234567?text=Hello%20Aurelia%20Atelier,%20I%20need%20help%20confirming%20my%20ring%20size%20for%20a%20jewellery%20order."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-[#0D1117] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-2 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shrink-0 cursor-pointer group"
           >
-            <FaWhatsapp className="w-4 h-4" />
+            <FaWhatsapp className="w-4 h-4 text-[#0D1117] group-hover:scale-110 transition-transform" />
             <span>Ask on WhatsApp</span>
           </a>
         </div>

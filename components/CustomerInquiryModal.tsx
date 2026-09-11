@@ -368,9 +368,9 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-3 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-md group cursor-pointer disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-3 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-lg shadow-[#C5A059]/20 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] group cursor-pointer disabled:opacity-60"
             >
-              <FaWhatsapp className="w-5 h-5 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
+              <FaWhatsapp className="w-5 h-5 text-[#0D1117] transition-all duration-300 group-hover:scale-110" />
               <span>Send Complete Inquiry to WhatsApp</span>
             </button>
             <p className="text-center text-[10px] text-[#8A90A0] mt-2">

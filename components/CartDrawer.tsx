@@ -220,9 +220,9 @@ export default function CartDrawer() {
               {/* Primary WhatsApp Inquiry CTA Button */}
               <Button
                 onClick={() => setIsInquiryModalOpen(true)}
-                className="w-full h-11 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md shadow-[#25D366]/20 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
+                className="w-full h-12 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] rounded-xl text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-lg shadow-[#C5A059]/20 flex items-center justify-center gap-2.5 cursor-pointer hover:scale-[1.01] active:scale-[0.99] group"
               >
-                <FaWhatsapp className="w-4 h-4 text-white shrink-0" />
+                <FaWhatsapp className="w-4 h-4 text-[#0D1117] shrink-0 group-hover:scale-110 transition-transform" />
                 <span>Inquire on WhatsApp ({totalItems} {totalItems === 1 ? 'Piece' : 'Pieces'})</span>
               </Button>
 

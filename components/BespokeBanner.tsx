@@ -84,9 +84,9 @@ export default function BespokeBanner() {
                     href="https://wa.me/923001234567?text=Hello%20Aurelia%20Atelier,%20I%20have%20a%20reference%20image%20for%20a%20custom%20jewellery%20piece.%20I%20would%20like%20a%20quote%20and%20consultation."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-[#0D1117] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-3 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer group"
                   >
-                    <FaWhatsapp className="w-4 h-4" />
+                    <FaWhatsapp className="w-4 h-4 text-[#0D1117] group-hover:scale-110 transition-transform" />
                     <span>Send Reference on WhatsApp</span>
                   </a>
 
