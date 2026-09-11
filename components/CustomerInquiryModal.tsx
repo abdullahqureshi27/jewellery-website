@@ -2,14 +2,17 @@
 
 /**
  * Client Component: Customer Inquiry Modal.
- * Built with shadcn Dialog primitive.
+ * Built with shadcn Dialog primitive and React Hook Form + Zod validation.
  * Captures customer details (Name, Phone, City, Address, Email, Ring Size/Notes)
- * and formats a complete WhatsApp inquiry for single or multi-item inquiries.
+ * with robust schema validation before compiling and dispatching WhatsApp inquiry.
  * Includes Lenis isolation, internal scrolling, and outside-click dismiss.
  */
 
-import React, { useState, useEffect } from 'react';
-import { X, Sparkles, CheckCircle2, MapPin, User, Phone, Mail, FileText } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { X, Sparkles, MapPin, User, Phone, Mail, FileText, AlertCircle } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { CartItem } from '@/context/CartContext';
@@ -19,6 +22,30 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
+
+// Zod Validation Schema for Customer WhatsApp Inquiry
+const customerInquirySchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: 'Full name must be at least 2 characters.' })
+    .max(80, { message: 'Name cannot exceed 80 characters.' }),
+  phone: z
+    .string()
+    .min(7, { message: 'Please provide a valid phone or WhatsApp number.' })
+    .regex(/^[\d\s+\-()]{7,25}$/, { message: 'Please enter a valid phone number (e.g. +92 300 1234567).' }),
+  city: z
+    .string()
+    .min(2, { message: 'City is required for delivery and courier coordination.' }),
+  address: z.string().optional(),
+  email: z
+    .string()
+    .email({ message: 'Please provide a valid email address.' })
+    .or(z.literal(''))
+    .optional(),
+  notes: z.string().optional(),
+});
+
+export type CustomerInquiryFormValues = z.infer<typeof customerInquirySchema>;
 
 interface CustomerInquiryModalProps {
   isOpen: boolean;
@@ -36,25 +63,43 @@ export default function CustomerInquiryModal({
   cartItems,
   onInquirySent,
 }: CustomerInquiryModalProps) {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [city, setCity] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [notes, setNotes] = useState('');
-  const [error, setError] = useState('');
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<CustomerInquiryFormValues>({
+    resolver: zodResolver(customerInquirySchema),
+    defaultValues: {
+      name: '',
+      phone: '',
+      city: '',
+      address: '',
+      email: '',
+      notes: '',
+    },
+    mode: 'onTouched',
+  });
+
+  // Reset form state when modal closes or opens
+  useEffect(() => {
+    if (!isOpen) {
+      reset();
+    }
+  }, [isOpen, reset]);
 
   // Lock Lenis and window scroll when dialog is open
   useEffect(() => {
+    const win = typeof window !== 'undefined' ? (window as unknown as { __lenis?: { stop: () => void; start: () => void } }) : null;
     if (isOpen) {
-      (window as any).__lenis?.stop();
+      win?.__lenis?.stop();
       document.body.style.overflow = 'hidden';
     } else {
-      (window as any).__lenis?.start();
+      win?.__lenis?.start();
       document.body.style.overflow = '';
     }
     return () => {
-      (window as any).__lenis?.start();
+      win?.__lenis?.start();
       document.body.style.overflow = '';
     };
   }, [isOpen]);
@@ -83,23 +128,7 @@ export default function CustomerInquiryModal({
 
   const totalCalculated = inquiryList.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) {
-      setError('Please provide your full name for atelier booking.');
-      return;
-    }
-    if (!phone.trim()) {
-      setError('Please provide your WhatsApp or phone number for confirmation.');
-      return;
-    }
-    if (!city.trim()) {
-      setError('Please indicate your city/location for courier coordination.');
-      return;
-    }
-
-    setError('');
-
+  const onSubmit = (data: CustomerInquiryFormValues) => {
     // Format list of items
     const itemsFormatted = inquiryList
       .map(
@@ -110,14 +139,14 @@ export default function CustomerInquiryModal({
 
     const totalFormatted = `Rs. ${totalCalculated.toLocaleString()}`;
 
-    // Structured message template without emojis
+    // Structured message template without informal emojis
     const textMessage = `*AURELIA FINE ATELIER — SHOWCASE INQUIRY*
 -----------------------------------------
 *CUSTOMER DETAILS:*
-• *Name:* ${name.trim()}
-• *Phone/WhatsApp:* ${phone.trim()}
-• *City:* ${city.trim()}
-${address.trim() ? `• *Address:* ${address.trim()}\n` : ''}${email.trim() ? `• *Email:* ${email.trim()}\n` : ''}${notes.trim() ? `• *Ring Size / Notes:* ${notes.trim()}\n` : ''}
+• *Name:* ${data.name}
+• *Phone/WhatsApp:* ${data.phone}
+• *City:* ${data.city}
+${data.address ? `• *Address:* ${data.address}\n` : ''}${data.email ? `• *Email:* ${data.email}\n` : ''}${data.notes ? `• *Ring Size / Notes:* ${data.notes}\n` : ''}
 -----------------------------------------
 *SELECTED JEWELLERY PIECES (${inquiryList.length} items):*
 
@@ -170,21 +199,16 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
 
         {/* Scrollable Form Body */}
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
           data-lenis-prevent="true"
           className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 space-y-5 scrollbar-thin"
         >
-          {error && (
-            <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-600 font-medium">
-              {error}
-            </div>
-          )}
-
           {/* Selected Items Summary Banner */}
           <div className="bg-white rounded-xl p-4 border border-[#E8E2D7] shadow-sm">
             <div className="text-xs font-semibold uppercase tracking-wider text-[#5C6270] mb-2 flex justify-between">
               <span>Items to Inquire:</span>
-              <span className="font-sans font-bold text-[#0D1117] tabular-nums lining-nums">
+              <span className="font-serif font-bold text-[#0D1117] tabular-nums lining-nums">
                 Total: Rs. {totalCalculated.toLocaleString()}
               </span>
             </div>
@@ -197,7 +221,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                       {item.itemCode} • {item.metal}
                     </span>
                   </div>
-                  <span className="font-sans font-bold text-[#0D1117] tabular-nums lining-nums">
+                  <span className="font-serif font-bold text-[#0D1117] tabular-nums lining-nums">
                     Rs. {(item.price * item.quantity).toLocaleString()}
                   </span>
                 </div>
@@ -209,85 +233,114 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Full Name */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
+              <label htmlFor="inquiry-name" className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
                 Full Name <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <User className="w-4 h-4 text-[#8A90A0] absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
+                  id="inquiry-name"
                   type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  {...register('name')}
                   placeholder="e.g., Sarah Khan"
-                  className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
+                  className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
+                    errors.name ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                  }`}
                 />
               </div>
+              {errors.name && (
+                <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1 font-medium">
+                  <AlertCircle className="w-3 h-3 shrink-0" />
+                  <span>{errors.name.message}</span>
+                </p>
+              )}
             </div>
 
             {/* WhatsApp / Phone */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
+              <label htmlFor="inquiry-phone" className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
                 WhatsApp / Phone Number <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <Phone className="w-4 h-4 text-[#8A90A0] absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
+                  id="inquiry-phone"
                   type="tel"
-                  required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="e.g., +92 321 1234567"
-                  className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
+                  {...register('phone')}
+                  placeholder="e.g., +92 300 1234567"
+                  className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
+                    errors.phone ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                  }`}
                 />
               </div>
+              {errors.phone && (
+                <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1 font-medium">
+                  <AlertCircle className="w-3 h-3 shrink-0" />
+                  <span>{errors.phone.message}</span>
+                </p>
+              )}
             </div>
 
             {/* City */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
+              <label htmlFor="inquiry-city" className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
                 City / Location <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <MapPin className="w-4 h-4 text-[#8A90A0] absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
+                  id="inquiry-city"
                   type="text"
-                  required
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
+                  {...register('city')}
                   placeholder="e.g., Karachi / Lahore / Islamabad"
-                  className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
+                  className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
+                    errors.city ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                  }`}
                 />
               </div>
+              {errors.city && (
+                <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1 font-medium">
+                  <AlertCircle className="w-3 h-3 shrink-0" />
+                  <span>{errors.city.message}</span>
+                </p>
+              )}
             </div>
 
             {/* Email (Optional) */}
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
+              <label htmlFor="inquiry-email" className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
                 Email Address <span className="text-[10px] text-[#8A90A0] font-normal">(Optional)</span>
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-[#8A90A0] absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
+                  id="inquiry-email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...register('email')}
                   placeholder="e.g., sarah@example.com"
-                  className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
+                  className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
+                    errors.email ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                  }`}
                 />
               </div>
+              {errors.email && (
+                <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1 font-medium">
+                  <AlertCircle className="w-3 h-3 shrink-0" />
+                  <span>{errors.email.message}</span>
+                </p>
+              )}
             </div>
           </div>
 
           {/* Delivery Address */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
-              Delivery / Postal Address
+            <label htmlFor="inquiry-address" className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
+              Delivery / Postal Address <span className="text-[10px] text-[#8A90A0] font-normal">(Optional)</span>
             </label>
             <input
+              id="inquiry-address"
               type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              {...register('address')}
               placeholder="e.g., House #12, Street 4, Phase 6 DHA, Karachi"
               className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 px-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
             />
@@ -295,16 +348,16 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
 
           {/* Ring Sizing / Custom Notes */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
-              Ring Size / Customization Notes
+            <label htmlFor="inquiry-notes" className="block text-xs font-semibold uppercase tracking-wider text-[#0D1117] mb-1">
+              Ring Size / Customization Notes <span className="text-[10px] text-[#8A90A0] font-normal">(Optional)</span>
             </label>
             <div className="relative">
               <FileText className="w-4 h-4 text-[#8A90A0] absolute left-3 top-3" />
               <textarea
+                id="inquiry-notes"
                 rows={2}
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="e.g., Ring Size 7 (US), custom inner engraving, or gift packaging requested..."
+                {...register('notes')}
+                placeholder="e.g., Ring Size 14 (PK) / US 7, custom inner laser engraving, or bridal gift packaging..."
                 className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
               />
             </div>
@@ -314,7 +367,8 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-md group cursor-pointer"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-3 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-md group cursor-pointer disabled:opacity-60"
             >
               <FaWhatsapp className="w-5 h-5 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
               <span>Send Complete Inquiry to WhatsApp</span>
