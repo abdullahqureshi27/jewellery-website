@@ -16,6 +16,21 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Check if the device is a mobile or touch screen device.
+    // Mobile browsers already have hardware-accelerated 120Hz smooth scrolling.
+    // Bypassing JS scroll-jacking on touch screens saves CPU cycles, eliminates TBT,
+    // and drastically improves mobile Lighthouse scores.
+    const isTouch =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches ||
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.innerWidth < 1024);
+
+    if (isTouch) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -23,7 +38,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      touchMultiplier: 0,
     });
 
     lenisRef.current = lenis;
@@ -53,6 +68,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
+    } else if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
     }
   }, [pathname]);
 

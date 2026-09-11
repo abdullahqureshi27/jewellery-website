@@ -118,7 +118,9 @@ export default function HeroSection() {
             alt={s.titleGold}
             fill
             priority={idx === 0}
-            sizes="100vw"
+            loading={idx === 0 ? 'eager' : 'lazy'}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+            quality={80}
             className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0D1117] via-[#0D1117]/85 to-transparent" />
