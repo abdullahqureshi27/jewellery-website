@@ -87,8 +87,16 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           />
         )}
 
-        {/* 1. TOP-LEFT: Shopping Cart Icon Button (Matching Shared Screenshot) */}
-        <div className="absolute top-3.5 left-3.5 z-20">
+        {/* 1. TOP-LEFT: Shopping Cart Icon Button (Slides in from left with opacity on hover) */}
+        <div
+          className={`absolute top-3.5 left-3.5 z-20 transition-all duration-300 ease-out transform ${
+            inCart
+              ? 'opacity-100 translate-x-0 pointer-events-auto'
+              : isHovered
+              ? 'opacity-100 translate-x-0 pointer-events-auto'
+              : 'opacity-0 -translate-x-6 pointer-events-none'
+          }`}
+        >
           <button
             onClick={handleCartClick}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
@@ -127,10 +135,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
               e.stopPropagation();
               onQuickView(product);
             }}
-            className={`w-40 sm:w-44 py-2.5 px-6 rounded-full bg-white text-[#12141A] hover:bg-[#0D1117] hover:text-white text-xs font-semibold tracking-wide text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform ${
+            className={`min-w-[145px] sm:min-w-[160px] px-8 py-2.5 sm:py-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-[13px] sm:text-[14px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out transform ${
               isHovered
                 ? 'opacity-100 translate-y-0 pointer-events-auto'
-                : 'opacity-0 -translate-y-5 pointer-events-none'
+                : 'opacity-0 -translate-y-6 pointer-events-none'
             }`}
           >
             Quick view
@@ -139,10 +147,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           {/* Bottom Button: Quick Shop / View Detail */}
           <Link
             href={`/product/${product.slug}`}
-            className={`w-40 sm:w-44 py-2.5 px-6 rounded-full bg-white text-[#12141A] hover:bg-[#0D1117] hover:text-white text-xs font-semibold tracking-wide text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-out delay-75 transform ${
+            className={`min-w-[145px] sm:min-w-[160px] px-8 py-2.5 sm:py-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-[13px] sm:text-[14px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out delay-75 transform ${
               isHovered
                 ? 'opacity-100 translate-y-0 pointer-events-auto'
-                : 'opacity-0 -translate-y-5 pointer-events-none'
+                : 'opacity-0 -translate-y-6 pointer-events-none'
             }`}
           >
             Quick Shop
