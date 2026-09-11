@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Sparkles, CheckCircle2 } from 'lucide-react';
+import { getWhatsAppLink } from '@/lib/whatsapp';
 
 /**
  * Server Component: Heritage & Bespoke Craftsmanship story.
@@ -98,7 +99,7 @@ export default function HeritageStory() {
 
             <div className="pt-4">
               <a
-                href="https://wa.me/923001234567?text=Hello%20Aurelia%20Jewellers,%20I%20would%20like%20to%20consult%20on%20a%20bespoke%20jewellery%20design."
+                href={getWhatsAppLink('Hello Aurelia Jewellers, I would like to consult on a bespoke jewellery design.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-bold uppercase tracking-[0.2em] px-8 py-3.5 rounded-full transition-all duration-300 shadow-md"

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Sparkles, Camera, PenTool, CheckCircle, Ruler } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+import { getWhatsAppLink } from '@/lib/whatsapp';
 import RingSizeModal from './RingSizeModal';
 
 /**
@@ -81,7 +82,7 @@ export default function BespokeBanner() {
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <a
-                    href="https://wa.me/923001234567?text=Hello%20Aurelia%20Atelier,%20I%20have%20a%20reference%20image%20for%20a%20custom%20jewellery%20piece.%20I%20would%20like%20a%20quote%20and%20consultation."
+                    href={getWhatsAppLink('Hello Aurelia Atelier, I have a reference image for a custom jewellery piece. I would like a quote and consultation.')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-3 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer group"

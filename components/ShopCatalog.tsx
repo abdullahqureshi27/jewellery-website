@@ -10,6 +10,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Filter, X, SlidersHorizontal, RotateCcw, Search, Sparkles } from 'lucide-react';
 import { JewelleryProduct } from '@/sanity/mockData';
+import { getWhatsAppLink } from '@/lib/whatsapp';
 import ProductCard from './ProductCard';
 import ProductQuickView from './ProductQuickView';
 import {
@@ -431,7 +432,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                   Pieces can be handcrafted to custom measurements. Connect on WhatsApp for complimentary guidance.
                 </p>
                 <a
-                  href="https://wa.me/923001234567?text=Hello%20Aurelia%20Atelier,%20I%20need%20custom%20jewellery%20sizing%20help."
+                  href={getWhatsAppLink('Hello Aurelia Atelier, I need custom jewellery sizing help.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block text-center w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"

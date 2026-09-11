@@ -16,6 +16,7 @@ import { X, Sparkles, MapPin, User, Phone, Mail, FileText, AlertCircle } from 'l
 import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { CartItem } from '@/context/CartContext';
+import { getWhatsAppLink } from '@/lib/whatsapp';
 import {
   Dialog,
   DialogContent,
@@ -157,8 +158,7 @@ ${itemsFormatted}
 -----------------------------------------
 _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
 
-    const encoded = encodeURIComponent(textMessage);
-    const whatsappUrl = `https://wa.me/923001234567?text=${encoded}`;
+    const whatsappUrl = getWhatsAppLink(textMessage);
 
     // Open WhatsApp in new tab
     window.open(whatsappUrl, '_blank');

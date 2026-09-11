@@ -12,6 +12,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { JewelleryProduct, MOCK_JEWELLERY_PRODUCTS } from '@/sanity/mockData';
+import { getWhatsAppLink, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp';
 
 export default function Navbar() {
   const router = useRouter();
@@ -152,12 +153,12 @@ export default function Navbar() {
               <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" /> Lifetime Rhodium Replating
             </span>
             <a
-              href="https://wa.me/923001234567?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20jewellery%20collection."
+              href={getWhatsAppLink('Hello, I would like to inquire about your jewellery collection.')}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline flex items-center gap-1 text-[#FAF8F5]"
             >
-              <PhoneCall className="w-3 h-3 text-[#C5A059]" /> VIP Concierge: +92 300 1234567
+              <PhoneCall className="w-3 h-3 text-[#C5A059]" /> VIP Concierge: {WHATSAPP_DISPLAY_NUMBER}
             </a>
           </div>
         </div>
@@ -264,7 +265,7 @@ export default function Navbar() {
               </Link>
 
               <a
-                href="https://wa.me/923001234567?text=Hello,%20I%20am%20interested%20in%20custom%20jewellery%20showcase."
+                href={getWhatsAppLink('Hello, I am interested in custom jewellery showcase.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 shadow-sm"
@@ -467,7 +468,7 @@ export default function Navbar() {
 
             <div className="pt-6 border-t border-[#E8E2D7] space-y-3">
               <a
-                href="https://wa.me/923001234567?text=Hello,%20I%20am%20interested%20in%20custom%20jewellery%20showcase."
+                href={getWhatsAppLink('Hello, I am interested in custom jewellery showcase.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full text-center block bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] py-3 rounded-full text-xs font-semibold uppercase tracking-widest transition-all"

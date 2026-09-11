@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Sparkles, Shield, Award, Gem, Clock } from 'lucide-react';
+import { getWhatsAppLink } from '@/lib/whatsapp';
 
 /**
  * Server Component: Luxury boutique footer with heritage details,
@@ -119,7 +120,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-xs text-[#8B949E]">
               <li>
                 <a
-                  href="https://wa.me/923001234567?text=Hello,%20I%20would%20like%20a%20custom%20order%20consultation."
+                  href={getWhatsAppLink('Hello, I would like a custom order consultation.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#FAF8F5] transition-colors"
@@ -129,7 +130,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/923001234567?text=Hello,%20how%20can%20I%20measure%20my%20ring%20size?"
+                  href={getWhatsAppLink('Hello, how can I measure my ring size?')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#FAF8F5] transition-colors"
@@ -160,7 +161,7 @@ export default function Footer() {
               Interested in a custom cut or bridal set? Connect directly with our lead gemologist via WhatsApp.
             </p>
             <a
-              href="https://wa.me/923001234567?text=Hello,%20I%20would%20like%20to%20book%20a%20private%20jewellery%20viewing."
+              href={getWhatsAppLink('Hello, I would like to book a private jewellery viewing.')}
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] text-xs font-semibold py-2.5 rounded-full uppercase tracking-wider transition-colors"

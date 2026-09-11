@@ -6,12 +6,13 @@
  */
 
 import { FaWhatsapp } from 'react-icons/fa';
+import { getWhatsAppLink } from '@/lib/whatsapp';
 
 export default function WhatsAppFloat() {
   return (
     <aside aria-label="WhatsApp Concierge" className="fixed bottom-6 right-6 z-40">
       <a
-        href="https://wa.me/923001234567?text=Hello,%20I%20am%20browsing%20your%20jewellery%20showcase%20and%20would%20like%20assistance."
+        href={getWhatsAppLink('Hello, I am browsing your jewellery showcase and would like assistance.')}
         target="_blank"
         rel="noopener noreferrer"
         className="relative w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl hover:shadow-[0_10px_25px_-5px_rgba(37,211,102,0.5)] flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
