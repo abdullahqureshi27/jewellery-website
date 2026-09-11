@@ -16,10 +16,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Invalidate product tag cache and all showcase routes
-    revalidateTag('products');
-    revalidatePath('/');
-    revalidatePath('/shop');
-    revalidatePath('/product/[slug]', 'page');
+    revalidateTag('products', { expire: 0 });
+    revalidatePath('/', 'layout');
 
     return NextResponse.json({
       revalidated: true,
