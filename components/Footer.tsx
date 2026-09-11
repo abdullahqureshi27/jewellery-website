@@ -60,7 +60,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[#C5A059]" />
-              <span className="font-serif text-2xl font-bold tracking-[0.2em] text-[#FAF8F5] uppercase">
+              <span className="font-serif text-2xl font-bold tracking-[0.1em] text-[#FAF8F5] uppercase">
                 Farhan Faheem
               </span>
             </div>
