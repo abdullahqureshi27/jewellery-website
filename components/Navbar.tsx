@@ -2,13 +2,14 @@
 
 /**
  * Client Component: Header and navigation bar.
- * Needs client state for mobile menu toggling, sticky scroll effects, and live search bar.
+ * Features live cart / inquiry bag badge, mobile menu, search drawer, and direct concierge.
  */
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight, ShoppingBag } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,6 +17,8 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
+
+  const { totalItems, setIsCartDrawerOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,14 +131,30 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Actions: Search, Admin Dashboard, WhatsApp */}
+            {/* Actions: Search, Inquiry Bag Button, Admin Studio */}
             <div className="flex items-center space-x-3 sm:space-x-4">
+              {/* Search Toggle */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="p-2 text-[#12141A] hover:text-[#C5A059] transition-colors"
                 aria-label="Search items"
               >
                 <Search className="w-5 h-5" />
+              </button>
+
+              {/* Inquiry Bag / Cart Button */}
+              <button
+                onClick={() => setIsCartDrawerOpen(true)}
+                className="relative p-2 text-[#0D1117] hover:text-[#C5A059] transition-colors flex items-center"
+                aria-label={`Inquiry Bag with ${totalItems} items`}
+                title="View Inquiry Bag"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#C5A059] text-[#0D1117] font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
+                    {totalItems}
+                  </span>
+                )}
               </button>
 
               <Link
@@ -204,7 +223,28 @@ export default function Navbar() {
                 </button>
               </div>
 
-              <div className="py-6 space-y-1">
+              {/* Inquiry Bag Quick Row on Mobile */}
+              <div className="py-4 border-b border-[#E8E2D7]">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setIsCartDrawerOpen(true);
+                  }}
+                  className="w-full flex items-center justify-between bg-white border border-[#E8E2D7] p-3 rounded-xl shadow-sm"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <ShoppingBag className="w-4 h-4 text-[#C5A059]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#0D1117]">
+                      Inquiry Bag
+                    </span>
+                  </div>
+                  <span className="bg-[#0D1117] text-[#FAF8F5] text-xs font-bold px-2.5 py-0.5 rounded-full">
+                    {totalItems} items
+                  </span>
+                </button>
+              </div>
+
+              <div className="py-4 space-y-1">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}

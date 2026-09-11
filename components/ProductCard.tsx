@@ -1,15 +1,20 @@
 'use client';
 
 /**
- * Client Component: Interactive luxury product card.
- * Features 2-image hover flip (macro gem piece ↔ lifestyle/model shot),
- * hallmark badges, pricing, and quick-view trigger.
+ * Client Component: Luxury Product Card matching user reference design.
+ * Features:
+ * 1. Top-left circular Shopping Cart icon button to add/remove from inquiry bag.
+ * 2. Bottom overlay on the image with two rounded pill buttons: [View Detail] & [Quick View].
+ * 3. Desktop: Smooth hover transitions. Mobile: Fully visible and tappable for best UX.
+ * 4. 2-image hover flip (macro studio piece ↔ model shot).
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { Sparkles, Eye, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
+import { ShoppingCart, Check, Eye, Sparkles } from 'lucide-react';
 import { JewelleryProduct } from '@/sanity/mockData';
+import { useCart } from '@/context/CartContext';
 
 interface ProductCardProps {
   product: JewelleryProduct;
@@ -18,6 +23,9 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onQuickView }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { addToCart, removeFromCart, isInCart, setIsCartDrawerOpen } = useCart();
+
+  const inCart = isInCart(product._id);
 
   const primaryImage = product.images[0]?.url || 'https://images.unsplash.com/photo-1605100804763-247f67b3557e';
   const secondaryImage = product.images[1]?.url || primaryImage;
@@ -36,18 +44,25 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
       }).format(product.originalPrice)
     : null;
 
-  const whatsappMessage = encodeURIComponent(
-    `Hello Aurelia Atelier! I am interested in this piece from your showcase:\n\n*${product.title}*\nItem Code: ${product.itemCode}\nPrice: ${product.priceOnRequest ? 'Price on Request' : formattedPrice}\n\nCould you share availability and custom sizing details?`
-  );
+  const handleCartClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (inCart) {
+      removeFromCart(product._id);
+    } else {
+      addToCart(product);
+      setIsCartDrawerOpen(true);
+    }
+  };
 
   return (
     <div
-      className="group relative bg-white rounded-xl overflow-hidden border border-[#E8E2D7] luxury-card-shadow flex flex-col justify-between"
+      className="group relative bg-white rounded-2xl overflow-hidden border border-[#E8E2D7] luxury-card-shadow flex flex-col justify-between transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Top Image Container with 2-Image Flip on Hover */}
-      <div className="relative aspect-square w-full bg-[#F5F2EC] overflow-hidden cursor-pointer">
+      {/* Product Image Container */}
+      <div className="relative aspect-square w-full bg-[#F5F2EC] overflow-hidden">
         {/* Primary Studio Shot */}
         <Image
           src={primaryImage}
@@ -72,10 +87,30 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           />
         )}
 
-        {/* Badge (Signature Piece / Best Seller) */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+        {/* 1. TOP-LEFT: Shopping Cart Icon Button (Matching Shared Screenshot) */}
+        <div className="absolute top-3.5 left-3.5 z-20">
+          <button
+            onClick={handleCartClick}
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
+              inCart
+                ? 'bg-[#C5A059] text-[#0D1117] ring-2 ring-white scale-105'
+                : 'bg-[#1A1817]/85 hover:bg-[#0D1117] text-white hover:text-[#C5A059] backdrop-blur-sm'
+            }`}
+            title={inCart ? 'In your inquiry bag (Click to remove)' : 'Add to inquiry bag'}
+            aria-label="Add to inquiry bag"
+          >
+            {inCart ? (
+              <Check className="w-5 h-5 stroke-[2.5]" />
+            ) : (
+              <ShoppingCart className="w-4 h-4 stroke-[2]" />
+            )}
+          </button>
+        </div>
+
+        {/* Top-Right Badge (Signature / Best Seller / Made to order) */}
+        <div className="absolute top-3.5 right-3.5 z-10 flex flex-col items-end gap-1">
           {product.badge && (
-            <span className="bg-[#0D1117]/90 backdrop-blur-sm text-[#FAF8F5] border border-[#C5A059]/40 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm">
+            <span className="bg-[#0D1117]/85 backdrop-blur-sm text-[#FAF8F5] border border-[#C5A059]/40 text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-sm">
               {product.badge}
             </span>
           )}
@@ -86,54 +121,53 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           )}
         </div>
 
-        {/* Hover Quick Actions Overlay */}
+        {/* 2. BOTTOM OVERLAY: [View Detail] & [Quick View] Pill Buttons (Matching Shared Screenshot) */}
+        {/* On desktop: fades and slides up on hover. On mobile: clearly visible for instant touch action */}
         <div
-          className={`absolute inset-0 bg-[#0D1117]/30 backdrop-blur-[2px] transition-opacity duration-300 flex items-center justify-center gap-3 z-20 ${
-            isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          className={`absolute inset-x-3 bottom-3 z-20 flex items-center gap-2.5 transition-all duration-300 ${
+            isHovered
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-90 sm:opacity-0 translate-y-0 sm:translate-y-2'
           }`}
         >
+          {/* Left Pill Button: View Detail */}
+          <Link
+            href={`/product/${product.slug}`}
+            className="flex-1 bg-[#1A1817]/90 hover:bg-[#0D1117] text-white text-center py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 shadow-md backdrop-blur-sm border border-white/10 hover:border-[#C5A059]"
+          >
+            View Detail
+          </Link>
+
+          {/* Right Pill Button: Quick View */}
           <button
             onClick={() => onQuickView(product)}
-            className="bg-[#FAF8F5] hover:bg-white text-[#0D1117] p-3 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:scale-110"
-            title="Quick View Specifications"
-            aria-label="Quick View Specifications"
+            className="flex-1 bg-[#1A1817]/90 hover:bg-[#0D1117] text-white py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 shadow-md backdrop-blur-sm border border-white/10 hover:border-[#C5A059]"
           >
-            <Eye className="w-4 h-4" />
+            Quick View
           </button>
-          <a
-            href={`https://wa.me/923001234567?text=${whatsappMessage}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#25D366] hover:bg-[#20ba59] text-white p-3 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:scale-110"
-            title="Inquire on WhatsApp"
-            aria-label="Inquire on WhatsApp"
-          >
-            <MessageCircle className="w-4 h-4 fill-white" />
-          </a>
         </div>
       </div>
 
-      {/* Product Details */}
+      {/* Product Details Section below image */}
       <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
         <div>
-          <div className="flex items-center justify-between text-[11px] text-[#8A90A0] uppercase tracking-widest font-medium mb-1.5">
+          <div className="flex items-center justify-between text-[11px] text-[#8A90A0] uppercase tracking-widest font-medium mb-1">
             <span>{product.category}</span>
             <span className="font-mono text-[#C5A059]">{product.itemCode}</span>
           </div>
 
-          <h3
-            onClick={() => onQuickView(product)}
-            className="font-serif text-base sm:text-lg font-bold text-[#0D1117] hover:text-[#C5A059] transition-colors cursor-pointer line-clamp-1 mb-1"
-          >
-            {product.title}
-          </h3>
+          <Link href={`/product/${product.slug}`}>
+            <h3 className="font-serif text-base font-bold text-[#0D1117] hover:text-[#C5A059] transition-colors line-clamp-1 mb-1">
+              {product.title}
+            </h3>
+          </Link>
 
           <p className="text-xs text-[#5C6270] line-clamp-1 mb-3">
             {product.metal} • {product.gemstone}
           </p>
         </div>
 
-        {/* Pricing & CTA */}
+        {/* Pricing & Stock Footer */}
         <div className="pt-3 border-t border-[#E8E2D7]/60 flex items-center justify-between">
           <div>
             {product.priceOnRequest ? (
@@ -154,13 +188,9 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             )}
           </div>
 
-          <button
-            onClick={() => onQuickView(product)}
-            className="text-xs font-semibold text-[#0D1117] hover:text-[#C5A059] uppercase tracking-wider flex items-center gap-1 group/btn"
-          >
-            <span>Details</span>
-            <Sparkles className="w-3 h-3 text-[#C5A059] group-hover/btn:rotate-45 transition-transform" />
-          </button>
+          <span className="text-[11px] font-semibold text-[#C5A059] uppercase tracking-wider">
+            {product.inStock ? 'Ready to Ship' : 'Made to Order'}
+          </span>
         </div>
       </div>
     </div>
