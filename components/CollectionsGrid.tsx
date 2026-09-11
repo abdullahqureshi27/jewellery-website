@@ -64,7 +64,11 @@ export default function CollectionsGrid() {
               key={col.title}
               href={`/shop?category=${col.category}`}
               className={`group relative rounded-2xl overflow-hidden bg-[#0D1117] border border-[#E8E2D7] shadow-sm hover:shadow-xl transition-all duration-500 ${
-                idx === 0 ? 'md:col-span-2 lg:col-span-2 aspect-[16/9]' : 'aspect-square'
+                idx === 0
+                  ? 'md:col-span-2 lg:col-span-2 aspect-[16/10] sm:aspect-[16/9]'
+                  : idx === 1
+                  ? 'col-span-1 aspect-square lg:aspect-auto lg:h-full min-h-[300px]'
+                  : 'col-span-1 aspect-square'
               }`}
             >
               <Image
