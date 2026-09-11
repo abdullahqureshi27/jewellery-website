@@ -116,30 +116,37 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </div>
         )}
 
-        {/* 2. BOTTOM OVERLAY: [View Detail] & [Quick View] Pill Buttons (Matching Shared Screenshot) */}
-        {/* On desktop: fades and slides up on hover. On mobile: clearly visible for instant touch action */}
-        <div
-          className={`absolute inset-x-3 bottom-3 z-20 flex items-center gap-2.5 transition-all duration-300 ${
-            isHovered
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-90 sm:opacity-0 translate-y-0 sm:translate-y-2'
-          }`}
-        >
-          {/* Left Pill Button: View Detail */}
+        {/* 2. CENTER OVERLAY: Two White Pill Buttons (Matching Reference Design) */}
+        {/* On hover: smooth slide-in from top to middle with opacity. On hover out: reverse transition */}
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 p-4 pointer-events-none">
+          {/* Top Button: Quick view */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onQuickView(product);
+            }}
+            className={`w-40 sm:w-44 py-2.5 px-6 rounded-full bg-white text-[#12141A] hover:bg-[#0D1117] hover:text-white text-xs font-semibold tracking-wide text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform ${
+              isHovered
+                ? 'opacity-100 translate-y-0 pointer-events-auto'
+                : 'opacity-0 -translate-y-5 pointer-events-none'
+            }`}
+          >
+            Quick view
+          </button>
+
+          {/* Bottom Button: Quick Shop / View Detail */}
           <Link
             href={`/product/${product.slug}`}
-            className="flex-1 bg-[#1A1817]/90 hover:bg-[#0D1117] text-white text-center py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 shadow-md backdrop-blur-sm border border-white/10 hover:border-[#C5A059]"
+            className={`w-40 sm:w-44 py-2.5 px-6 rounded-full bg-white text-[#12141A] hover:bg-[#0D1117] hover:text-white text-xs font-semibold tracking-wide text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-out delay-75 transform ${
+              isHovered
+                ? 'opacity-100 translate-y-0 pointer-events-auto'
+                : 'opacity-0 -translate-y-5 pointer-events-none'
+            }`}
           >
-            View Detail
+            Quick Shop
           </Link>
-
-          {/* Right Pill Button: Quick View */}
-          <button
-            onClick={() => onQuickView(product)}
-            className="flex-1 bg-[#1A1817]/90 hover:bg-[#0D1117] text-white py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 shadow-md backdrop-blur-sm border border-white/10 hover:border-[#C5A059]"
-          >
-            Quick View
-          </button>
         </div>
       </div>
 
