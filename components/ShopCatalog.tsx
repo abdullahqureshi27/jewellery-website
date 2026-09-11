@@ -36,8 +36,17 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
   const [selectedGemstone, setSelectedGemstone] = useState<string>('all');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<string>('featured');
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   const [selectedQuickView, setSelectedQuickView] = useState<JewelleryProduct | null>(null);
+
+  const handleFilterToggle = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setMobileFilterOpen(true);
+    } else {
+      setIsFilterOpen((prev) => !prev);
+    }
+  };
 
   // Sync state whenever URL query params change (e.g. from navbar clicks or back/forward)
   useEffect(() => {
@@ -179,7 +188,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           </p>
         </div>
 
-        {/* FitFlair-Inspired Horizontal Quick Category Pills */}
+        {/* Horizontal Quick Category Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none justify-start md:justify-center">
           {categories.map((cat) => {
             const isSelected = selectedCategory === cat.value;
@@ -187,7 +196,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               <button
                 key={cat.value}
                 onClick={() => handleCategoryChange(cat.value)}
-                className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex-shrink-0 ${
+                className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex-shrink-0 cursor-pointer ${
                   isSelected
                     ? 'bg-[#0D1117] text-[#FAF8F5] shadow-md border border-[#0D1117]'
                     : 'bg-white text-[#5C6270] border border-[#E8E2D7] hover:border-[#C5A059] hover:text-[#0D1117]'
@@ -199,183 +208,236 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           })}
         </div>
 
-        {/* Filter Bar & Sorting Row */}
-        <div className="bg-white p-4 rounded-xl border border-[#E8E2D7] shadow-sm mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            {/* Mobile Filter Toggle */}
-            <button
-              onClick={() => setMobileFilterOpen(true)}
-              className="lg:hidden inline-flex items-center gap-2 bg-[#FAF8F5] border border-[#E8E2D7] px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider text-[#0D1117]"
-            >
-              <Filter className="w-4 h-4 text-[#C5A059]" />
-              <span>Filters ({activeFiltersCount})</span>
-            </button>
-
-            {/* In-Catalog Search */}
-            <div className="relative flex-1 sm:w-64">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#8A90A0]" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Filter by title, metal, or SKU..."
-                className="w-full bg-[#FAF8F5] border border-[#E8E2D7] rounded-lg py-1.5 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059]"
-              />
-            </div>
-
+        {/* FitFlair-Inspired Toolbar: [Filter Toggle] [Big Search Box (flex-1)] [Sort by Select] [Reset Button] */}
+        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-[#E8E2D7] shadow-sm mb-8 flex flex-col md:flex-row items-stretch md:items-center gap-3 sm:gap-4">
+          {/* 1. Most Left: Filter Toggle Button (FitFlair style) */}
+          <button
+            onClick={handleFilterToggle}
+            className={`inline-flex items-center justify-center gap-2 px-4 h-11 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer shrink-0 select-none ${
+              isFilterOpen
+                ? 'bg-[#0D1117] text-[#FAF8F5] shadow-sm ring-1 ring-[#C5A059]'
+                : 'bg-[#FAF8F5] hover:bg-[#0D1117] hover:text-[#FAF8F5] text-[#0D1117] border border-[#E8E2D7] hover:border-[#0D1117]'
+            }`}
+            title={isFilterOpen ? 'Hide filter sidebar' : 'Show filter sidebar'}
+          >
+            <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
+            <span>{isFilterOpen ? 'Hide Filters' : 'Filter'}</span>
             {activeFiltersCount > 0 && (
+              <span className="ml-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#C5A059] text-[#0D1117]">
+                {activeFiltersCount}
+              </span>
+            )}
+          </button>
+
+          {/* 2. Middle: Big Search Input taking the whole remaining space */}
+          <div className="relative flex-1 w-full min-w-0">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8A90A0]" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search pieces by title, metal, gemstone, or SKU..."
+              className="w-full h-11 bg-[#FAF8F5] border border-[#E8E2D7] rounded-xl pl-10 pr-9 text-xs sm:text-sm text-[#12141A] placeholder-[#8A90A0] focus:bg-white focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all"
+            />
+            {searchQuery && (
               <button
-                onClick={handleResetFilters}
-                className="hidden sm:inline-flex items-center gap-1 text-xs text-[#C5A059] hover:underline uppercase tracking-wider font-semibold"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8A90A0] hover:text-[#0D1117] p-1 cursor-pointer"
+                title="Clear search"
               >
-                <RotateCcw className="w-3 h-3" />
-                <span>Reset</span>
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
 
-          {/* Luxury shadcn Sort Dropdown */}
-          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-            <span className="text-xs text-[#8A90A0] uppercase tracking-wider hidden sm:inline">
-              Sort by:
-            </span>
-            <Select
-              value={sortBy}
-              onValueChange={(val) => {
-                if (val) setSortBy(val as string);
-              }}
+          {/* 3. Right Group: Sort By Select + Reset Button */}
+          <div className="flex items-center gap-2.5 w-full md:w-auto shrink-0 justify-between md:justify-end">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-[#8A90A0] uppercase tracking-wider hidden xl:inline whitespace-nowrap">
+                Sort by:
+              </span>
+              <Select
+                value={sortBy}
+                onValueChange={(val) => {
+                  if (val) setSortBy(val as string);
+                }}
+              >
+                <SelectTrigger
+                  size="lg"
+                  className="w-[170px] sm:w-[190px] !h-11 px-4 bg-[#FAF8F5] border-[#E8E2D7] text-xs font-medium text-[#12141A] rounded-xl hover:border-[#C5A059] transition-colors cursor-pointer shadow-sm"
+                >
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border-[#E8E2D7] shadow-xl rounded-xl p-1 z-50">
+                  <SelectItem value="featured" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                    Signature &amp; Featured
+                  </SelectItem>
+                  <SelectItem value="price-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                    Price: Low to High
+                  </SelectItem>
+                  <SelectItem value="price-desc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                    Price: High to Low
+                  </SelectItem>
+                  <SelectItem value="name-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                    Alphabetical (A-Z)
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* 4. Reset button at the end after Sort by */}
+            <button
+              onClick={handleResetFilters}
+              title="Reset all filters and search"
+              className={`inline-flex items-center gap-1.5 h-11 px-4 rounded-xl border text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                activeFiltersCount > 0
+                  ? 'bg-[#FAF8F5] border-[#C5A059] text-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] shadow-sm'
+                  : 'bg-[#FAF8F5] border-[#E8E2D7] text-[#8A90A0] hover:text-[#0D1117] hover:border-[#8A90A0]'
+              }`}
             >
-              <SelectTrigger className="w-[200px] bg-[#FAF8F5] border-[#E8E2D7] text-xs font-medium text-[#12141A] rounded-lg h-9 hover:border-[#C5A059] transition-colors">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent className="bg-white border-[#E8E2D7] shadow-xl rounded-xl p-1 z-50">
-                <SelectItem value="featured" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
-                  Signature &amp; Featured
-                </SelectItem>
-                <SelectItem value="price-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
-                  Price: Low to High
-                </SelectItem>
-                <SelectItem value="price-desc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
-                  Price: High to Low
-                </SelectItem>
-                <SelectItem value="name-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
-                  Alphabetical (A-Z)
-                </SelectItem>
-              </SelectContent>
-            </Select>
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset</span>
+            </button>
           </div>
         </div>
 
-        {/* Catalog Main Layout: Desktop Sidebar Filters + Product Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Catalog Main Layout: Collapsible Sidebar Filters + Product Grid */}
+        <div className={isFilterOpen ? "grid grid-cols-1 lg:grid-cols-4 gap-8 items-start transition-all duration-300" : "w-full"}>
           {/* Desktop Filter Sidebar (FitFlair-Inspired Drawer Sidebar) */}
-          <aside className="hidden lg:block lg:col-span-1 space-y-6">
-            <div className="bg-white p-6 rounded-xl border border-[#E8E2D7] shadow-sm space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-[#E8E2D7]">
-                <div className="flex items-center gap-2">
-                  <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
-                  <h3 className="font-serif text-sm font-bold uppercase tracking-wider text-[#0D1117]">
-                    Filter Pieces
-                  </h3>
+          {isFilterOpen && (
+            <aside className="hidden lg:block lg:col-span-1 space-y-6 animate-fadeIn transition-all duration-300">
+              <div className="bg-white p-6 rounded-2xl border border-[#E8E2D7] shadow-sm space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#E8E2D7]">
+                  <div className="flex items-center gap-2">
+                    <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
+                    <h3 className="font-serif text-sm font-bold uppercase tracking-wider text-[#0D1117]">
+                      Filter Pieces
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {activeFiltersCount > 0 && (
+                      <button
+                        onClick={handleResetFilters}
+                        className="text-[11px] text-[#C5A059] hover:underline uppercase tracking-wider font-semibold cursor-pointer"
+                      >
+                        Clear All
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setIsFilterOpen(false)}
+                      className="text-[#8A90A0] hover:text-[#0D1117] p-1 rounded-md hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+                      title="Close filter panel"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
-                {activeFiltersCount > 0 && (
+
+                {/* Quick Action Pills: Apply & Reset (FitFlair design!) */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setIsFilterOpen(false)}
+                    className="flex-1 bg-[#0D1117] hover:bg-[#1A202C] text-[#FAF8F5] py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
+                  >
+                    Apply
+                  </button>
                   <button
                     onClick={handleResetFilters}
-                    className="text-[11px] text-[#C5A059] hover:underline uppercase tracking-wider font-semibold"
+                    className="flex-1 bg-[#FAF8F5] border border-[#E8E2D7] hover:bg-[#E8E2D7]/50 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#5C6270] transition-colors cursor-pointer text-center"
                   >
-                    Clear All
+                    Reset
                   </button>
-                )}
-              </div>
+                </div>
 
-              {/* Metal Filter */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
-                  Metal &amp; Purity
-                </label>
-                <div className="space-y-1.5">
-                  {metals.map((m) => (
-                    <button
-                      key={m.value}
-                      onClick={() => setSelectedMetal(m.value)}
-                      className={`w-full text-left text-xs py-1.5 px-2.5 rounded-md transition-colors flex items-center justify-between ${
-                        selectedMetal === m.value
-                          ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
-                          : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
-                      }`}
-                    >
-                      <span>{m.label}</span>
-                      {selectedMetal === m.value && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                      )}
-                    </button>
-                  ))}
+                {/* Metal Filter */}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+                    Metal &amp; Purity
+                  </label>
+                  <div className="space-y-1.5">
+                    {metals.map((m) => (
+                      <button
+                        key={m.value}
+                        onClick={() => setSelectedMetal(m.value)}
+                        className={`w-full text-left text-xs py-2 px-3 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
+                          selectedMetal === m.value
+                            ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
+                            : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
+                        }`}
+                      >
+                        <span>{m.label}</span>
+                        {selectedMetal === m.value && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Gemstone Filter */}
+                <div className="pt-4 border-t border-[#E8E2D7]">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+                    Gemstone
+                  </label>
+                  <div className="space-y-1.5">
+                    {gemstones.map((g) => (
+                      <button
+                        key={g.value}
+                        onClick={() => setSelectedGemstone(g.value)}
+                        className={`w-full text-left text-xs py-2 px-3 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
+                          selectedGemstone === g.value
+                            ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
+                            : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
+                        }`}
+                      >
+                        <span>{g.label}</span>
+                        {selectedGemstone === g.value && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Availability Toggle */}
+                <div className="pt-4 border-t border-[#E8E2D7]">
+                  <label className="flex items-center gap-2.5 cursor-pointer text-xs font-medium text-[#12141A]">
+                    <input
+                      type="checkbox"
+                      checked={inStockOnly}
+                      onChange={(e) => setInStockOnly(e.target.checked)}
+                      className="rounded border-[#E8E2D7] text-[#C5A059] focus:ring-[#C5A059] w-4 h-4 cursor-pointer"
+                    />
+                    <span>Ready to Ship Only</span>
+                  </label>
                 </div>
               </div>
 
-              {/* Gemstone Filter */}
-              <div className="pt-4 border-t border-[#E8E2D7]">
-                <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
-                  Gemstone
-                </label>
-                <div className="space-y-1.5">
-                  {gemstones.map((g) => (
-                    <button
-                      key={g.value}
-                      onClick={() => setSelectedGemstone(g.value)}
-                      className={`w-full text-left text-xs py-1.5 px-2.5 rounded-md transition-colors flex items-center justify-between ${
-                        selectedGemstone === g.value
-                          ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
-                          : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
-                      }`}
-                    >
-                      <span>{g.label}</span>
-                      {selectedGemstone === g.value && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                      )}
-                    </button>
-                  ))}
-                </div>
+              {/* Custom Concierge Callout */}
+              <div className="bg-[#0D1117] text-[#FAF8F5] p-6 rounded-2xl border border-[#C5A059]/30">
+                <Sparkles className="w-5 h-5 text-[#C5A059] mb-2" />
+                <h4 className="font-serif text-sm font-bold uppercase tracking-wider mb-1">
+                  Custom Sizing?
+                </h4>
+                <p className="text-xs text-[#8B949E] leading-relaxed mb-4">
+                  Pieces can be handcrafted to custom measurements. Connect on WhatsApp for complimentary guidance.
+                </p>
+                <a
+                  href="https://wa.me/923001234567?text=Hello%20Aurelia%20Atelier,%20I%20need%20custom%20jewellery%20sizing%20help."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-center w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"
+                >
+                  Inquire on WhatsApp
+                </a>
               </div>
-
-              {/* Availability Toggle */}
-              <div className="pt-4 border-t border-[#E8E2D7]">
-                <label className="flex items-center gap-2.5 cursor-pointer text-xs font-medium text-[#12141A]">
-                  <input
-                    type="checkbox"
-                    checked={inStockOnly}
-                    onChange={(e) => setInStockOnly(e.target.checked)}
-                    className="rounded border-[#E8E2D7] text-[#C5A059] focus:ring-[#C5A059] w-4 h-4 cursor-pointer"
-                  />
-                  <span>Ready to Ship Only</span>
-                </label>
-              </div>
-            </div>
-
-            {/* Custom Concierge Callout */}
-            <div className="bg-[#0D1117] text-[#FAF8F5] p-6 rounded-xl border border-[#C5A059]/30">
-              <Sparkles className="w-5 h-5 text-[#C5A059] mb-2" />
-              <h4 className="font-serif text-sm font-bold uppercase tracking-wider mb-1">
-                Custom Ring Sizing?
-              </h4>
-              <p className="text-xs text-[#8B949E] leading-relaxed mb-4">
-                All rings can be custom made in sizes 4 through 12. Connect on WhatsApp for complimentary sizing guidance.
-              </p>
-              <a
-                href="https://wa.me/923001234567?text=Hello%20Aurelia%20Atelier,%20I%20need%20custom%20ring%20sizing%20help."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"
-              >
-                Inquire on WhatsApp
-              </a>
-            </div>
-          </aside>
+            </aside>
+          )}
 
           {/* Products Grid */}
-          <main className="lg:col-span-3">
+          <main className={isFilterOpen ? "lg:col-span-3" : "w-full"}>
             {filteredProducts.length === 0 ? (
-              <div className="bg-white rounded-xl border border-[#E8E2D7] p-12 text-center">
+              <div className="bg-white rounded-2xl border border-[#E8E2D7] p-12 text-center">
                 <Sparkles className="w-8 h-8 text-[#C5A059] mx-auto mb-3" />
                 <h3 className="font-serif text-xl font-bold uppercase text-[#0D1117] mb-2">
                   No Matching Jewels Found
@@ -385,14 +447,20 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#C5A059] hover:text-[#0D1117] transition-colors"
+                  className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#C5A059] hover:text-[#0D1117] transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset All Filters</span>
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div
+                className={
+                  isFilterOpen
+                    ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+                    : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                }
+              >
                 {filteredProducts.map((product) => (
                   <ProductCard
                     key={product._id}

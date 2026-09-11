@@ -92,14 +92,12 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           className={`absolute top-3.5 left-3.5 z-20 transition-all duration-300 ease-out transform ${
             inCart
               ? 'opacity-100 translate-x-0 pointer-events-auto'
-              : isHovered
-              ? 'opacity-100 translate-x-0 pointer-events-auto'
-              : 'opacity-0 -translate-x-6 pointer-events-none'
+              : 'opacity-0 -translate-x-6 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto'
           }`}
         >
           <button
             onClick={handleCartClick}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md cursor-pointer ${
               inCart
                 ? 'bg-[#C5A059] text-[#0D1117] ring-2 ring-white scale-105'
                 : 'bg-[#1A1817]/85 hover:bg-[#0D1117] text-white hover:text-[#C5A059] backdrop-blur-sm'
@@ -124,9 +122,9 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </div>
         )}
 
-        {/* 2. CENTER OVERLAY: Two White Pill Buttons (Matching Reference Design) */}
+        {/* 2. CENTER OVERLAY: Two White Pill Buttons (Balanced padding and sleek slide-in) */}
         {/* On hover: smooth slide-in from top to middle with opacity. On hover out: reverse transition */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 p-4 pointer-events-none">
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2.5 p-4 pointer-events-none">
           {/* Top Button: Quick view */}
           <button
             type="button"
@@ -135,11 +133,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
               e.stopPropagation();
               onQuickView(product);
             }}
-            className={`min-w-[145px] sm:min-w-[160px] px-8 py-2.5 sm:py-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-[13px] sm:text-[14px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out transform ${
-              isHovered
-                ? 'opacity-100 translate-y-0 pointer-events-auto'
-                : 'opacity-0 -translate-y-6 pointer-events-none'
-            }`}
+            className="w-[136px] sm:w-[144px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer"
           >
             Quick view
           </button>
@@ -147,11 +141,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           {/* Bottom Button: Quick Shop / View Detail */}
           <Link
             href={`/product/${product.slug}`}
-            className={`min-w-[145px] sm:min-w-[160px] px-8 py-2.5 sm:py-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-[13px] sm:text-[14px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out delay-75 transform ${
-              isHovered
-                ? 'opacity-100 translate-y-0 pointer-events-auto'
-                : 'opacity-0 -translate-y-6 pointer-events-none'
-            }`}
+            className="w-[136px] sm:w-[144px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out delay-75 transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer"
           >
             Quick Shop
           </Link>

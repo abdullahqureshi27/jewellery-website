@@ -22,7 +22,10 @@ export default function Navbar() {
 
   const { totalItems, setIsCartDrawerOpen } = useCart();
 
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -161,7 +164,7 @@ export default function Navbar() {
                 title="View Inquiry Bag"
               >
                 <ShoppingBag className="w-5 h-5" />
-                {totalItems > 0 && (
+                {mounted && totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-[#C5A059] text-[#0D1117] font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
                     {totalItems}
                   </span>
