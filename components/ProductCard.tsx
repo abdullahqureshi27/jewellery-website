@@ -13,6 +13,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, Check, Eye, Sparkles } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
 
@@ -63,41 +64,52 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
     >
       {/* Product Image Container */}
       <div className="relative aspect-square w-full bg-[#F5F2EC] overflow-hidden">
-        {/* Primary Studio Shot */}
-        <Image
-          src={primaryImage}
-          alt={product.title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className={`object-cover transition-opacity duration-700 ease-in-out ${isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
-            }`}
-        />
-
-        {/* Secondary Model / Angle Shot on Hover */}
-        {secondaryImage !== primaryImage && (
+        {/* Clickable Image: Clicking anywhere on image navigates to Product Detail Page */}
+        <Link
+          href={`/product/${product.slug}`}
+          className="block absolute inset-0 z-0 cursor-pointer"
+          aria-label={`View details for ${product.title}`}
+        >
+          {/* Primary Studio Shot */}
           <Image
-            src={secondaryImage}
-            alt={`${product.title} lifestyle`}
+            src={primaryImage}
+            alt={product.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={`object-cover transition-all duration-700 ease-in-out ${isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-              }`}
+            className={`object-cover transition-opacity duration-700 ease-in-out ${
+              isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+            }`}
           />
-        )}
+
+          {/* Secondary Model / Angle Shot on Hover */}
+          {secondaryImage !== primaryImage && (
+            <Image
+              src={secondaryImage}
+              alt={`${product.title} lifestyle`}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className={`object-cover transition-all duration-700 ease-in-out ${
+                isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+              }`}
+            />
+          )}
+        </Link>
 
         {/* 1. TOP-LEFT: Shopping Cart Icon Button (Slides in from left with opacity on hover) */}
         <div
-          className={`absolute top-3.5 left-3.5 z-20 transition-all duration-300 ease-out transform ${inCart
+          className={`absolute top-3.5 left-3.5 z-20 transition-all duration-300 ease-out transform ${
+            inCart
               ? 'opacity-100 translate-x-0 pointer-events-auto'
               : 'opacity-0 -translate-x-6 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto'
-            }`}
+          }`}
         >
           <button
             onClick={handleCartClick}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md cursor-pointer ${inCart
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md cursor-pointer ${
+              inCart
                 ? 'bg-[#C5A059] text-[#0D1117] ring-2 ring-white scale-105'
                 : 'bg-[#1A1817]/85 hover:bg-[#0D1117] text-white hover:text-[#C5A059] backdrop-blur-sm'
-              }`}
+            }`}
             title={inCart ? 'In your inquiry bag (Click to remove)' : 'Add to inquiry bag'}
             aria-label="Add to inquiry bag"
           >
@@ -111,14 +123,14 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
         {/* Top-Right In-Stock / Made to order status */}
         {!product.inStock && (
-          <div className="absolute top-3.5 right-3.5 z-10">
+          <div className="absolute top-3.5 right-3.5 z-10 pointer-events-none">
             <span className="bg-amber-900/80 backdrop-blur-sm text-amber-200 text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
               Made to Order
             </span>
           </div>
         )}
 
-        {/* 2. CENTER OVERLAY: Two White Pill Buttons (Balanced padding and sleek slide-in) */}
+        {/* 2. CENTER OVERLAY: Two White Pill Buttons */}
         {/* On hover: smooth slide-in from top to middle with opacity. On hover out: reverse transition */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2.5 p-4 pointer-events-none">
           {/* Top Button: Quick view */}
@@ -129,18 +141,24 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
               e.stopPropagation();
               onQuickView(product);
             }}
-            className="w-[136px] sm:w-[144px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer"
+            className="w-[146px] sm:w-[156px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer flex items-center justify-center"
           >
-            Quick view
+            <span>Quick view</span>
           </button>
 
-          {/* Bottom Button: Quick Shop / View Detail */}
-          <Link
-            href={`/product/${product.slug}`}
-            className="w-[136px] sm:w-[144px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out delay-75 transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer"
+          {/* Bottom Button: Direct WhatsApp Inquiry */}
+          <a
+            href={`https://wa.me/923001234567?text=${encodeURIComponent(
+              `Hello Aurelia Atelier, I would like to inquire about "${product.title}" (${product.itemCode}). Price: ${formattedPrice}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="w-[146px] sm:w-[156px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out delay-75 transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer flex items-center justify-center gap-1.5"
           >
-            Quick Shop
-          </Link>
+            <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+            <span>WhatsApp Inquiry</span>
+          </a>
         </div>
       </div>
 
