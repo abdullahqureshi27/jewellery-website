@@ -6,30 +6,59 @@
  * tailored with luxury jewellery filters (Metal Purity, Gemstone, Carat, Price).
  */
 
-import { useState, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Filter, X, SlidersHorizontal, RotateCcw, Search, Sparkles } from 'lucide-react';
 import { JewelleryProduct } from '@/sanity/mockData';
 import ProductCard from './ProductCard';
 import ProductQuickView from './ProductQuickView';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface ShopCatalogProps {
   initialProducts: JewelleryProduct[];
 }
 
 export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get('category') || 'all';
-  const initialSearch = searchParams.get('search') || '';
+  const urlCategory = searchParams.get('category') || 'all';
+  const urlSearch = searchParams.get('search') || '';
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
-  const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
+  const [selectedCategory, setSelectedCategory] = useState<string>(urlCategory);
+  const [searchQuery, setSearchQuery] = useState<string>(urlSearch);
   const [selectedMetal, setSelectedMetal] = useState<string>('all');
   const [selectedGemstone, setSelectedGemstone] = useState<string>('all');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<string>('featured');
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   const [selectedQuickView, setSelectedQuickView] = useState<JewelleryProduct | null>(null);
+
+  // Sync state whenever URL query params change (e.g. from navbar clicks or back/forward)
+  useEffect(() => {
+    setSelectedCategory(urlCategory);
+  }, [urlCategory]);
+
+  useEffect(() => {
+    setSearchQuery(urlSearch);
+  }, [urlSearch]);
+
+  const handleCategoryChange = (catValue: string) => {
+    setSelectedCategory(catValue);
+    const params = new URLSearchParams(searchParams.toString());
+    if (catValue === 'all') {
+      params.delete('category');
+    } else {
+      params.set('category', catValue);
+    }
+    const qs = params.toString();
+    router.push(qs ? `/shop?${qs}` : '/shop', { scroll: false });
+  };
 
   const categories = [
     { label: 'All Pieces', value: 'all' },
@@ -65,6 +94,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
     setSelectedGemstone('all');
     setInStockOnly(false);
     setSortBy('featured');
+    router.push('/shop', { scroll: false });
   };
 
   // Active filters count
@@ -156,7 +186,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
             return (
               <button
                 key={cat.value}
-                onClick={() => setSelectedCategory(cat.value)}
+                onClick={() => handleCategoryChange(cat.value)}
                 className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex-shrink-0 ${
                   isSelected
                     ? 'bg-[#0D1117] text-[#FAF8F5] shadow-md border border-[#0D1117]'
@@ -204,21 +234,35 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
             )}
           </div>
 
-          {/* Sort Dropdown */}
+          {/* Luxury shadcn Sort Dropdown */}
           <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             <span className="text-xs text-[#8A90A0] uppercase tracking-wider hidden sm:inline">
               Sort by:
             </span>
-            <select
+            <Select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="bg-[#FAF8F5] border border-[#E8E2D7] rounded-lg px-3 py-1.5 text-xs text-[#12141A] font-medium focus:outline-none focus:border-[#C5A059]"
+              onValueChange={(val) => {
+                if (val) setSortBy(val as string);
+              }}
             >
-              <option value="featured">Signature &amp; Featured</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="name-asc">Alphabetical (A-Z)</option>
-            </select>
+              <SelectTrigger className="w-[200px] bg-[#FAF8F5] border-[#E8E2D7] text-xs font-medium text-[#12141A] rounded-lg h-9 hover:border-[#C5A059] transition-colors">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border-[#E8E2D7] shadow-xl rounded-xl p-1 z-50">
+                <SelectItem value="featured" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  Signature &amp; Featured
+                </SelectItem>
+                <SelectItem value="price-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  Price: Low to High
+                </SelectItem>
+                <SelectItem value="price-desc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  Price: High to Low
+                </SelectItem>
+                <SelectItem value="name-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  Alphabetical (A-Z)
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

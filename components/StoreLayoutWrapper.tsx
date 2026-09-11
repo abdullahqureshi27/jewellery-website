@@ -6,7 +6,7 @@
  * the embedded /studio route so Sanity Studio gets a clean full-screen canvas.
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { usePathname } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -28,7 +28,9 @@ export default function StoreLayoutWrapper({
 
   return (
     <CartProvider>
-      <Navbar />
+      <Suspense fallback={null}>
+        <Navbar />
+      </Suspense>
       <main className="flex-1">{children}</main>
       <Footer />
       <WhatsAppFloat />

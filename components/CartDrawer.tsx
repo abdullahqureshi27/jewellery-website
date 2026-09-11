@@ -2,6 +2,7 @@
 
 /**
  * Client Component: Slide-over Inquiry Bag / Cart Drawer.
+ * Built with shadcn Sheet & Button primitives.
  * Shows selected pieces, allows quantity updates/removal,
  * and launches the customer details inquiry modal.
  */
@@ -9,9 +10,18 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, Trash2, Plus, Minus, ShoppingBag, Sparkles, ArrowRight } from 'lucide-react';
+import { Trash2, Plus, Minus, ShoppingBag, Sparkles, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CustomerInquiryModal from './CustomerInquiryModal';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
 export default function CartDrawer() {
   const {
@@ -27,31 +37,26 @@ export default function CartDrawer() {
 
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
-  if (!isCartDrawerOpen) return null;
-
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-[#0D1117]/60 backdrop-blur-sm animate-fadeIn">
-        <div
-          className="fixed inset-y-0 right-0 w-full max-w-md bg-[#FAF8F5] shadow-2xl flex flex-col justify-between z-50 border-l border-[#E8E2D7] animate-slideLeft"
-          onClick={(e) => e.stopPropagation()}
+      <Sheet open={isCartDrawerOpen} onOpenChange={setIsCartDrawerOpen}>
+        <SheetContent
+          side="right"
+          showCloseButton={true}
+          className="w-full sm:max-w-md bg-[#FAF8F5] border-l border-[#E8E2D7] p-0 flex flex-col justify-between shadow-2xl z-50 overflow-hidden"
         >
           {/* Drawer Header */}
-          <div className="p-5 bg-[#0D1117] text-[#FAF8F5] flex items-center justify-between border-b border-[#C5A059]/30">
+          <SheetHeader className="p-5 bg-[#0D1117] text-[#FAF8F5] flex flex-row items-center justify-between border-b border-[#C5A059]/30 space-y-0 pr-12">
             <div className="flex items-center gap-2">
               <ShoppingBag className="w-5 h-5 text-[#C5A059]" />
-              <h3 className="font-serif text-base font-bold uppercase tracking-wider">
+              <SheetTitle className="font-serif text-base font-bold uppercase tracking-wider text-[#FAF8F5]">
                 Inquiry Bag ({totalItems})
-              </h3>
+              </SheetTitle>
             </div>
-            <button
-              onClick={() => setIsCartDrawerOpen(false)}
-              className="p-1.5 rounded-full hover:bg-white/10 text-[#FAF8F5] transition-colors"
-              aria-label="Close bag"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+            <SheetDescription className="sr-only">
+              Review your selected jewellery pieces before inquiring
+            </SheetDescription>
+          </SheetHeader>
 
           {/* Drawer Items List */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
@@ -66,14 +71,16 @@ export default function CartDrawer() {
                 <p className="text-xs text-[#5C6270] max-w-xs mx-auto">
                   Browse our showcase and tap the 🛒 cart icon on any jewel to add items for a combined inquiry.
                 </p>
-                <Link
-                  href="/shop"
-                  onClick={() => setIsCartDrawerOpen(false)}
-                  className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#C5A059] hover:text-[#0D1117] transition-colors mt-2"
-                >
-                  <span>Explore Showcase</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                <div className="pt-2">
+                  <Button
+                    onClick={() => setIsCartDrawerOpen(false)}
+                    render={<Link href="/shop" />}
+                    className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#C5A059] hover:text-[#0D1117] transition-colors"
+                  >
+                    <span>Explore Showcase</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Button>
+                </div>
               </div>
             ) : (
               items.map(({ product, quantity }) => (
@@ -84,8 +91,8 @@ export default function CartDrawer() {
                   {/* Thumbnail */}
                   <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-[#F5F2EC] flex-shrink-0 border border-[#E8E2D7]">
                     <Image
-                      src={product.images[0]?.url || ''}
-                      alt={product.title}
+                      src={product.images?.[0]?.url || ''}
+                      alt={product.title || 'Jewellery piece'}
                       fill
                       sizes="64px"
                       className="object-cover"
@@ -114,7 +121,7 @@ export default function CartDrawer() {
 
                     <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#E8E2D7]/50">
                       <span className="font-serif text-xs font-bold text-[#0D1117]">
-                        Rs. {(product.price * quantity).toLocaleString()}
+                        Rs. {((product.price || 0) * quantity).toLocaleString()}
                       </span>
 
                       {/* Quantity Toggles */}
@@ -146,8 +153,8 @@ export default function CartDrawer() {
 
           {/* Drawer Footer Checkout Action */}
           {items.length > 0 && (
-            <div className="p-5 bg-white border-t border-[#E8E2D7] space-y-3">
-              <div className="flex items-baseline justify-between">
+            <SheetFooter className="p-5 bg-white border-t border-[#E8E2D7] space-y-3 flex flex-col sm:flex-col items-stretch">
+              <div className="flex items-baseline justify-between w-full">
                 <span className="text-xs uppercase tracking-wider text-[#5C6270] font-semibold">
                   Estimated Showcase Total:
                 </span>
@@ -156,24 +163,25 @@ export default function CartDrawer() {
                 </span>
               </div>
 
-              <button
+              <Button
                 onClick={() => setIsInquiryModalOpen(true)}
-                className="w-full flex items-center justify-center gap-2 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-md group"
+                className="w-full bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-5 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-md group cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 text-[#C5A059] group-hover:text-white" />
+                <Sparkles className="w-4 h-4 text-[#C5A059] group-hover:text-white mr-2" />
                 <span>Inquire About All ({totalItems}) Items</span>
-              </button>
+              </Button>
 
-              <button
+              <Button
+                variant="ghost"
                 onClick={clearCart}
-                className="w-full text-center text-[11px] text-[#8A90A0] hover:text-[#0D1117] underline transition-colors"
+                className="w-full text-center text-[11px] text-[#8A90A0] hover:text-[#0D1117] h-auto p-0 hover:bg-transparent underline cursor-pointer"
               >
                 Clear Entire Bag
-              </button>
-            </div>
+              </Button>
+            </SheetFooter>
           )}
-        </div>
-      </div>
+        </SheetContent>
+      </Sheet>
 
       {/* Customer Details Inquiry Modal for multiple cart items */}
       <CustomerInquiryModal

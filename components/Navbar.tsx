@@ -7,7 +7,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
@@ -17,6 +17,8 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams.get('category');
 
   const { totalItems, setIsCartDrawerOpen } = useCart();
 
@@ -111,7 +113,16 @@ export default function Navbar() {
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href;
+                let isActive = false;
+                if (link.href === '/') {
+                  isActive = pathname === '/';
+                } else if (link.href === '/shop') {
+                  isActive = pathname === '/shop' && (!currentCategory || currentCategory === 'all');
+                } else if (link.href.includes('category=')) {
+                  const cat = link.href.split('category=')[1];
+                  isActive = pathname === '/shop' && currentCategory === cat;
+                }
+
                 return (
                   <Link
                     key={link.name}
@@ -170,7 +181,7 @@ export default function Navbar() {
                 href="https://wa.me/923001234567?text=Hello,%20I%20am%20interested%20in%20custom%20jewellery%20showcase."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 shadow-sm"
+                className="hidden md:inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 shadow-sm"
               >
                 <span>WhatsApp</span>
               </a>
