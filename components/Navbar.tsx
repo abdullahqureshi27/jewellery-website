@@ -5,20 +5,25 @@
  * Features live cart / inquiry bag badge, mobile menu, search drawer, and direct concierge.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight, ShoppingBag } from 'lucide-react';
+import Image from 'next/image';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { JewelleryProduct, MOCK_JEWELLERY_PRODUCTS } from '@/sanity/mockData';
 
 export default function Navbar() {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState<JewelleryProduct[]>(MOCK_JEWELLERY_PRODUCTS);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get('category');
+  const urlSearch = searchParams.get('search') || '';
 
   const { totalItems, setIsCartDrawerOpen } = useCart();
 
@@ -33,7 +38,26 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Fetch all products on background so navbar search has full live inventory
+  useEffect(() => {
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProducts(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  // Synchronize searchQuery with URL query parameter when on /shop
+  useEffect(() => {
+    if (pathname === '/shop') {
+      setSearchQuery(urlSearch);
+    }
+  }, [urlSearch, pathname]);
+
+  // Close drawers on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setSearchOpen(false);
@@ -48,10 +72,69 @@ export default function Navbar() {
     { name: 'Bridal Sets', href: '/shop?category=bridal' },
   ];
 
+  // Real-time matching logic across title, itemCode, gemstone, metal, and description
+  const matchingProducts = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    const q = searchQuery.toLowerCase().trim();
+    return products.filter((item) => {
+      if (!item) return false;
+      const matchTitle = (item.title || '').toLowerCase().includes(q);
+      const matchCode = (item.itemCode || '').toLowerCase().includes(q);
+      const matchGem = (item.gemstone || '').toLowerCase().includes(q);
+      const matchMetal = (item.metal || '').toLowerCase().includes(q);
+      const matchDesc = (item.description || '').toLowerCase().includes(q);
+      return matchTitle || matchCode || matchGem || matchMetal || matchDesc;
+    });
+  }, [products, searchQuery]);
+
+  // Real-time search handler: updates local state and syncs with /shop live with zero page reload
+  const handleSearchChange = (val: string) => {
+    setSearchQuery(val);
+    if (pathname === '/shop') {
+      const params = new URLSearchParams(searchParams.toString());
+      if (val.trim()) {
+        params.set('search', val.trim());
+      } else {
+        params.delete('search');
+      }
+      const qs = params.toString();
+      router.replace(qs ? `/shop?${qs}` : '/shop', { scroll: false });
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    if (pathname === '/shop') {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete('search');
+      const qs = params.toString();
+      router.replace(qs ? `/shop?${qs}` : '/shop', { scroll: false });
+    }
+  };
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      window.location.href = `/shop?search=${encodeURIComponent(searchQuery.trim())}`;
+    const trimmed = searchQuery.trim();
+    if (trimmed) {
+      router.push(`/shop?search=${encodeURIComponent(trimmed)}`, { scroll: false });
+    } else {
+      router.push('/shop', { scroll: false });
+    }
+    setSearchOpen(false);
+  };
+
+  const handleProductSelect = (slug: string) => {
+    setSearchOpen(false);
+    router.push(`/product/${slug}`);
+  };
+
+  const handleViewAllResults = () => {
+    setSearchOpen(false);
+    const trimmed = searchQuery.trim();
+    if (trimmed) {
+      router.push(`/shop?search=${encodeURIComponent(trimmed)}`, { scroll: false });
+    } else {
+      router.push('/shop', { scroll: false });
     }
   };
 
@@ -191,26 +274,128 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Expandable Search Drawer */}
+          {/* Expandable Search Drawer with Real-Time Live Results */}
           {searchOpen && (
-            <div className="pt-4 pb-2 border-t border-[#E8E2D7] mt-3 animate-fadeIn">
+            <div className="pt-4 pb-2 border-t border-[#E8E2D7] mt-3 animate-fadeIn relative">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <Search className="absolute left-3 w-4 h-4 text-[#5C6270]" />
+                <Search className="absolute left-3.5 w-4 h-4 text-[#5C6270]" />
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search by gem, cut, or item (e.g. Solitaire, Emerald, 925 Silver)..."
-                  className="w-full bg-white border border-[#E8E2D7] rounded-full py-2.5 pl-10 pr-24 text-sm text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-inner"
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  placeholder="Search pieces by title, gem, metal, or SKU in real-time..."
+                  className="w-full bg-white border border-[#E8E2D7] rounded-full py-2.5 pl-10 pr-28 text-sm text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-inner"
                   autoFocus
                 />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={handleClearSearch}
+                    className="absolute right-20 text-[#8A90A0] hover:text-[#0D1117] p-1 transition-colors cursor-pointer"
+                    title="Clear search"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
                 <button
                   type="submit"
-                  className="absolute right-1.5 bg-[#C5A059] hover:bg-[#B08B3E] text-[#0D1117] font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider transition-colors"
+                  className="absolute right-1.5 bg-[#C5A059] hover:bg-[#B08B3E] text-[#0D1117] font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider transition-colors cursor-pointer"
                 >
                   Find
                 </button>
               </form>
+
+              {/* Real-Time Live Matching Dropdown */}
+              {searchQuery.trim().length > 0 && (
+                <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border border-[#E8E2D7] shadow-2xl overflow-hidden z-50 animate-fadeIn">
+                  <div className="p-3 bg-[#FAF8F5] border-b border-[#E8E2D7] flex items-center justify-between text-xs text-[#5C6270]">
+                    <span>
+                      Live Matching:{' '}
+                      <strong className="text-[#0D1117] font-semibold">
+                        {matchingProducts.length}
+                      </strong>{' '}
+                      piece{matchingProducts.length === 1 ? '' : 's'}
+                    </span>
+                    {pathname === '/shop' && (
+                      <span className="text-[#C5A059] font-medium flex items-center gap-1 text-[11px]">
+                        <Sparkles className="w-3 h-3" /> Catalog updating live
+                      </span>
+                    )}
+                  </div>
+
+                  {matchingProducts.length > 0 ? (
+                    <div>
+                      <div className="max-h-80 overflow-y-auto divide-y divide-[#E8E2D7]/50">
+                        {matchingProducts.slice(0, 5).map((product) => (
+                          <button
+                            key={product._id}
+                            type="button"
+                            onClick={() => handleProductSelect(product.slug)}
+                            className="w-full text-left p-3 hover:bg-[#FAF8F5] transition-colors flex items-center gap-3.5 group cursor-pointer"
+                          >
+                            <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-[#E8E2D7]/40 shrink-0 border border-[#E8E2D7]">
+                              {product.images?.[0]?.url && (
+                                <Image
+                                  src={product.images[0].url}
+                                  alt={product.title}
+                                  fill
+                                  sizes="48px"
+                                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="font-serif text-sm font-semibold text-[#0D1117] truncate group-hover:text-[#C5A059] transition-colors">
+                                {product.title}
+                              </p>
+                              <p className="text-xs text-[#5C6270] truncate mt-0.5">
+                                {product.metal} • {product.gemstone}
+                              </p>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <p className="font-serif font-bold text-sm text-[#0D1117] lining-nums">
+                                Rs. {product.price.toLocaleString()}
+                              </p>
+                              <span className="text-[10px] text-[#C5A059] font-medium tracking-wider uppercase">
+                                {product.category}
+                              </span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                      <div className="p-2.5 bg-[#FAF8F5] border-t border-[#E8E2D7]">
+                        <button
+                          type="button"
+                          onClick={handleViewAllResults}
+                          className="w-full py-2 px-4 rounded-xl bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                          <span>View All {matchingProducts.length} Results in Catalog</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-6 text-center">
+                      <p className="text-xs text-[#5C6270]">
+                        No pieces found matching &ldquo;{searchQuery}&rdquo;
+                      </p>
+                      <p className="text-[11px] text-[#8A90A0] mt-1">
+                        Try searching for &ldquo;Solitaire&rdquo;, &ldquo;Emerald&rdquo;, &ldquo;Moissanite&rdquo;, or &ldquo;925 Silver&rdquo;
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchOpen(false);
+                          router.push('/shop', { scroll: false });
+                        }}
+                        className="mt-3 inline-flex items-center gap-1 text-xs text-[#C5A059] hover:underline font-semibold cursor-pointer"
+                      >
+                        Browse All Jewellery &rarr;
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
