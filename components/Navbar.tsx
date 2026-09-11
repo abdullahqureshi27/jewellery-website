@@ -66,11 +66,11 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'All Jewellery', href: '/shop' },
+    { name: 'All', href: '/shop' },
     { name: 'Rings', href: '/shop?category=rings' },
     { name: 'Earrings', href: '/shop?category=earrings' },
     { name: 'Pendants', href: '/shop?category=pendants' },
-    { name: 'Bridal Sets', href: '/shop?category=bridal' },
+    { name: 'Bridal', href: '/shop?category=bridal' },
   ];
 
   // Real-time matching logic across title, itemCode, gemstone, metal, and description
@@ -188,7 +188,7 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300" />
                 <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.2em] text-[#0D1117] uppercase">
-                  Aurelia
+                  Abdullah
                 </span>
                 <Sparkles className="w-5 h-5 text-[#C5A059] group-hover:-rotate-12 transition-transform duration-300" />
               </div>
@@ -198,7 +198,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8 shrink-0">
               {navLinks.map((link) => {
                 let isActive = false;
                 if (link.href === '/') {
@@ -214,7 +214,7 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`text-sm uppercase tracking-widest transition-colors py-1 relative ${
+                    className={`text-sm uppercase tracking-widest transition-colors py-1 relative whitespace-nowrap shrink-0 ${
                       isActive
                         ? 'text-[#0D1117] font-semibold'
                         : 'text-[#5C6270] hover:text-[#C5A059]'
@@ -411,7 +411,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[#C5A059]" />
                   <span className="font-serif text-xl font-bold tracking-widest text-[#0D1117] uppercase">
-                    Aurelia
+                    Abdullah
                   </span>
                 </div>
                 <button
