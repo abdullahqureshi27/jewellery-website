@@ -95,7 +95,7 @@ export default function CartDrawer() {
                     Your Cart is Empty
                   </h4>
                   <p className="text-xs text-[#8B949E] max-w-xs mx-auto leading-relaxed">
-                    Explore our atelier catalogue and click the 🛒 bag icon on any jewel to curate your inquiry.
+                    Explore our atelier catalogue and click the bag icon on any jewel to curate your inquiry.
                   </p>
                 </div>
                 <div className="pt-2">

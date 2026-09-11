@@ -88,7 +88,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                     <button
                       key={idx}
                       onClick={() => setSelectedImgIdx(idx)}
-                      className={`relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all ${
+                      className={`relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all cursor-pointer ${
                         selectedImgIdx === idx
                           ? 'border-[#C5A059] ring-2 ring-[#C5A059]/30'
                           : 'border-[#E8E2D7] hover:border-[#C5A059]/60 opacity-70 hover:opacity-100'
@@ -181,7 +181,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   {/* Add to Inquiry Bag */}
                   <button
                     onClick={handleCartToggle}
-                    className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 border shadow-sm ${
+                    className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 border shadow-sm cursor-pointer ${
                       inCart
                         ? 'bg-[#C5A059] text-[#0D1117] border-[#C5A059]'
                         : 'bg-white hover:bg-[#FAF8F5] text-[#0D1117] border-[#E8E2D7]'

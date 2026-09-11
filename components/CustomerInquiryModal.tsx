@@ -82,21 +82,21 @@ export default function CustomerInquiryModal({
 
     const totalFormatted = `Rs. ${totalCalculated.toLocaleString()}`;
 
-    // Structured message template
-    const textMessage = `✨ *AURELIA FINE ATELIER — SHOWCASE INQUIRY* ✨
+    // Structured message template without emojis
+    const textMessage = `*AURELIA FINE ATELIER — SHOWCASE INQUIRY*
 -----------------------------------------
-👤 *CUSTOMER DETAILS:*
+*CUSTOMER DETAILS:*
 • *Name:* ${name.trim()}
 • *Phone/WhatsApp:* ${phone.trim()}
 • *City:* ${city.trim()}
 ${address.trim() ? `• *Address:* ${address.trim()}\n` : ''}${email.trim() ? `• *Email:* ${email.trim()}\n` : ''}${notes.trim() ? `• *Ring Size / Notes:* ${notes.trim()}\n` : ''}
 -----------------------------------------
-💍 *SELECTED JEWELLERY PIECES (${inquiryList.length} items):*
+*SELECTED JEWELLERY PIECES (${inquiryList.length} items):*
 
 ${itemsFormatted}
 
 -----------------------------------------
-💰 *ESTIMATED TOTAL:* ${totalFormatted}
+*ESTIMATED TOTAL:* ${totalFormatted}
 -----------------------------------------
 _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
 

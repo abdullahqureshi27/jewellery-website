@@ -183,7 +183,7 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                 {/* Add to Inquiry Bag button */}
                 <button
                   onClick={handleCartToggle}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
                     inCart
                       ? 'bg-[#C5A059] text-[#0D1117] border-[#C5A059]'
                       : 'bg-white hover:bg-[#FAF8F5] text-[#0D1117] border-[#E8E2D7]'
