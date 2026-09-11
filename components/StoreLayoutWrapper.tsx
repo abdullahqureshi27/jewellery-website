@@ -12,6 +12,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import CartDrawer from '@/components/CartDrawer';
+import SmoothScroll from '@/components/SmoothScroll';
 import { CartProvider } from '@/context/CartContext';
 
 export default function StoreLayoutWrapper({
@@ -27,14 +28,16 @@ export default function StoreLayoutWrapper({
   }
 
   return (
-    <CartProvider>
-      <Suspense fallback={null}>
-        <Navbar />
-      </Suspense>
-      <main className="flex-1">{children}</main>
-      <Footer />
-      <WhatsAppFloat />
-      <CartDrawer />
-    </CartProvider>
+    <SmoothScroll>
+      <CartProvider>
+        <Suspense fallback={null}>
+          <Navbar />
+        </Suspense>
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <WhatsAppFloat />
+        <CartDrawer />
+      </CartProvider>
+    </SmoothScroll>
   );
 }
