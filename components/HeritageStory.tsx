@@ -1,0 +1,114 @@
+import Image from 'next/image';
+import { Sparkles, CheckCircle2 } from 'lucide-react';
+
+/**
+ * Server Component: Heritage & Bespoke Craftsmanship story.
+ */
+
+export default function HeritageStory() {
+  return (
+    <section className="py-24 bg-[#FAF8F5] border-t border-[#E8E2D7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Atmospheric Image Collage */}
+          <div className="relative">
+            <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-2xl overflow-hidden border border-[#E8E2D7] shadow-xl">
+              <Image
+                src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80"
+                alt="Jewellery master artisan hand-setting gemstone"
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/60 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] block font-semibold">
+                  The Master Karigar
+                </span>
+                <p className="font-serif text-lg font-bold">
+                  Hand-Cut Prongs &amp; Precision Micro-Pavé
+                </p>
+              </div>
+            </div>
+
+            {/* Floating Luxury Stamp */}
+            <div className="absolute -bottom-6 -left-2 sm:-left-6 bg-[#0D1117] text-[#FAF8F5] p-5 rounded-2xl border border-[#C5A059]/40 shadow-2xl hidden sm:block max-w-[200px]">
+              <Sparkles className="w-6 h-6 text-[#C5A059] mb-2" />
+              <p className="font-serif text-2xl font-bold text-[#C5A059]">75+ Yrs</p>
+              <p className="text-[11px] text-[#8B949E] uppercase tracking-wider">
+                Unbroken family lineage of jewellery master craftsmen
+              </p>
+            </div>
+          </div>
+
+          {/* Right: Narrative & Quality Assurances */}
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#C5A059] font-bold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Authentic Heritage &amp; Craft</span>
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0D1117] leading-tight">
+              Why Choose Aurelia Fine Jewellery?
+            </h2>
+
+            <p className="text-sm text-[#5C6270] leading-relaxed">
+              Unlike mass-manufactured commercial alloy jewellery that tarnishes within weeks, every Aurelia
+              piece begins with certified **925 solid sterling silver** or **18k gold vermeil**. We treat every
+              piece with a triple-pass rhodium mirror dipping for permanent tarnish resistance.
+            </p>
+
+            <div className="space-y-4 pt-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#C5A059] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-serif text-base font-bold text-[#0D1117]">
+                    D Color VVS1 Moissanite Certified
+                  </h4>
+                  <p className="text-xs text-[#5C6270] mt-0.5">
+                    Hardness rating of 9.25 on Mohs scale with higher refractive fire than mined diamonds. Accompanied by a GRA warranty card.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#C5A059] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-serif text-base font-bold text-[#0D1117]">
+                    Lifetime Rhodium Replating Warranty
+                  </h4>
+                  <p className="text-xs text-[#5C6270] mt-0.5">
+                    We stand behind our craft forever. Send your piece back anytime for complimentary ultrasonic steam cleaning and replating.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#C5A059] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-serif text-base font-bold text-[#0D1117]">
+                    Bespoke Sizing &amp; Custom Orders
+                  </h4>
+                  <p className="text-xs text-[#5C6270] mt-0.5">
+                    Have a family heirloom design or custom engagement ring idea? Our designers can bring your sketch to life within 10 days.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <a
+                href="https://wa.me/923001234567?text=Hello%20Aurelia%20Jewellers,%20I%20would%20like%20to%20consult%20on%20a%20bespoke%20jewellery%20design."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-bold uppercase tracking-[0.2em] px-8 py-3.5 rounded-full transition-all duration-300 shadow-md"
+              >
+                <span>Consult Our Gemologist on WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
