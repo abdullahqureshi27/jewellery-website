@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Sparkles, ArrowRight, ShieldCheck, Gem, ChevronLeft, ChevronRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 
 /**
