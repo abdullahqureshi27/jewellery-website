@@ -44,7 +44,16 @@ export async function getProducts(): Promise<JewelleryProduct[]> {
       },
       description
     }`;
-    const data = await client.fetch(sanityQuery);
+    const data = await client.fetch(
+      sanityQuery,
+      {},
+      {
+        next: {
+          revalidate: 60, // Cache for 60s across all users; prevents crashing Sanity under high traffic
+          tags: ['products'],
+        },
+      }
+    );
     if (data && data.length > 0) {
       return data;
     }

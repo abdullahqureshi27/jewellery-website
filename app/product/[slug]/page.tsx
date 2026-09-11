@@ -14,6 +14,8 @@ interface ProductPageProps {
   }>;
 }
 
+export const revalidate = 60; // Next.js ISR: Cache product pages for 60s to handle high concurrent traffic
+
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
