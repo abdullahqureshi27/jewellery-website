@@ -52,8 +52,9 @@ function SheetContent({
       <SheetPrimitive.Popup
         data-slot="sheet-content"
         data-side={side}
+        data-lenis-prevent="true"
         className={cn(
-          "fixed z-50 flex flex-col bg-[#FAF8F5] text-foreground shadow-2xl transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "fixed z-50 flex flex-col bg-[#FAF8F5] text-foreground shadow-2xl transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] max-h-screen h-full",
           "data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-full data-[side=right]:max-w-md data-[side=right]:border-l data-[side=right]:border-[#E8E2D7]",
           "data-[side=right]:data-starting-style:translate-x-full data-[side=right]:data-ending-style:translate-x-full",
           "data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-full data-[side=left]:max-w-md data-[side=left]:border-r data-[side=left]:border-[#E8E2D7]",

@@ -7,7 +7,7 @@
  * and fluid off-screen slide-in animation.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, Plus, Minus, ShoppingBag, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
@@ -37,16 +37,32 @@ export default function CartDrawer() {
 
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
+  // Freeze background page scrolling and disable Lenis while the drawer is open
+  useEffect(() => {
+    if (isCartDrawerOpen) {
+      document.body.style.overflow = 'hidden';
+      (window as any).__lenis?.stop();
+    } else {
+      document.body.style.overflow = '';
+      (window as any).__lenis?.start();
+    }
+    return () => {
+      document.body.style.overflow = '';
+      (window as any).__lenis?.start();
+    };
+  }, [isCartDrawerOpen]);
+
   return (
     <>
       <Sheet open={isCartDrawerOpen} onOpenChange={setIsCartDrawerOpen}>
         <SheetContent
           side="right"
           showCloseButton={true}
-          className="w-full sm:max-w-md bg-[#0B0D13] text-white border-l border-white/10 p-0 flex flex-col justify-between shadow-2xl z-50 overflow-hidden"
+          data-lenis-prevent="true"
+          className="w-full sm:max-w-md bg-[#0B0D13] text-white border-l border-white/10 p-0 flex flex-col justify-between shadow-2xl z-50 overflow-hidden h-full max-h-screen"
         >
           {/* Drawer Header (FitFlair Inspired Dark Theme) */}
-          <SheetHeader className="p-6 bg-[#0B0D13] border-b border-white/10 space-y-3 pr-14">
+          <SheetHeader className="p-6 bg-[#0B0D13] border-b border-white/10 space-y-3 pr-14 flex-shrink-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#C5A059]">
@@ -76,7 +92,10 @@ export default function CartDrawer() {
           </SheetHeader>
 
           {/* Drawer Items List (FitFlair Inspired High-Contrast Cards) */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-3.5">
+          <div
+            data-lenis-prevent="true"
+            className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-5 space-y-3.5"
+          >
             {items.length === 0 ? (
               <div className="py-24 text-center space-y-4">
                 <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-[#8B949E]">
@@ -181,7 +200,7 @@ export default function CartDrawer() {
 
           {/* Drawer Footer (FitFlair Inspired Dark Luxury Checkout) */}
           {items.length > 0 && (
-            <SheetFooter className="p-6 bg-[#10141D] border-t border-white/10 space-y-4 flex flex-col sm:flex-col items-stretch">
+            <SheetFooter className="p-6 bg-[#10141D] border-t border-white/10 space-y-4 flex flex-col sm:flex-col items-stretch flex-shrink-0">
               {/* Trust Badge */}
               <div className="bg-[#0B0D13] border border-white/10 rounded-xl p-3 flex items-center gap-2.5 text-xs text-[#8B949E]">
                 <ShieldCheck className="w-4 h-4 text-[#E5C17B] flex-shrink-0" />
