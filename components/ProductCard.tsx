@@ -191,12 +191,12 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                 Price on Request
               </span>
             ) : (
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-sans text-base sm:text-lg font-bold text-[#0D1117] tracking-tight tabular-nums lining-nums">
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-base sm:text-lg font-bold text-[#0D1117] tracking-normal">
                   {formattedPrice}
                 </span>
                 {formattedOriginalPrice && (
-                  <span className="text-xs text-[#8A90A0] line-through tabular-nums lining-nums font-sans">
+                  <span className="font-serif text-xs text-[#8A90A0] line-through">
                     {formattedOriginalPrice}
                   </span>
                 )}

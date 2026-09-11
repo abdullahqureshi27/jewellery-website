@@ -121,11 +121,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                     </span>
                   ) : (
                     <>
-                      <span className="font-sans text-3xl font-bold text-[#0D1117] tracking-tight tabular-nums lining-nums">
+                      <span className="font-serif text-3xl font-bold text-[#0D1117] tracking-normal">
                         {formattedPrice}
                       </span>
                       {formattedOriginalPrice && (
-                        <span className="text-base text-[#8A90A0] line-through font-sans tabular-nums lining-nums">
+                        <span className="text-lg text-[#8A90A0] line-through font-serif">
                           {formattedOriginalPrice}
                         </span>
                       )}

@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans, Geist } from "next/font/google";
+import { Cinzel, Plus_Jakarta_Sans, Geist } from "next/font/google";
 import StoreLayoutWrapper from "@/components/StoreLayoutWrapper";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 /**
- * Server Component: Root application layout providing luxury typography,
- * StoreLayoutWrapper (isolating /studio from storefront UI), and global SEO metadata.
+ * Server Component: Root application layout providing luxury typography with Cinzel
+ * and Plus Jakarta Sans (guaranteeing modern lining figures), StoreLayoutWrapper, and global SEO metadata.
  */
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cinzel = Cinzel({
+  variable: "--font-serif",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const jakarta = Plus_Jakarta_Sans({
@@ -54,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", playfair.variable, jakarta.variable, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", cinzel.variable, jakarta.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#12141A]">
         <StoreLayoutWrapper>{children}</StoreLayoutWrapper>
