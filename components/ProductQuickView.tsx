@@ -27,13 +27,18 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
   if (!product) return null;
 
   const inCart = isInCart(product._id);
-  const activeImage = product.images[selectedImgIndex] || product.images[0];
+  const activeImage =
+    product.images?.[selectedImgIndex] ||
+    product.images?.[0] || {
+      url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e',
+      alt: product.title || 'Jewellery piece',
+    };
 
   const formattedPrice = new Intl.NumberFormat('en-PK', {
     style: 'currency',
     currency: 'PKR',
     maximumFractionDigits: 0,
-  }).format(product.price);
+  }).format(product.price || 0);
 
   const formattedOriginalPrice = product.originalPrice
     ? new Intl.NumberFormat('en-PK', {

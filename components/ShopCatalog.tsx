@@ -79,6 +79,8 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
   const filteredProducts = useMemo(() => {
     return initialProducts
       .filter((item) => {
+        if (!item) return false;
+
         // Category filter
         if (selectedCategory !== 'all' && item.category !== selectedCategory) {
           return false;
@@ -86,14 +88,16 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
 
         // Metal filter
         if (selectedMetal !== 'all') {
-          if (!item.metal.toLowerCase().includes(selectedMetal.toLowerCase())) {
+          const metalStr = (item.metal || '').toLowerCase();
+          if (!metalStr.includes(selectedMetal.toLowerCase())) {
             return false;
           }
         }
 
         // Gemstone filter
         if (selectedGemstone !== 'all') {
-          if (!item.gemstone.toLowerCase().includes(selectedGemstone.toLowerCase())) {
+          const gemStr = (item.gemstone || '').toLowerCase();
+          if (!gemStr.includes(selectedGemstone.toLowerCase())) {
             return false;
           }
         }
@@ -106,10 +110,10 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
         // Search query filter
         if (searchQuery.trim()) {
           const query = searchQuery.toLowerCase().trim();
-          const matchTitle = item.title.toLowerCase().includes(query);
-          const matchCode = item.itemCode.toLowerCase().includes(query);
-          const matchGem = item.gemstone.toLowerCase().includes(query);
-          const matchMetal = item.metal.toLowerCase().includes(query);
+          const matchTitle = (item.title || '').toLowerCase().includes(query);
+          const matchCode = (item.itemCode || '').toLowerCase().includes(query);
+          const matchGem = (item.gemstone || '').toLowerCase().includes(query);
+          const matchMetal = (item.metal || '').toLowerCase().includes(query);
           if (!matchTitle && !matchCode && !matchGem && !matchMetal) {
             return false;
           }
@@ -118,9 +122,11 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
         return true;
       })
       .sort((a, b) => {
-        if (sortBy === 'price-asc') return a.price - b.price;
-        if (sortBy === 'price-desc') return b.price - a.price;
-        if (sortBy === 'name-asc') return a.title.localeCompare(b.title);
+        const priceA = a.price || 0;
+        const priceB = b.price || 0;
+        if (sortBy === 'price-asc') return priceA - priceB;
+        if (sortBy === 'price-desc') return priceB - priceA;
+        if (sortBy === 'name-asc') return (a.title || '').localeCompare(b.title || '');
         // Default: featured first
         return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
       });

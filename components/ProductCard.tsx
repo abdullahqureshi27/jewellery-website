@@ -27,16 +27,16 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
   const inCart = isInCart(product._id);
 
-  const primaryImage = product.images[0]?.url || 'https://images.unsplash.com/photo-1605100804763-247f67b3557e';
-  const secondaryImage = product.images[1]?.url || primaryImage;
+  const primaryImage = product?.images?.[0]?.url || 'https://images.unsplash.com/photo-1605100804763-247f67b3557e';
+  const secondaryImage = product?.images?.[1]?.url || primaryImage;
 
   const formattedPrice = new Intl.NumberFormat('en-PK', {
     style: 'currency',
     currency: 'PKR',
     maximumFractionDigits: 0,
-  }).format(product.price);
+  }).format(product?.price || 0);
 
-  const formattedOriginalPrice = product.originalPrice
+  const formattedOriginalPrice = product?.originalPrice
     ? new Intl.NumberFormat('en-PK', {
         style: 'currency',
         currency: 'PKR',
