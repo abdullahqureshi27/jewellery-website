@@ -32,7 +32,7 @@ const COLLECTIONS = [
     title: 'Channel Tennis Bangles',
     category: 'bangles',
     description: 'Continuous ribbons of moissanite light with heavy 925 security locks.',
-    imageUrl: 'https://images.unsplash.com/photo-1611591475836-8158c54c379a?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=800&q=80',
     count: '8 Handcrafted Bangles',
   },
   {

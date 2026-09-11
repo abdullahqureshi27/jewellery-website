@@ -39,7 +39,7 @@ const MARQUEE_ITEMS: MarqueeItem[] = [
   {
     title: 'Channel Tennis Bangles',
     category: 'Bracelets',
-    imageUrl: 'https://images.unsplash.com/photo-1611591475836-8158c54c379a?auto=format&fit=crop&w=600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=600&q=80',
     tag: 'Double Safety Clasp',
     href: '/shop?category=bangles',
   },

@@ -112,7 +112,7 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1611591475836-8158c54c379a?auto=format&fit=crop&w=1000&q=80',
+        url: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1000&q=80',
         alt: 'Celeste Tennis Bangle with Channel Setting macro',
       },
       {
