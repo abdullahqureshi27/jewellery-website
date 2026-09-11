@@ -8,7 +8,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ShoppingCart, MessageCircle, ShieldCheck, Award, Clock, Check } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, ShieldCheck, Award, Clock, Check } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
 import CustomerInquiryModal from './CustomerInquiryModal';
@@ -193,9 +194,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   {/* Open Customer Inquiry Form */}
                   <button
                     onClick={() => setIsInquiryModalOpen(true)}
-                    className="flex-1 flex items-center justify-center gap-2.5 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-md group"
+                    className="flex-1 flex items-center justify-center gap-2.5 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-md group cursor-pointer"
                   >
-                    <MessageCircle className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
+                    <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
                     <span>Inquire with My Details</span>
                   </button>
                 </div>

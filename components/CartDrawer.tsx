@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, Plus, Minus, ShoppingBag, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { useCart } from '@/context/CartContext';
 import CustomerInquiryModal from './CustomerInquiryModal';
 import {
@@ -221,7 +222,7 @@ export default function CartDrawer() {
                 onClick={() => setIsInquiryModalOpen(true)}
                 className="w-full h-11 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md shadow-[#25D366]/20 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99]"
               >
-                <Sparkles className="w-3.5 h-3.5" />
+                <FaWhatsapp className="w-4 h-4 text-white shrink-0" />
                 <span>Inquire on WhatsApp ({totalItems} {totalItems === 1 ? 'Piece' : 'Pieces'})</span>
               </Button>
 

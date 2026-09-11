@@ -38,10 +38,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
   const formattedOriginalPrice = product?.originalPrice
     ? new Intl.NumberFormat('en-PK', {
-        style: 'currency',
-        currency: 'PKR',
-        maximumFractionDigits: 0,
-      }).format(product.originalPrice)
+      style: 'currency',
+      currency: 'PKR',
+      maximumFractionDigits: 0,
+    }).format(product.originalPrice)
     : null;
 
   const handleCartClick = (e: React.MouseEvent) => {
@@ -69,9 +69,8 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           alt={product.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className={`object-cover transition-opacity duration-700 ease-in-out ${
-            isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
-          }`}
+          className={`object-cover transition-opacity duration-700 ease-in-out ${isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+            }`}
         />
 
         {/* Secondary Model / Angle Shot on Hover */}
@@ -81,27 +80,24 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             alt={`${product.title} lifestyle`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={`object-cover transition-all duration-700 ease-in-out ${
-              isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-            }`}
+            className={`object-cover transition-all duration-700 ease-in-out ${isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+              }`}
           />
         )}
 
         {/* 1. TOP-LEFT: Shopping Cart Icon Button (Slides in from left with opacity on hover) */}
         <div
-          className={`absolute top-3.5 left-3.5 z-20 transition-all duration-300 ease-out transform ${
-            inCart
+          className={`absolute top-3.5 left-3.5 z-20 transition-all duration-300 ease-out transform ${inCart
               ? 'opacity-100 translate-x-0 pointer-events-auto'
               : 'opacity-0 -translate-x-6 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto'
-          }`}
+            }`}
         >
           <button
             onClick={handleCartClick}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md cursor-pointer ${
-              inCart
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md cursor-pointer ${inCart
                 ? 'bg-[#C5A059] text-[#0D1117] ring-2 ring-white scale-105'
                 : 'bg-[#1A1817]/85 hover:bg-[#0D1117] text-white hover:text-[#C5A059] backdrop-blur-sm'
-            }`}
+              }`}
             title={inCart ? 'In your inquiry bag (Click to remove)' : 'Add to inquiry bag'}
             aria-label="Add to inquiry bag"
           >

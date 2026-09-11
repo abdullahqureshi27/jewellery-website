@@ -9,7 +9,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, ShieldCheck, ShoppingCart, MessageCircle, Check, ArrowRight } from 'lucide-react';
+import { X, ShieldCheck, ShoppingCart, Check, ArrowRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
 import CustomerInquiryModal from './CustomerInquiryModal';
@@ -195,9 +196,9 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                 {/* Direct Inquiry with Customer Details */}
                 <button
                   onClick={() => setIsInquiryFormOpen(true)}
-                  className="flex-1 flex items-center justify-center gap-2 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md group"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md group cursor-pointer"
                 >
-                  <MessageCircle className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
+                  <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
                   <span>Ask Details</span>
                 </button>
               </div>

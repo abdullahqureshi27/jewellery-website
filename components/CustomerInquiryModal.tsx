@@ -8,7 +8,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { X, MessageCircle, Sparkles, CheckCircle2, MapPin, User, Phone, Mail, FileText } from 'lucide-react';
+import { X, Sparkles, CheckCircle2, MapPin, User, Phone, Mail, FileText } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { CartItem } from '@/context/CartContext';
 
@@ -282,9 +283,9 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-md group"
+              className="w-full flex items-center justify-center gap-3 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-md group cursor-pointer"
             >
-              <MessageCircle className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" />
+              <FaWhatsapp className="w-5 h-5 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
               <span>Send Complete Inquiry to WhatsApp</span>
             </button>
             <p className="text-center text-[10px] text-[#8A90A0] mt-2">
