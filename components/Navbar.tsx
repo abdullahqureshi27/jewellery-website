@@ -184,21 +184,21 @@ export default function Navbar() {
             </button>
 
             {/* Brand Logo */}
-            <Link href="/" className="flex flex-col items-center group">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300" />
-                <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.2em] text-[#0D1117] uppercase">
-                  Abdullah
+            <Link href="/" className="flex flex-col items-center group shrink-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300 shrink-0" />
+                <span className="font-serif text-xl sm:text-2xl xl:text-3xl font-bold tracking-[0.16em] sm:tracking-[0.2em] text-[#0D1117] uppercase whitespace-nowrap">
+                  Farhan Faheem
                 </span>
-                <Sparkles className="w-5 h-5 text-[#C5A059] group-hover:-rotate-12 transition-transform duration-300" />
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:-rotate-12 transition-transform duration-300 shrink-0" />
               </div>
-              <span className="text-[10px] tracking-[0.35em] text-[#C5A059] uppercase font-medium">
+              <span className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#C5A059] uppercase font-medium">
                 Fine Atelier • Est. 1947
               </span>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8 shrink-0">
+            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-7 shrink-0">
               {navLinks.map((link) => {
                 let isActive = false;
                 if (link.href === '/') {
@@ -214,7 +214,7 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`text-sm uppercase tracking-widest transition-colors py-1 relative whitespace-nowrap shrink-0 ${
+                    className={`text-xs xl:text-sm uppercase tracking-widest transition-colors py-1 relative whitespace-nowrap shrink-0 ${
                       isActive
                         ? 'text-[#0D1117] font-semibold'
                         : 'text-[#5C6270] hover:text-[#C5A059]'
@@ -411,7 +411,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[#C5A059]" />
                   <span className="font-serif text-xl font-bold tracking-widest text-[#0D1117] uppercase">
-                    Abdullah
+                    Farhan Faheem
                   </span>
                 </div>
                 <button
