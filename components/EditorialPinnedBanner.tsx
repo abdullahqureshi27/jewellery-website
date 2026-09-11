@@ -12,10 +12,8 @@ import { Sparkles, ChevronDown } from 'lucide-react';
 
 export default function EditorialPinnedBanner() {
   return (
-    <div className="relative h-[160vh] -mt-1" aria-label="Editorial Brand Poem">
-      {/* Sticky Fullscreen Pinned Window */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-0">
-        {/* Editorial Background Image */}
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#0D1117]" aria-label="Editorial Brand Poem">
+      {/* Editorial Background Image */}
         <Image
           src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=2400&q=90"
           alt="Two souls, one story, sealed in silver and light"
@@ -53,7 +51,6 @@ export default function EditorialPinnedBanner() {
             <ChevronDown className="w-4 h-4 text-[#C5A059]" />
           </div>
         </div>
-      </div>
-    </div>
-  );
+      </section>
+    );
 }

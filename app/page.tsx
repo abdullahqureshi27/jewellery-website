@@ -32,32 +32,37 @@ export default async function HomePage() {
       {/* 3. Shop by Occasion & Curated Milestone Edits */}
       <OccasionsBanner />
 
-      {/* 4. Interactive Signature Pieces Carousel */}
+      {/* 4. The Atelier Standards (Materials, Hallmarks & Authenticity Spotlight) */}
+      <AtelierStandards />
+
+      {/* 5. Interactive Signature Pieces Carousel */}
       <FeaturedCarousel
         products={featuredProducts}
         title="Signature Atelier Pieces"
         subtitle="Exclusive Certified Moissanites & Hand-Set Gemstones"
       />
 
-      {/* 5. The Atelier Standards (Materials, Hallmarks & Authenticity Spotlight) */}
-      <AtelierStandards />
+      {/* 6. Zanvari-Inspired Sticky Pinned Editorial Section with Solid Curtain Reveal */}
+      <div className="relative">
+        {/* Pinned Editorial Section: Locks at top-0 as soon as it reaches full screen */}
+        <div className="sticky top-0 h-screen w-full z-0 overflow-hidden">
+          <EditorialPinnedBanner />
+        </div>
 
-      {/* 6. Zanvari-Inspired Sticky Pinned Editorial Section */}
-      <EditorialPinnedBanner />
+        {/* Subsequent Content Layer: 100% Solid Opaque Background (#FAF8F5) that slides over the pinned image */}
+        <div className="relative z-10 bg-[#FAF8F5] border-t border-[#E8E2D7] shadow-[0_-30px_70px_rgba(0,0,0,0.5)]">
+          {/* Visual Categories Grid */}
+          <CollectionsGrid />
 
-      {/* 7. Subsequent Content Layer: Slides over the pinned image on scroll */}
-      <div className="relative z-10 bg-[#FAF8F5] shadow-[0_-25px_60px_rgba(0,0,0,0.35)]">
-        {/* Visual Categories Grid */}
-        <CollectionsGrid />
+          {/* Bespoke Custom Orders & WhatsApp Consultation with Ring Size Guide */}
+          <BespokeBanner />
 
-        {/* Bespoke Custom Orders & WhatsApp Consultation with Ring Size Guide */}
-        <BespokeBanner />
+          {/* VIP Bridal & Client Testimonials Carousel */}
+          <TestimonialsCarousel />
 
-        {/* VIP Bridal & Client Testimonials Carousel */}
-        <TestimonialsCarousel />
-
-        {/* Craftsmanship & Heritage Quality Assurance */}
-        <HeritageStory />
+          {/* Craftsmanship & Heritage Quality Assurance */}
+          <HeritageStory />
+        </div>
       </div>
     </div>
   );
