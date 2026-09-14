@@ -272,7 +272,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                 }}
               >
                 <SelectTrigger
-                  size="lg"
+                  size="default"
                   className="w-[170px] sm:w-[190px] !h-11 px-4 bg-[#FAF8F5] border-[#E8E2D7] text-xs font-medium text-[#12141A] rounded-xl hover:border-[#C5A059] transition-colors cursor-pointer shadow-sm"
                 >
                   <SelectValue placeholder="Sort by" />
