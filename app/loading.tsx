@@ -9,8 +9,8 @@ export default function Loading() {
         <div className="absolute inset-0 rounded-full border-2 border-[#E8E2D7]" />
         <div className="absolute inset-0 rounded-full border-2 border-t-[#C5A059] animate-spin" />
       </div>
-      <p className="font-serif text-lg tracking-[0.2em] uppercase text-[#0D1117] animate-pulse">
-        Aurelia Atelier
+      <p className="font-serif text-lg tracking-[0.1em] uppercase text-[#0D1117] animate-pulse">
+        Faraz Faheem Atelier
       </p>
       <p className="text-xs text-[#5C6270] tracking-widest uppercase mt-1">
         Polishing Fine Jewels...

@@ -61,7 +61,7 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[#C5A059]" />
               <span className="font-serif text-2xl font-bold tracking-[0.1em] text-[#FAF8F5] uppercase">
-                Farhan Faheem
+                Faraz Faheem
               </span>
             </div>
             <p className="text-xs text-[#8B949E] leading-relaxed">
@@ -173,7 +173,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#8B949E] gap-4">
-          <p>© {new Date().getFullYear()} Farhan Faheem Fine Jewellery Atelier. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Faraz Faheem Fine Jewellery Atelier (FF Zever). All rights reserved.</p>
           <div className="flex items-center space-x-6 text-[#C5A059]">
             <span>925 Sterling Silver</span>
             <span>•</span>

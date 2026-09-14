@@ -50,11 +50,11 @@ export default function HeritageStory() {
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0D1117] leading-tight">
-              Why Choose Aurelia Fine Jewellery?
+              Why Choose Faraz Faheem Atelier?
             </h2>
 
             <p className="text-sm text-[#5C6270] leading-relaxed">
-              Unlike mass-manufactured commercial alloy jewellery that tarnishes within weeks, every Aurelia
+              Unlike mass-manufactured commercial alloy jewellery that tarnishes within weeks, every Faraz Faheem
               piece begins with certified **925 solid sterling silver** or **18k gold vermeil**. We treat every
               piece with a triple-pass rhodium mirror dipping for permanent tarnish resistance.
             </p>
@@ -99,7 +99,7 @@ export default function HeritageStory() {
 
             <div className="pt-4">
               <a
-                href={getWhatsAppLink('Hello Aurelia Jewellers, I would like to consult on a bespoke jewellery design.')}
+                href={getWhatsAppLink('Hello Faraz Faheem Atelier, I would like to consult on a bespoke jewellery design.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-bold uppercase tracking-[0.2em] px-8 py-3.5 rounded-full transition-all duration-300 shadow-md"

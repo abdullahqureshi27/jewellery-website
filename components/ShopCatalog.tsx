@@ -432,7 +432,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                   Pieces can be handcrafted to custom measurements. Connect on WhatsApp for complimentary guidance.
                 </p>
                 <a
-                  href={getWhatsAppLink('Hello Aurelia Atelier, I need custom jewellery sizing help.')}
+                  href={getWhatsAppLink('Hello Faraz Faheem Atelier, I need custom jewellery sizing help.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block text-center w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"

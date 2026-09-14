@@ -10,9 +10,18 @@ import { getProducts } from '@/sanity/lib/client';
  */
 
 export const metadata: Metadata = {
-  title: 'All Jewellery Showcase | Aurelia & Co. Atelier',
+  title: 'All Jewellery Showcase | Faraz Faheem Atelier',
   description:
-    'Browse our full jewellery showcase of handcrafted 925 sterling silver rings, moissanite pendants, teardrop earrings, and bridal sets.',
+    'Browse our full jewellery showcase of handcrafted 925 sterling silver rings, certified moissanite pendants, teardrop earrings, and bridal sets by Faraz Faheem (FF Zever).',
+  alternates: {
+    canonical: 'https://www.ffzever.com/shop',
+  },
+  openGraph: {
+    title: 'All Jewellery Showcase | Faraz Faheem Atelier',
+    description:
+      'Browse our handcrafted 925 sterling silver, certified moissanite, and bespoke bridal sets in Pakistan.',
+    url: 'https://www.ffzever.com/shop',
+  },
 };
 
 export const revalidate = 60;

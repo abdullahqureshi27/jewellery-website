@@ -150,7 +150,7 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
           </div>
 
           <a
-            href={getWhatsAppLink('Hello Aurelia Atelier, I need help confirming my ring size for a jewellery order.')}
+            href={getWhatsAppLink('Hello Faraz Faheem Atelier, I need help confirming my ring size for a jewellery order.')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shrink-0 cursor-pointer group"

@@ -22,22 +22,35 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   if (!product) {
     return {
-      title: 'Piece Not Found | Aurelia Atelier',
+      title: 'Piece Not Found | Faraz Faheem Atelier',
     };
   }
 
+  const primaryImage = product.images[0]?.url || '';
+
   return {
-    title: `${product.title} | Aurelia & Co. Fine Jewellery`,
+    title: `${product.title} | Faraz Faheem Fine Jewellery`,
     description: product.description,
+    alternates: {
+      canonical: `https://www.ffzever.com/product/${slug}`,
+    },
     openGraph: {
-      title: `${product.title} | Aurelia & Co.`,
+      title: `${product.title} | Faraz Faheem Atelier`,
       description: product.description,
+      url: `https://www.ffzever.com/product/${slug}`,
+      siteName: 'Faraz Faheem Atelier',
       images: [
         {
-          url: product.images[0]?.url || '',
+          url: primaryImage,
           alt: product.title,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.title} | Faraz Faheem Atelier`,
+      description: product.description,
+      images: [primaryImage],
     },
   };
 }
@@ -57,5 +70,41 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  return <ProductDetailView product={product} />;
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    description: product.description,
+    image: product.images.map((img) => img.url),
+    sku: product.itemCode,
+    brand: {
+      '@type': 'Brand',
+      name: 'Faraz Faheem Atelier',
+    },
+    material: product.metal,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'PKR',
+      price: product.price,
+      availability: product.inStock
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/PreOrder',
+      url: `https://www.ffzever.com/product/${slug}`,
+      itemCondition: 'https://schema.org/NewCondition',
+      seller: {
+        '@type': 'Organization',
+        name: 'Faraz Faheem Atelier',
+      },
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <ProductDetailView product={product} />
+    </>
+  );
 }

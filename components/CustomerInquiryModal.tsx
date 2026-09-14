@@ -141,7 +141,7 @@ export default function CustomerInquiryModal({
     const totalFormatted = `Rs. ${totalCalculated.toLocaleString()}`;
 
     // Structured message template without informal emojis
-    const textMessage = `*AURELIA FINE ATELIER — SHOWCASE INQUIRY*
+    const textMessage = `*FARAZ FAHEEM ATELIER (FF ZEVER) — SHOWCASE INQUIRY*
 -----------------------------------------
 *CUSTOMER DETAILS:*
 • *Name:* ${data.name}

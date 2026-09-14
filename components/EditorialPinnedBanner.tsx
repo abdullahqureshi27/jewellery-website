@@ -43,7 +43,7 @@ export default function EditorialPinnedBanner() {
           </h2>
 
           <p className="font-serif text-sm sm:text-base md:text-lg italic tracking-[0.25em] text-[#E8E2D7] uppercase font-light">
-            A touch of forever by Aurelia Atelier
+            A touch of forever by Faraz Faheem Atelier
           </p>
 
           {/* Subtle scroll-down cue */}

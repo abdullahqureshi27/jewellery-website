@@ -82,7 +82,7 @@ export default function BespokeBanner() {
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <a
-                    href={getWhatsAppLink('Hello Aurelia Atelier, I have a reference image for a custom jewellery piece. I would like a quote and consultation.')}
+                    href={getWhatsAppLink('Hello Faraz Faheem Atelier, I have a reference image for a custom jewellery piece. I would like a quote and consultation.')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-3 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer group"
