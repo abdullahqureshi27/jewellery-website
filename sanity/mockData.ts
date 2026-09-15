@@ -140,20 +140,6 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     description:
       'Delicate handcrafted 925 pure sterling silver pendant set with a radiant round synthetic pink gemstone and sparkling zircon halo. Includes authentic 925 sterling silver chain. Treated with tarnish-resistant rhodium finish. Delivered across Pakistan in luxury FF Jewellers packaging.',
   },
-    isFeatured: true,
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Emerald Empress Royal Halo Pendant close-up',
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Pendant worn against silk collar',
-      },
-    ],
-    description:
-      'A breathtaking deep Colombian-green cushion cut emerald wrapped in a sparkling micropavé moissanite halo. Finished with 18k yellow gold vermeil over hallmarked 925 silver.',
-  },
   {
     _id: 'zn-003',
     title: 'Seraphina TearDrop Moissanite Drop Earrings',
