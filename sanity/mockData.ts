@@ -105,4 +105,97 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     description:
       'Delicate handcrafted 925 pure sterling silver pendant set with a radiant round synthetic pink gemstone and sparkling zircon halo. Includes authentic 925 sterling silver chain. Treated with tarnish-resistant rhodium finish.',
   },
+  {
+    _id: 'ff-006',
+    title: 'Artisan 925 Solid Silver Tennis Bracelet',
+    slug: 'artisan-silver-tennis-bracelet',
+    category: 'bracelets',
+    price: 34500,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: '/products/ff-zircon-collage.jpeg',
+        alt: 'Artisan 925 Solid Silver Tennis Bracelet by FFZever',
+      },
+      {
+        url: '/products/ff-zircon-box.jpeg',
+        alt: 'FFZever Velvet Presentation Box',
+      },
+    ],
+    description:
+      'Precision prong-set with D-color brilliant simulated diamonds in pure 925 solid sterling silver. Coated in triple-pass rhodium mirror plating for an authentic white-gold gleam and anti-tarnish protection.',
+  },
+  {
+    _id: 'ff-007',
+    title: 'Royal Moissanite Halo Cuff Bracelet',
+    slug: 'royal-moissanite-halo-cuff-bracelet',
+    category: 'bracelets',
+    price: 42000,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: '/products/ff-zircon-box.jpeg',
+        alt: 'Royal Moissanite Halo Cuff Bracelet by FFZever',
+      },
+    ],
+    description:
+      'Masterfully forged in solid 925 sterling silver, featuring a central cluster of halo-set moissanites. Comes complete with double security clasp and official FFZever authenticity hallmark.',
+  },
+  {
+    _id: 'ff-008',
+    title: 'Noor-e-Jahan Emerald Bridal Suite',
+    slug: 'noor-e-jahan-emerald-bridal-suite',
+    category: 'bridal',
+    price: 125000,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: '/products/ff-emerald-angle.jpeg',
+        alt: 'Noor-e-Jahan Emerald Bridal Suite by FFZever',
+      },
+      {
+        url: '/products/ff-emerald-locket-set.jpeg',
+        alt: 'FFZever Emerald Bridal Suite Details',
+      },
+    ],
+    description:
+      'Heirloom grand bridal choker necklace, matching chandelier earrings, and maang tikka set in solid 925 sterling silver with royal Burma emeralds and micro-pave moissanite halos.',
+  },
+  {
+    _id: 'ff-009',
+    title: '3ct Emerald Cut Moissanite Solitaire Ring',
+    slug: '3ct-emerald-cut-moissanite-ring',
+    category: 'rings',
+    price: 28500,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: '/products/ff-zircon-locket-set.jpeg',
+        alt: '3ct Emerald Cut Moissanite Solitaire Ring by FFZever',
+      },
+    ],
+    description:
+      'Stunning 3.0 carat emerald-cut GRA certified D VVS1 moissanite mounted on a solid 925 sterling silver band with hidden halo pavé. Hallmarked 925 with lifetime anti-tarnish rhodium plating.',
+  },
+  {
+    _id: 'ff-010',
+    title: 'Bespoke Channel Set Moissanite Band',
+    slug: 'bespoke-channel-set-moissanite-band',
+    category: 'rings',
+    price: 19800,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: '/products/ff-ruby-locket-set.jpeg',
+        alt: 'Bespoke Channel Set Moissanite Band by FFZever',
+      },
+    ],
+    description:
+      'Classic eternity band handcrafted with round brilliant-cut moissanites in a protective channel setting. Forged in solid 925 sterling silver with comfort-fit curved interior.',
+  },
 ];
