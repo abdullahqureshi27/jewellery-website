@@ -13,6 +13,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
 import CustomerInquiryModal from './CustomerInquiryModal';
+import { toast } from '@/components/ui/sonner';
 
 interface ProductDetailViewProps {
   product: JewelleryProduct;
@@ -48,9 +49,18 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const handleCartToggle = () => {
     if (inCart) {
       removeFromCart(product._id);
+      toast('Removed from Shopping Bag', {
+        description: product.title,
+      });
     } else {
       addToCart(product);
-      setIsCartDrawerOpen(true);
+      toast.success('Added to Shopping Bag', {
+        description: `${product.title} • Solid 925 Silver`,
+        action: {
+          label: 'View Bag',
+          onClick: () => setIsCartDrawerOpen(true),
+        },
+      });
     }
   };
 

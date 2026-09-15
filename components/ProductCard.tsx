@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { ShoppingCart, Check, Eye, Sparkles } from 'lucide-react';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
+import { toast } from '@/components/ui/sonner';
 
 interface ProductCardProps {
   product: JewelleryProduct;
@@ -39,9 +40,18 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
     e.stopPropagation();
     if (inCart) {
       removeFromCart(product._id);
+      toast('Removed from Shopping Bag', {
+        description: product.title,
+      });
     } else {
       addToCart(product);
-      setIsCartDrawerOpen(true);
+      toast.success('Added to Shopping Bag', {
+        description: `${product.title} • Solid 925 Silver`,
+        action: {
+          label: 'View Bag',
+          onClick: () => setIsCartDrawerOpen(true),
+        },
+      });
     }
   };
 

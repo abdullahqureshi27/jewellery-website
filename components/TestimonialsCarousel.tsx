@@ -26,17 +26,17 @@ const TESTIMONIALS: Testimonial[] = [
     piece: '3ct Emerald Cut Moissanite Solitaire',
     rating: 5,
     review:
-      'The fire in direct sunlight is breathtaking. Everyone in my family thought it was a 25-lakh diamond ring. The heavy 925 silver setting and velvet presentation chest feel like a Paris high-jewellery house.',
+      'The fire in direct sunlight is breathtaking. Everyone in my family thought it was a 25-lakh diamond ring. The solid 925 sterling silver setting and velvet presentation chest feel like a Paris high-jewellery house.',
     date: 'Verified Bridal Commission',
   },
   {
     id: '2',
     name: 'Dr. Mehwish Rizvi',
     city: 'Gulberg, Lahore',
-    piece: 'Noor-e-Jahan Ruby Bridal Choker',
+    piece: 'Noor-e-Jahan Ruby Bridal Suite',
     rating: 5,
     review:
-      'The craftsmanship on the hand-set Burma rubies made my baraat outfit unforgettable. The 18K vermeil has zero fading even after multiple festive wearings. Truly heirloom quality.',
+      'The craftsmanship on the hand-set Burma rubies made my baraat outfit unforgettable. The triple rhodium mirror plating has zero fading and maintains that flawless white-gold lustre. Truly heirloom quality.',
     date: 'Verified Bridal Client',
   },
   {
@@ -56,7 +56,7 @@ const TESTIMONIALS: Testimonial[] = [
     piece: 'Bespoke Channel Set Moissanite Band',
     rating: 5,
     review:
-      'We sent a rough Pinterest sketch on WhatsApp. The master karigar shared a 3D render within 48 hours and cast our dream matching wedding bands. Their concierge service on WhatsApp is top tier.',
+      'We sent a rough Pinterest sketch on WhatsApp. The master karigar shared a 3D render within 48 hours and cast our dream matching wedding bands in solid 925 silver. Their concierge service on WhatsApp is top tier.',
     date: 'Custom Bespoke Set',
   },
 ];
@@ -91,28 +91,34 @@ export default function TestimonialsCarousel() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#64748B] tracking-[0.25em] uppercase mb-2">
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#64748B] tracking-[0.25em] uppercase mb-2 bg-[#F8FAFC] border border-[#E2E8F0] px-4 py-1.5 rounded-full">
             <Sparkles className="w-3.5 h-3.5 text-[#94A3B8]" />
             <span>Verified Atelier Patrons</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wider text-[#0F172A]">
             Loved by Discerning Collectors
           </h2>
+          <p className="text-xs text-[#64748B] tracking-wider uppercase mt-2">
+            Authentic 925 Solid Sterling Silver &amp; Certified Moissanite
+          </p>
         </div>
 
         {/* Carousel Card */}
-        <div className="relative bg-white rounded-3xl p-8 sm:p-14 border border-[#E2E8F0] shadow-xl transition-all duration-500">
-          <Quote className="w-12 h-12 text-[#CBD5E1]/40 absolute top-6 right-8" />
+        <div className="relative bg-[#FFFFFF] rounded-3xl p-8 sm:p-14 border border-[#E2E8F0] shadow-[0_20px_50px_-15px_rgba(15,23,42,0.08)] transition-all duration-500">
+          <Quote className="w-14 h-14 text-[#CBD5E1]/30 absolute top-6 right-8 pointer-events-none" />
 
-          {/* Rating Stars */}
-          <div className="flex items-center gap-1 mb-6">
+          {/* Rating Stars - Radiant Gold Stars */}
+          <div className="flex items-center gap-1.5 mb-6">
             {[...Array(item.rating)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-[#94A3B8] text-[#94A3B8]" />
+              <Star key={i} className="w-5 h-5 fill-[#F59E0B] text-[#F59E0B]" />
             ))}
+            <span className="ml-2 text-xs font-bold text-[#0F172A] tracking-wider">
+              5.0 / 5.0 Rating
+            </span>
           </div>
 
           {/* Review Quote */}
-          <blockquote className="font-serif text-lg sm:text-2xl text-[#0F172A] leading-relaxed mb-8 min-h-[100px]">
+          <blockquote className="font-serif text-lg sm:text-2xl text-[#0F172A] leading-relaxed mb-8 min-h-[90px]">
             &ldquo;{item.review}&rdquo;
           </blockquote>
 
@@ -126,8 +132,8 @@ export default function TestimonialsCarousel() {
               <p className="text-xs text-[#64748B] font-medium mt-0.5">{item.piece}</p>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] px-3 py-1 rounded-full text-[11px] font-semibold w-fit">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#64748B]" />
+            <div className="inline-flex items-center gap-1.5 bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] px-3.5 py-1.5 rounded-full text-[11px] font-semibold w-fit">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
               <span>{item.date}</span>
             </div>
           </div>

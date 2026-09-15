@@ -14,6 +14,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat';
 import CartDrawer from '@/components/CartDrawer';
 import SmoothScroll from '@/components/SmoothScroll';
 import { CartProvider } from '@/context/CartContext';
+import { Toaster } from '@/components/ui/sonner';
 
 export default function StoreLayoutWrapper({
   children,
@@ -37,6 +38,7 @@ export default function StoreLayoutWrapper({
         <Footer />
         <WhatsAppFloat />
         <CartDrawer />
+        <Toaster />
       </CartProvider>
     </SmoothScroll>
   );

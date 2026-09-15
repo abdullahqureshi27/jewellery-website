@@ -1,39 +1,92 @@
 import Link from 'next/link';
-import { Sparkles, Shield, Award, Gem, Clock } from 'lucide-react';
+import { Sparkles, ShieldCheck, Award, Gem, Truck } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 
 /**
  * Server Component: Luxury boutique footer with heritage details,
- * trust badges, customer care, and atelier address.
+ * trust badges, customer care, and atelier craftsmanship.
  */
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const craftsmanshipYears = currentYear - 1982;
+
   return (
-    <footer className="bg-[#0A0D14] text-[#F8FAFC] pt-16 pb-12 border-t border-[#334155]/40">
+    <footer className="bg-[#0A0D14] text-[#F8FAFC] border-t border-[#334155]/40">
+      {/* Top Trust Pillars Ribbon */}
+      <div className="border-b border-white/10 py-10 bg-[#0F172A]/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
+            <div className="flex items-center gap-3 justify-center sm:justify-start">
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#CBD5E1] shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white">925 Sterling Silver</h4>
+                <p className="text-[11px] text-[#94A3B8]">100% Solid Stamped Hallmark</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 justify-center sm:justify-start">
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#CBD5E1] shrink-0">
+                <Award className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white">Rhodium Mirror Polish</h4>
+                <p className="text-[11px] text-[#94A3B8]">Anti-Tarnish Lustre Finish</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 justify-center sm:justify-start">
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#CBD5E1] shrink-0">
+                <Gem className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white">Certified Moissanite</h4>
+                <p className="text-[11px] text-[#94A3B8]">GRA D VVS1 Optical Fire</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 justify-center sm:justify-start">
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#CBD5E1] shrink-0">
+                <Truck className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white">Insured Delivery</h4>
+                <p className="text-[11px] text-[#94A3B8]">Safe Nationwide Dispatch</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Links */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 py-14 border-b border-[#1E293B]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 py-14 border-b border-white/10">
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#94A3B8]" />
+              <Sparkles className="w-5 h-5 text-[#CBD5E1]" />
               <span className="font-serif text-2xl font-bold tracking-[0.1em] text-white uppercase">
                 FFZever
               </span>
             </div>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
-              Crafting heirloom-grade sterling silver, natural gemstone, and certified moissanite jewellery
-              since 1982. Every facet polished to mirror perfection.
+              Master handcrafted solid 925 sterling silver, certified moissanite, and heirloom gemstone jewellery since 1982.
+              Over {craftsmanshipYears} years of precision artisan karigar heritage.
             </p>
-            <p className="text-xs text-[#CBD5E1] pt-2">
-              Handcrafted 925 Solid Sterling Silver • Nationwide Insured Delivery
-            </p>
+            <div className="pt-2">
+              <span className="inline-block text-[11px] text-[#CBD5E1] font-semibold tracking-wider uppercase bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+                Faraz Faheem Atelier • Since 1982
+              </span>
+            </div>
           </div>
 
           {/* Collections */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#CBD5E1] mb-4">
-              Signature Collections
+              Showcase Collections
             </h4>
             <ul className="space-y-2.5 text-xs text-[#94A3B8]">
               <li>
@@ -48,7 +101,17 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/shop?category=earrings" className="hover:text-white transition-colors">
-                  Ear rings &amp; Tops
+                  Ear rings &amp; Daily Tops
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop?category=bridal" className="hover:text-white transition-colors">
+                  Bridal Suites
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop?category=rings" className="hover:text-white transition-colors">
+                  Moissanite Solitaire Rings
                 </Link>
               </li>
             </ul>
@@ -62,17 +125,17 @@ export default function Footer() {
             <ul className="space-y-2.5 text-xs text-[#94A3B8]">
               <li>
                 <a
-                  href={getWhatsAppLink('Hello, I would like a custom order consultation.')}
+                  href={getWhatsAppLink('Hello Faraz Faheem Atelier, I would like to inquire about a bespoke custom order.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  Custom Design Inquiry
+                  Custom Bespoke Commission
                 </a>
               </li>
               <li>
                 <a
-                  href={getWhatsAppLink('Hello, how can I measure my ring size?')}
+                  href={getWhatsAppLink('Hello Faraz Faheem Atelier, I need assistance measuring my ring size.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
@@ -81,10 +144,10 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-[#94A3B8]">Certificate Verification (GRA)</span>
+                <span className="text-[#94A3B8]">GRA Certificate Verification</span>
               </li>
               <li>
-                <span className="text-[#94A3B8]">Worldwide Insured Shipping</span>
+                <span className="text-[#94A3B8]">Complimentary Lifetime Re-Polishing</span>
               </li>
               <li>
                 <Link href="/studio" target="_blank" className="text-[#CBD5E1] hover:underline">
@@ -95,33 +158,36 @@ export default function Footer() {
           </div>
 
           {/* Bespoke Inquiry Card */}
-          <div className="bg-[#0F172A] p-5 rounded-lg border border-[#334155]/60">
-            <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-2">
-              Private Jewellery Viewing
-            </h4>
-            <p className="text-xs text-[#94A3B8] mb-4">
-              Interested in a custom cut or bridal set? Connect directly with our lead gemologist via WhatsApp.
-            </p>
+          <div className="bg-[#131720] p-6 rounded-2xl border border-white/10 shadow-lg flex flex-col justify-between">
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-2">
+                Private Consultation
+              </h4>
+              <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
+                Interested in custom bridal jewellery or bespoke 3D CAD design? Chat directly with our master atelier on WhatsApp.
+              </p>
+            </div>
             <a
-              href={getWhatsAppLink('Hello, I would like to book a private jewellery viewing.')}
+              href={getWhatsAppLink('Hello Faraz Faheem Atelier, I would like to book a bespoke jewellery consultation.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center w-full bg-white hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-semibold py-2.5 rounded-full uppercase tracking-wider transition-colors"
+              className="inline-flex items-center justify-center gap-2 w-full bg-white hover:bg-[#CBD5E1] text-[#0F172A] text-xs font-bold py-3 rounded-full uppercase tracking-wider transition-all duration-300 shadow-md group cursor-pointer"
             >
-              Book Viewing on WhatsApp
+              <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
+              <span>Inquire on WhatsApp</span>
             </a>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#94A3B8] gap-4">
-          <p>© {new Date().getFullYear()} FFZever (Faraz Faheem Atelier). All rights reserved.</p>
-          <div className="flex items-center space-x-6 text-[#CBD5E1]">
+        <div className="py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#94A3B8] gap-4">
+          <p>© {currentYear} FFZever (Faraz Faheem Atelier • Since 1982). All rights reserved.</p>
+          <div className="flex items-center space-x-6 text-[#CBD5E1] text-[11px]">
             <span>925 Sterling Silver</span>
             <span>•</span>
             <span>GRA Certified Moissanite</span>
             <span>•</span>
-            <span>Nationwide &amp; Worldwide Delivery</span>
+            <span>Insured Nationwide Delivery</span>
           </div>
         </div>
       </div>

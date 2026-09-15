@@ -54,6 +54,21 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
     }
   };
 
+  // Freeze background page scrolling and pause Lenis while mobile filter drawer is open
+  useEffect(() => {
+    if (mobileFilterOpen) {
+      document.body.style.overflow = 'hidden';
+      (window as any).__lenis?.stop();
+    } else {
+      document.body.style.overflow = '';
+      (window as any).__lenis?.start();
+    }
+    return () => {
+      document.body.style.overflow = '';
+      (window as any).__lenis?.start();
+    };
+  }, [mobileFilterOpen]);
+
   // Sync state whenever URL query params change (e.g. from navbar clicks or back/forward)
   useEffect(() => {
     setSelectedCategory(urlCategory);
@@ -415,9 +430,11 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
       <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
         <SheetContent
           side="right"
-          className="w-full max-w-sm sm:max-w-md bg-white border-l border-[#E2E8F0] p-0 flex flex-col justify-between"
+          showCloseButton={true}
+          data-lenis-prevent="true"
+          className="w-[80vw] max-w-[80vw] sm:w-full sm:max-w-md bg-white border-l border-[#E2E8F0] p-0 flex flex-col justify-between"
         >
-          <div className="p-6 border-b border-[#E2E8F0] bg-white">
+          <div className="p-6 border-b border-[#E2E8F0] bg-white pr-12">
             <SheetHeader className="p-0 space-y-1 text-left">
               <SheetTitle className="font-serif text-lg font-bold uppercase tracking-wider text-[#0F172A] flex items-center gap-2">
                 <SlidersHorizontal className="w-4 h-4 text-[#94A3B8]" />

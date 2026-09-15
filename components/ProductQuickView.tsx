@@ -14,6 +14,7 @@ import { X, ShieldCheck, ShoppingCart, Check, ArrowRight } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
+import { toast } from '@/components/ui/sonner';
 import CustomerInquiryModal from './CustomerInquiryModal';
 import {
   Dialog,
@@ -77,9 +78,18 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
   const handleCartToggle = () => {
     if (inCart) {
       removeFromCart(product._id);
+      toast('Removed from Shopping Bag', {
+        description: product.title,
+      });
     } else {
       addToCart(product);
-      setIsCartDrawerOpen(true);
+      toast.success('Added to Shopping Bag', {
+        description: `${product.title} • Solid 925 Silver`,
+        action: {
+          label: 'View Bag',
+          onClick: () => setIsCartDrawerOpen(true),
+        },
+      });
     }
   };
 

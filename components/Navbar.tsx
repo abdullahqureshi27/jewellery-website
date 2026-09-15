@@ -397,26 +397,102 @@ export default function Navbar() {
 
           {/* Mobile Search Expandable Line */}
           {mobileSearchOpen && (
-            <div className="sm:hidden pt-3 pb-1 border-t border-[#E2E8F0] mt-3 animate-fadeIn">
+            <div className="sm:hidden pt-3 pb-1 border-t border-[#E2E8F0] mt-3 animate-fadeIn relative">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  placeholder="SEARCH..."
-                  className="w-full bg-white border border-[#E2E8F0] rounded-full py-2 pl-4 pr-10 text-xs uppercase tracking-wider text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#475569]"
+                  placeholder="SEARCH PIECES..."
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-full py-2.5 pl-4 pr-10 text-xs uppercase tracking-wider text-[#0F172A] placeholder-[#94A3B8] focus:bg-white focus:outline-none focus:border-[#475569] shadow-inner"
                   autoFocus
                 />
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={handleClearSearch}
-                    className="absolute right-3 text-[#94A3B8] hover:text-[#0F172A] p-1"
+                    className="absolute right-3 text-[#94A3B8] hover:text-[#0F172A] p-1 cursor-pointer"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
                 )}
               </form>
+
+              {/* Real-Time Live Matching Cards for Mobile Search */}
+              {searchQuery.trim().length > 0 && (
+                <div className="mt-2 w-full bg-white rounded-2xl border border-[#E2E8F0] shadow-2xl overflow-hidden z-50 animate-fadeIn">
+                  <div className="p-3 bg-[#F8FAFC] border-b border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B]">
+                    <span>
+                      Found:{' '}
+                      <strong className="text-[#0F172A] font-semibold">
+                        {matchingProducts.length}
+                      </strong>{' '}
+                      piece{matchingProducts.length === 1 ? '' : 's'}
+                    </span>
+                    {pathname === '/shop' && (
+                      <span className="text-[#475569] font-medium flex items-center gap-1 text-[11px]">
+                        <Sparkles className="w-3 h-3 text-[#94A3B8]" /> Catalog live
+                      </span>
+                    )}
+                  </div>
+
+                  {matchingProducts.length > 0 ? (
+                    <div>
+                      <div className="max-h-72 overflow-y-auto divide-y divide-[#E2E8F0]">
+                        {matchingProducts.slice(0, 5).map((product) => (
+                          <button
+                            key={product._id}
+                            type="button"
+                            onClick={() => handleProductSelect(product.slug)}
+                            className="w-full text-left p-3 hover:bg-[#F8FAFC] transition-colors flex items-center gap-3 group cursor-pointer"
+                          >
+                            <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-[#F1F5F9] shrink-0 border border-[#E2E8F0]">
+                              {product.images?.[0]?.url && (
+                                <Image
+                                  src={product.images[0].url}
+                                  alt={product.title}
+                                  fill
+                                  sizes="48px"
+                                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="font-serif text-sm font-semibold text-[#0F172A] truncate group-hover:text-[#475569] transition-colors">
+                                {product.title}
+                              </p>
+                              <p className="text-xs text-[#64748B] truncate mt-0.5">
+                                {product.category}
+                              </p>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <p className="font-serif font-bold text-xs text-[#0F172A] lining-nums">
+                                Rs. {product.price.toLocaleString()}
+                              </p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                      <div className="p-2.5 bg-[#F8FAFC] border-t border-[#E2E8F0]">
+                        <button
+                          type="button"
+                          onClick={handleViewAllResults}
+                          className="w-full py-2.5 px-4 rounded-xl bg-[#0F172A] hover:bg-[#334155] text-white text-xs font-semibold uppercase tracking-wider transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                          <span>View All {matchingProducts.length} Results</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-5 text-center">
+                      <p className="text-xs text-[#64748B]">
+                        No pieces found matching &ldquo;{searchQuery}&rdquo;
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>

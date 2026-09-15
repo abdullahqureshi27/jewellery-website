@@ -60,7 +60,7 @@ export default function CartDrawer() {
           side="right"
           showCloseButton={true}
           data-lenis-prevent="true"
-          className="w-full sm:max-w-md bg-[#0B0D13] text-white border-l border-white/10 p-0 flex flex-col justify-between shadow-2xl z-50 overflow-hidden h-full max-h-screen"
+          className="w-[80vw] max-w-[80vw] sm:w-full sm:max-w-md bg-[#0B0D13] text-white border-l border-white/10 p-0 flex flex-col justify-between shadow-2xl z-50 overflow-hidden h-full max-h-screen"
         >
           {/* Compact Luxury Header */}
           <SheetHeader className="px-5 py-4 bg-[#0B0D13] border-b border-white/10 flex-shrink-0 pr-12">
