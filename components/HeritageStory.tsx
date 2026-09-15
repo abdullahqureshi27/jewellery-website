@@ -7,6 +7,9 @@ import { getWhatsAppLink } from '@/lib/whatsapp';
  */
 
 export default function HeritageStory() {
+  const currentYear = new Date().getFullYear();
+  const yearsOfCraftsmanship = currentYear - 1982;
+
   return (
     <section className="py-24 bg-[#FAF8F5] border-t border-[#E8E2D7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +40,7 @@ export default function HeritageStory() {
               <Sparkles className="w-6 h-6 text-[#C5A059] mb-2" />
               <p className="font-serif text-2xl font-bold text-[#C5A059]">Since 1982</p>
               <p className="text-[11px] text-[#8B949E] uppercase tracking-wider">
-                Over 40 years of master jewellery craftsmanship
+                Over {yearsOfCraftsmanship} years of master jewellery craftsmanship
               </p>
             </div>
           </div>
