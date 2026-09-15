@@ -79,7 +79,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
     { label: 'All Pieces', value: 'all' },
     { label: 'Locket Sets', value: 'locket-sets' },
     { label: 'Pendants', value: 'pendants' },
-    { label: 'Ear rings', value: 'earrings' },
+    { label: 'Ear rings & Tops', value: 'earrings' },
     { label: 'Bracelets', value: 'bracelets' },
     { label: 'Bridal Sets', value: 'bridal' },
     { label: 'Rings', value: 'rings' },

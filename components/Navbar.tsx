@@ -21,6 +21,7 @@ import { JewelleryProduct, MOCK_JEWELLERY_PRODUCTS } from '@/sanity/mockData';
 export default function Navbar() {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showNavLinks, setShowNavLinks] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,10 +37,40 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
+    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    let scrollAccumulator = 0;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      // Near top of page: always show the full nav links
+      if (currentScrollY < 60) {
+        setShowNavLinks(true);
+        scrollAccumulator = 0;
+      } else {
+        if (delta > 0) {
+          // Scrolling downwards: hide nav links row
+          if (scrollAccumulator < 0) scrollAccumulator = 0;
+          scrollAccumulator += delta;
+          if (scrollAccumulator > 30) {
+            setShowNavLinks(false);
+          }
+        } else if (delta < 0) {
+          // Scrolling upwards (even slightly): instantly reveal nav links row
+          if (scrollAccumulator > 0) scrollAccumulator = 0;
+          scrollAccumulator += delta;
+          if (scrollAccumulator < -20) {
+            setShowNavLinks(true);
+          }
+        }
+      }
+
+      setIsScrolled(currentScrollY > 20);
+      lastScrollY = currentScrollY;
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -73,6 +104,9 @@ export default function Navbar() {
     { name: 'Locket Sets', href: '/shop?category=locket-sets' },
     { name: 'Pendants', href: '/shop?category=pendants' },
     { name: 'Ear rings & Tops', href: '/shop?category=earrings' },
+    { name: 'Bracelets', href: '/shop?category=bracelets' },
+    { name: 'Bridal Sets', href: '/shop?category=bridal' },
+    { name: 'Rings', href: '/shop?category=rings' },
   ];
 
   // Real-time matching logic across title and description
@@ -324,34 +358,42 @@ export default function Navbar() {
           </div>
 
           {/* TIER 2: Category Navigation Links (Directly under the logo) */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 pt-2.5 mt-2 border-t border-[#E8E2D7]/50">
-            {navLinks.map((link) => {
-              let isActive = false;
-              if (link.href === '/shop') {
-                isActive = pathname === '/shop' && (!currentCategory || currentCategory === 'all');
-              } else if (link.href.includes('category=')) {
-                const cat = link.href.split('category=')[1];
-                isActive = pathname === '/shop' && currentCategory === cat;
-              }
+          <div
+            className={`hidden lg:block overflow-hidden transition-all duration-300 ease-in-out ${
+              showNavLinks
+                ? 'max-h-16 opacity-100 mt-2.5 pt-2 border-t border-[#E8E2D7]/50 translate-y-0 pointer-events-auto'
+                : 'max-h-0 opacity-0 mt-0 pt-0 border-t-0 -translate-y-2 pointer-events-none'
+            }`}
+          >
+            <nav className="flex items-center space-x-5 xl:space-x-7 overflow-x-auto no-scrollbar py-0.5">
+              {navLinks.map((link) => {
+                let isActive = false;
+                if (link.href === '/shop') {
+                  isActive = pathname === '/shop' && (!currentCategory || currentCategory === 'all');
+                } else if (link.href.includes('category=')) {
+                  const cat = link.href.split('category=')[1];
+                  isActive = pathname === '/shop' && currentCategory === cat;
+                }
 
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`text-xs uppercase tracking-[0.14em] font-semibold transition-colors py-1 relative whitespace-nowrap shrink-0 ${
-                    isActive
-                      ? 'text-[#0D1117]'
-                      : 'text-[#5C6270] hover:text-[#C5A059]'
-                  }`}
-                >
-                  {link.name}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0D1117]" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`text-xs uppercase tracking-[0.14em] font-semibold transition-colors py-1 relative whitespace-nowrap shrink-0 ${
+                      isActive
+                        ? 'text-[#0D1117]'
+                        : 'text-[#5C6270] hover:text-[#C5A059]'
+                    }`}
+                  >
+                    {link.name}
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0D1117]" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
 
           {/* Mobile Search Expandable Line */}
           {mobileSearchOpen && (

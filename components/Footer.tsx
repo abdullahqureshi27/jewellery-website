@@ -13,46 +13,46 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heritage Trust Badges */}
         {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-16 border-b border-[#252D3D]">
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
-              <Shield className="w-5 h-5 text-[#C5A059]" />
+            <div className="flex flex-col items-center text-center p-4">
+              <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
+                <Shield className="w-5 h-5 text-[#C5A059]" />
+              </div>
+              <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
+                925 Pure Silver
+              </h4>
+              <p className="text-xs text-[#8B949E] mt-1">Hallmarked &amp; anti-tarnish rhodium plated</p>
             </div>
-            <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
-              925 Pure Silver
-            </h4>
-            <p className="text-xs text-[#8B949E] mt-1">Hallmarked &amp; anti-tarnish rhodium plated</p>
-          </div>
 
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
-              <Gem className="w-5 h-5 text-[#C5A059]" />
+            <div className="flex flex-col items-center text-center p-4">
+              <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
+                <Gem className="w-5 h-5 text-[#C5A059]" />
+              </div>
+              <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
+                GRA Moissanite
+              </h4>
+              <p className="text-xs text-[#8B949E] mt-1">D Color VVS1 with warranty certification card</p>
             </div>
-            <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
-              GRA Moissanite
-            </h4>
-            <p className="text-xs text-[#8B949E] mt-1">D Color VVS1 with warranty certification card</p>
-          </div>
 
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
-              <Award className="w-5 h-5 text-[#C5A059]" />
+            <div className="flex flex-col items-center text-center p-4">
+              <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
+                <Award className="w-5 h-5 text-[#C5A059]" />
+              </div>
+              <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
+                Lifetime Replating
+              </h4>
+              <p className="text-xs text-[#8B949E] mt-1">Complimentary lifetime polish and rhodium care</p>
             </div>
-            <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
-              Lifetime Replating
-            </h4>
-            <p className="text-xs text-[#8B949E] mt-1">Complimentary lifetime polish and rhodium care</p>
-          </div>
 
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
-              <Clock className="w-5 h-5 text-[#C5A059]" />
+            <div className="flex flex-col items-center text-center p-4">
+              <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
+                <Clock className="w-5 h-5 text-[#C5A059]" />
+              </div>
+              <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
+                Bespoke Craft
+              </h4>
+              <p className="text-xs text-[#8B949E] mt-1">Master karigars crafting made-to-order sets</p>
             </div>
-            <h4 className="font-serif text-sm font-semibold tracking-wider uppercase text-[#FAF8F5]">
-              Bespoke Craft
-            </h4>
-            <p className="text-xs text-[#8B949E] mt-1">Master karigars crafting made-to-order sets</p>
-          </div>
-        </div> */}
+          </div> */}
 
         {/* Main Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 py-14 border-b border-[#252D3D]">
