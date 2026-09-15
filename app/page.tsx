@@ -31,7 +31,7 @@ export default async function HomePage() {
       />
 
       {/* 3. The Atelier Standards (Materials, Hallmarks & Authenticity Spotlight) */}
-      <AtelierStandards />
+      {/* <AtelierStandards /> */}
 
       {/* 6. Zanvari-Inspired Sticky Pinned Editorial Section with Solid Curtain Reveal */}
       <div className="relative">

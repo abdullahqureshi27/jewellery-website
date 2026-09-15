@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="bg-[#0D1117] text-[#FAF8F5] pt-16 pb-12 border-t border-[#C5A059]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heritage Trust Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-16 border-b border-[#252D3D]">
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-16 border-b border-[#252D3D]">
           <div className="flex flex-col items-center text-center p-4">
             <div className="w-12 h-12 rounded-full bg-[#161B22] border border-[#C5A059]/40 flex items-center justify-center mb-3">
               <Shield className="w-5 h-5 text-[#C5A059]" />
@@ -52,7 +52,7 @@ export default function Footer() {
             </h4>
             <p className="text-xs text-[#8B949E] mt-1">Master karigars crafting made-to-order sets</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Main Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 py-14 border-b border-[#252D3D]">
@@ -68,14 +68,9 @@ export default function Footer() {
               Crafting heirloom-grade sterling silver, natural gemstone, and certified moissanite jewellery
               since 1982. Every facet polished to mirror perfection.
             </p>
-            <div className="pt-2">
-              <span className="text-[11px] uppercase tracking-widest text-[#C5A059] block">
-                Atelier Orders:
-              </span>
-              <p className="text-xs text-[#8B949E] mt-0.5">
-                Handcrafted 925 Pure Silver • Nationwide Insured Delivery across Pakistan
-              </p>
-            </div>
+            <p className="text-xs text-[#C5A059] pt-2">
+              Handcrafted 925 Solid Sterling Silver • Nationwide Insured Delivery
+            </p>
           </div>
 
           {/* Collections */}
@@ -97,21 +92,6 @@ export default function Footer() {
               <li>
                 <Link href="/shop?category=earrings" className="hover:text-[#FAF8F5] transition-colors">
                   Ear rings &amp; Tops
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=bracelets" className="hover:text-[#FAF8F5] transition-colors">
-                  Tennis Bracelets
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=bridal" className="hover:text-[#FAF8F5] transition-colors">
-                  Bridal Sets
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=rings" className="hover:text-[#FAF8F5] transition-colors">
-                  Solitaire &amp; Eternity Rings
                 </Link>
               </li>
             </ul>

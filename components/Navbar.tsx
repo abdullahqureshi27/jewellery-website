@@ -2,23 +2,27 @@
 
 /**
  * Client Component: Header and navigation bar.
- * Features live cart / inquiry bag badge, mobile menu, search drawer, and direct concierge.
+ * Redesigned into 2-tier NDURE layout:
+ * - Tier 1: Brand logo on the left (FFZEVER / Faraz Faheem • Since 1982)
+ *           Right side: Minimalist horizontal search line + Shopping Bag (Cart)
+ *           (No WhatsApp button, No Studio button, No desktop hamburger)
+ * - Tier 2: Category navigation links directly under the logo:
+ *           ALL, LOCKET SETS, PENDANTS, EAR RINGS & TOPS
  */
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { Sparkles, Menu, X, Search, PhoneCall, ShieldCheck, ChevronRight, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Sparkles, Menu, X, Search, ChevronRight, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { JewelleryProduct, MOCK_JEWELLERY_PRODUCTS } from '@/sanity/mockData';
-import { getWhatsAppLink, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp';
 
 export default function Navbar() {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [products, setProducts] = useState<JewelleryProduct[]>(MOCK_JEWELLERY_PRODUCTS);
   const pathname = usePathname();
@@ -61,18 +65,14 @@ export default function Navbar() {
   // Close drawers on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-    setSearchOpen(false);
+    setMobileSearchOpen(false);
   }, [pathname]);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
     { name: 'All', href: '/shop' },
     { name: 'Locket Sets', href: '/shop?category=locket-sets' },
     { name: 'Pendants', href: '/shop?category=pendants' },
-    { name: 'Ear rings', href: '/shop?category=earrings' },
-    { name: 'Bracelets', href: '/shop?category=bracelets' },
-    { name: 'Bridal', href: '/shop?category=bridal' },
-    { name: 'Rings', href: '/shop?category=rings' },
+    { name: 'Ear rings & Tops', href: '/shop?category=earrings' },
   ];
 
   // Real-time matching logic across title and description
@@ -121,16 +121,17 @@ export default function Navbar() {
     } else {
       router.push('/shop', { scroll: false });
     }
-    setSearchOpen(false);
+    setMobileSearchOpen(false);
   };
 
   const handleProductSelect = (slug: string) => {
-    setSearchOpen(false);
+    setMobileSearchOpen(false);
+    setSearchQuery('');
     router.push(`/product/${slug}`);
   };
 
   const handleViewAllResults = () => {
-    setSearchOpen(false);
+    setMobileSearchOpen(false);
     const trimmed = searchQuery.trim();
     if (trimmed) {
       router.push(`/shop?search=${encodeURIComponent(trimmed)}`, { scroll: false });
@@ -143,260 +144,237 @@ export default function Navbar() {
     <>
       {/* Top Luxury Announcement Ribbon */}
       <div className="bg-[#0D1117] text-[#FAF8F5] text-xs py-2 px-4 border-b border-[#C5A059]/20 tracking-wider">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+        <div className="max-w-7xl mx-auto flex justify-between items-center text-[11px] sm:text-xs">
           <div className="flex items-center gap-2 mx-auto sm:mx-0">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
-            <span>Handcrafted in 925 Sterling Silver &amp; Certified D VVS1 Moissanite</span>
+            <span>Handcrafted 925 Solid Sterling Silver • Nationwide Insured Delivery</span>
           </div>
-          <div className="hidden sm:flex items-center gap-6 text-[#C5A059]">
-            <span className="flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" /> Lifetime Rhodium Replating
-            </span>
-            <a
-              href={getWhatsAppLink('Hello, I would like to inquire about your jewellery collection.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline flex items-center gap-1 text-[#FAF8F5]"
-            >
-              <PhoneCall className="w-3 h-3 text-[#C5A059]" /> VIP Concierge: {WHATSAPP_DISPLAY_NUMBER}
-            </a>
+          <div className="hidden sm:flex items-center gap-4 text-[#C5A059] font-medium">
+            <span>Since 1982 • Authentic Master Karigars</span>
           </div>
         </div>
       </div>
 
-      {/* Main Sticky Luxury Header */}
+      {/* Main Sticky Luxury Header (NDURE-Inspired 2-Tier Layout) */}
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#FAF8F5]/95 backdrop-blur-md shadow-sm border-b border-[#E8E2D7] py-3'
-            : 'bg-[#FAF8F5] border-b border-[#E8E2D7]/60 py-4'
+            ? 'bg-[#FAF8F5]/98 backdrop-blur-md shadow-sm border-b border-[#E8E2D7] py-2.5'
+            : 'bg-[#FAF8F5] border-b border-[#E8E2D7]/60 py-3 sm:py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Mobile Menu Button */}
+          {/* TIER 1: Logo on Left | Search & Shopping Bag on Right */}
+          <div className="flex items-center justify-between gap-4">
+            {/* Mobile Menu Hamburger (Visible ONLY on small screens) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#12141A] hover:text-[#C5A059] transition-colors"
+              className="lg:hidden p-1.5 -ml-1.5 text-[#12141A] hover:text-[#C5A059] transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
-            {/* Brand Logo */}
-            <Link href="/" className="flex flex-col items-center group shrink-0">
+            {/* Brand Logo on the Left */}
+            <Link href="/" className="flex flex-col items-start group shrink-0">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300 shrink-0" />
-                <span className="font-serif text-xl sm:text-2xl xl:text-3xl font-bold tracking-[0.08em] sm:tracking-[0.1em] text-[#0D1117] uppercase whitespace-nowrap">
+                <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.08em] sm:tracking-[0.1em] text-[#0D1117] uppercase whitespace-nowrap">
                   FFZever
                 </span>
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:-rotate-12 transition-transform duration-300 shrink-0" />
               </div>
-              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#C5A059] uppercase font-medium">
+              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#C5A059] uppercase font-medium pl-0.5">
                 Faraz Faheem • Since 1982
               </span>
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-5 shrink-0">
-              {navLinks.map((link) => {
-                let isActive = false;
-                if (link.href === '/') {
-                  isActive = pathname === '/';
-                } else if (link.href === '/shop') {
-                  isActive = pathname === '/shop' && (!currentCategory || currentCategory === 'all');
-                } else if (link.href.includes('category=')) {
-                  const cat = link.href.split('category=')[1];
-                  isActive = pathname === '/shop' && currentCategory === cat;
-                }
+            {/* Right Side: Minimalist Search Line & Shopping Bag */}
+            <div className="flex items-center gap-3 sm:gap-5">
+              {/* Desktop Search Line (NDURE style) */}
+              <div className="relative hidden sm:block w-44 md:w-60 lg:w-72">
+                <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => handleSearchChange(e.target.value)}
+                    placeholder="SEARCH"
+                    className="w-full bg-transparent border-b border-[#0D1117]/40 hover:border-[#0D1117] focus:border-[#C5A059] py-1 pl-1 pr-7 text-xs uppercase tracking-widest text-[#0D1117] placeholder-[#8A90A0] focus:outline-none transition-colors"
+                  />
+                  {searchQuery ? (
+                    <button
+                      type="button"
+                      onClick={handleClearSearch}
+                      className="absolute right-1 text-[#8A90A0] hover:text-[#0D1117] p-0.5 transition-colors cursor-pointer"
+                      title="Clear search"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="absolute right-1 text-[#0D1117] hover:text-[#C5A059] p-0.5 transition-colors cursor-pointer"
+                      title="Search"
+                    >
+                      <Search className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </form>
 
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={`text-xs xl:text-sm uppercase tracking-wider transition-colors py-1 relative whitespace-nowrap shrink-0 ${
-                      isActive
-                        ? 'text-[#0D1117] font-semibold'
-                        : 'text-[#5C6270] hover:text-[#C5A059]'
-                    }`}
-                  >
-                    {link.name}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#C5A059]" />
+                {/* Real-Time Live Matching Dropdown for Desktop Search */}
+                {searchQuery.trim().length > 0 && (
+                  <div className="absolute right-0 top-full mt-2 w-80 md:w-96 bg-white rounded-2xl border border-[#E8E2D7] shadow-2xl overflow-hidden z-50 animate-fadeIn">
+                    <div className="p-3 bg-[#FAF8F5] border-b border-[#E8E2D7] flex items-center justify-between text-xs text-[#5C6270]">
+                      <span>
+                        Found:{' '}
+                        <strong className="text-[#0D1117] font-semibold">
+                          {matchingProducts.length}
+                        </strong>{' '}
+                        piece{matchingProducts.length === 1 ? '' : 's'}
+                      </span>
+                      {pathname === '/shop' && (
+                        <span className="text-[#C5A059] font-medium flex items-center gap-1 text-[11px]">
+                          <Sparkles className="w-3 h-3" /> Catalog live
+                        </span>
+                      )}
+                    </div>
+
+                    {matchingProducts.length > 0 ? (
+                      <div>
+                        <div className="max-h-80 overflow-y-auto divide-y divide-[#E8E2D7]/50">
+                          {matchingProducts.slice(0, 5).map((product) => (
+                            <button
+                              key={product._id}
+                              type="button"
+                              onClick={() => handleProductSelect(product.slug)}
+                              className="w-full text-left p-3 hover:bg-[#FAF8F5] transition-colors flex items-center gap-3 group cursor-pointer"
+                            >
+                              <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-[#E8E2D7]/40 shrink-0 border border-[#E8E2D7]">
+                                {product.images?.[0]?.url && (
+                                  <Image
+                                    src={product.images[0].url}
+                                    alt={product.title}
+                                    fill
+                                    sizes="48px"
+                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                  />
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="font-serif text-sm font-semibold text-[#0D1117] truncate group-hover:text-[#C5A059] transition-colors">
+                                  {product.title}
+                                </p>
+                                <p className="text-xs text-[#5C6270] truncate mt-0.5">
+                                  {product.category}
+                                </p>
+                              </div>
+                              <div className="text-right shrink-0">
+                                <p className="font-serif font-bold text-xs text-[#0D1117] lining-nums">
+                                  Rs. {product.price.toLocaleString()}
+                                </p>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                        <div className="p-2.5 bg-[#FAF8F5] border-t border-[#E8E2D7]">
+                          <button
+                            type="button"
+                            onClick={handleViewAllResults}
+                            className="w-full py-2 px-4 rounded-xl bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                          >
+                            <span>View All {matchingProducts.length} Results</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-6 text-center">
+                        <p className="text-xs text-[#5C6270]">
+                          No pieces found matching &ldquo;{searchQuery}&rdquo;
+                        </p>
+                      </div>
                     )}
-                  </Link>
-                );
-              })}
-            </nav>
+                  </div>
+                )}
+              </div>
 
-            {/* Actions: Search, Inquiry Bag Button, Admin Studio */}
-            <div className="flex items-center space-x-3 sm:space-x-4">
-              {/* Search Toggle */}
+              {/* Mobile Search Icon Button */}
               <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2 text-[#12141A] hover:text-[#C5A059] transition-colors"
+                onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+                className="sm:hidden p-1.5 text-[#12141A] hover:text-[#C5A059] transition-colors"
                 aria-label="Search items"
               >
                 <Search className="w-5 h-5" />
               </button>
 
-              {/* Inquiry Bag / Cart Button */}
+              {/* Shopping Bag / Inquiry Cart */}
               <button
                 onClick={() => setIsCartDrawerOpen(true)}
-                className="relative p-2 text-[#0D1117] hover:text-[#C5A059] transition-colors flex items-center"
+                className="relative p-1.5 text-[#0D1117] hover:text-[#C5A059] transition-colors flex items-center cursor-pointer"
                 aria-label={`Inquiry Bag with ${totalItems} items`}
                 title="View Inquiry Bag"
               >
-                <ShoppingBag className="w-5 h-5" />
+                <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.75]" />
                 {mounted && totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#C5A059] text-[#0D1117] font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
+                  <span className="absolute -top-1 -right-1 bg-[#C5A059] text-[#0D1117] font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
                     {totalItems}
                   </span>
                 )}
               </button>
-
-              <Link
-                href="/studio"
-                target="_blank"
-                className="hidden md:inline-flex items-center text-xs font-medium uppercase tracking-wider text-[#5C6270] hover:text-[#0D1117] border border-[#E8E2D7] px-3 py-1.5 rounded-full hover:border-[#C5A059] transition-colors"
-                title="Client Sanity Admin Dashboard"
-              >
-                Studio
-              </Link>
-
-              <a
-                href={getWhatsAppLink('Hello, I am interested in custom jewellery showcase.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 shadow-sm"
-              >
-                <span>WhatsApp</span>
-              </a>
             </div>
           </div>
 
-          {/* Expandable Search Drawer with Real-Time Live Results */}
-          {searchOpen && (
-            <div className="pt-4 pb-2 border-t border-[#E8E2D7] mt-3 animate-fadeIn relative">
+          {/* TIER 2: Category Navigation Links (Directly under the logo) */}
+          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 pt-2.5 mt-2 border-t border-[#E8E2D7]/50">
+            {navLinks.map((link) => {
+              let isActive = false;
+              if (link.href === '/shop') {
+                isActive = pathname === '/shop' && (!currentCategory || currentCategory === 'all');
+              } else if (link.href.includes('category=')) {
+                const cat = link.href.split('category=')[1];
+                isActive = pathname === '/shop' && currentCategory === cat;
+              }
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-xs uppercase tracking-[0.14em] font-semibold transition-colors py-1 relative whitespace-nowrap shrink-0 ${
+                    isActive
+                      ? 'text-[#0D1117]'
+                      : 'text-[#5C6270] hover:text-[#C5A059]'
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0D1117]" />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Mobile Search Expandable Line */}
+          {mobileSearchOpen && (
+            <div className="sm:hidden pt-3 pb-1 border-t border-[#E8E2D7] mt-3 animate-fadeIn">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <Search className="absolute left-3.5 w-4 h-4 text-[#5C6270]" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  placeholder="Search pieces by name or collection in real-time..."
-                  className="w-full bg-white border border-[#E8E2D7] rounded-full py-2.5 pl-10 pr-28 text-sm text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-inner"
+                  placeholder="SEARCH..."
+                  className="w-full bg-white border border-[#E8E2D7] rounded-full py-2 pl-4 pr-10 text-xs uppercase tracking-wider text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059]"
                   autoFocus
                 />
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={handleClearSearch}
-                    className="absolute right-20 text-[#8A90A0] hover:text-[#0D1117] p-1 transition-colors cursor-pointer"
-                    title="Clear search"
+                    className="absolute right-3 text-[#8A90A0] hover:text-[#0D1117] p-1"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
                 )}
-                <button
-                  type="submit"
-                  className="absolute right-1.5 bg-[#C5A059] hover:bg-[#B08B3E] text-[#0D1117] font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider transition-colors cursor-pointer"
-                >
-                  Find
-                </button>
               </form>
-
-              {/* Real-Time Live Matching Dropdown */}
-              {searchQuery.trim().length > 0 && (
-                <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border border-[#E8E2D7] shadow-2xl overflow-hidden z-50 animate-fadeIn">
-                  <div className="p-3 bg-[#FAF8F5] border-b border-[#E8E2D7] flex items-center justify-between text-xs text-[#5C6270]">
-                    <span>
-                      Live Matching:{' '}
-                      <strong className="text-[#0D1117] font-semibold">
-                        {matchingProducts.length}
-                      </strong>{' '}
-                      piece{matchingProducts.length === 1 ? '' : 's'}
-                    </span>
-                    {pathname === '/shop' && (
-                      <span className="text-[#C5A059] font-medium flex items-center gap-1 text-[11px]">
-                        <Sparkles className="w-3 h-3" /> Catalog updating live
-                      </span>
-                    )}
-                  </div>
-
-                  {matchingProducts.length > 0 ? (
-                    <div>
-                      <div className="max-h-80 overflow-y-auto divide-y divide-[#E8E2D7]/50">
-                        {matchingProducts.slice(0, 5).map((product) => (
-                          <button
-                            key={product._id}
-                            type="button"
-                            onClick={() => handleProductSelect(product.slug)}
-                            className="w-full text-left p-3 hover:bg-[#FAF8F5] transition-colors flex items-center gap-3.5 group cursor-pointer"
-                          >
-                            <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-[#E8E2D7]/40 shrink-0 border border-[#E8E2D7]">
-                              {product.images?.[0]?.url && (
-                                <Image
-                                  src={product.images[0].url}
-                                  alt={product.title}
-                                  fill
-                                  sizes="48px"
-                                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
-                              )}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="font-serif text-sm font-semibold text-[#0D1117] truncate group-hover:text-[#C5A059] transition-colors">
-                                {product.title}
-                              </p>
-                              <p className="text-xs text-[#5C6270] truncate mt-0.5">
-                                {product.metal} • {product.gemstone}
-                              </p>
-                            </div>
-                            <div className="text-right shrink-0">
-                              <p className="font-serif font-bold text-sm text-[#0D1117] lining-nums">
-                                Rs. {product.price.toLocaleString()}
-                              </p>
-                              <span className="text-[10px] text-[#C5A059] font-medium tracking-wider uppercase">
-                                {product.category}
-                              </span>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                      <div className="p-2.5 bg-[#FAF8F5] border-t border-[#E8E2D7]">
-                        <button
-                          type="button"
-                          onClick={handleViewAllResults}
-                          className="w-full py-2 px-4 rounded-xl bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          <span>View All {matchingProducts.length} Results in Catalog</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="p-6 text-center">
-                      <p className="text-xs text-[#5C6270]">
-                        No pieces found matching &ldquo;{searchQuery}&rdquo;
-                      </p>
-                      <p className="text-[11px] text-[#8A90A0] mt-1">
-                        Try searching for &ldquo;Solitaire&rdquo;, &ldquo;Emerald&rdquo;, &ldquo;Moissanite&rdquo;, or &ldquo;925 Silver&rdquo;
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSearchOpen(false);
-                          router.push('/shop', { scroll: false });
-                        }}
-                        className="mt-3 inline-flex items-center gap-1 text-xs text-[#C5A059] hover:underline font-semibold cursor-pointer"
-                      >
-                        Browse All Jewellery &rarr;
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
           )}
         </div>
@@ -411,7 +389,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[#C5A059]" />
                   <span className="font-serif text-xl font-bold tracking-[0.1em] text-[#0D1117] uppercase">
-                    Faraz Faheem
+                    FFZever
                   </span>
                 </div>
                 <button
@@ -449,34 +427,21 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="flex items-center justify-between py-3 text-base font-medium tracking-wider uppercase text-[#12141A] hover:text-[#C5A059] border-b border-[#E8E2D7]/50"
+                    className="flex items-center justify-between py-3 text-sm font-medium tracking-wider uppercase text-[#12141A] hover:text-[#C5A059] border-b border-[#E8E2D7]/50"
                   >
                     <span>{link.name}</span>
                     <ChevronRight className="w-4 h-4 text-[#C5A059]" />
                   </Link>
                 ))}
-                <Link
-                  href="/studio"
-                  target="_blank"
-                  className="flex items-center justify-between py-3 text-sm font-medium tracking-wider uppercase text-[#5C6270] hover:text-[#0D1117]"
-                >
-                  <span>Client Studio Dashboard</span>
-                  <ChevronRight className="w-4 h-4 text-[#C5A059]" />
-                </Link>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[#E8E2D7] space-y-3">
-              <a
-                href={getWhatsAppLink('Hello, I am interested in custom jewellery showcase.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full text-center block bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] py-3 rounded-full text-xs font-semibold uppercase tracking-widest transition-all"
-              >
-                Inquire on WhatsApp
-              </a>
+            <div className="pt-6 border-t border-[#E8E2D7] space-y-2">
+              <p className="text-center text-xs font-medium text-[#C5A059] tracking-wider uppercase">
+                Handcrafted 925 Solid Silver
+              </p>
               <p className="text-center text-[11px] text-[#5C6270]">
-                Pure 925 Silver Atelier • Since 1982
+                FFZever • Since 1982
               </p>
             </div>
           </div>
@@ -485,3 +450,4 @@ export default function Navbar() {
     </>
   );
 }
+

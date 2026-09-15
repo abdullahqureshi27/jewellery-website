@@ -9,14 +9,12 @@
  * 4. 2-image hover flip (macro studio piece ↔ model shot).
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, Check, Eye, Sparkles } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { useCart } from '@/context/CartContext';
-import CustomerInquiryModal from './CustomerInquiryModal';
 
 interface ProductCardProps {
   product: JewelleryProduct;
@@ -24,7 +22,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onQuickView }: ProductCardProps) {
-  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const { addToCart, removeFromCart, isInCart, setIsCartDrawerOpen } = useCart();
 
   const inCart = isInCart(product._id);
@@ -96,8 +93,8 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
         {/* 2. CENTER OVERLAY: Two White Pill Buttons */}
         {/* On hover: smooth slide-in from top to middle with opacity. On hover out: reverse transition */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2.5 p-4 pointer-events-none">
-          {/* Top Button: Quick view */}
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 pointer-events-none">
+          {/* Quick view Button */}
           <button
             type="button"
             onClick={(e) => {
@@ -108,20 +105,6 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             className="w-[146px] sm:w-[156px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer flex items-center justify-center"
           >
             <span>Quick view</span>
-          </button>
-
-          {/* Bottom Button: Open Direct WhatsApp Inquiry Dialog */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsInquiryModalOpen(true);
-            }}
-            className="w-[146px] sm:w-[156px] py-2 sm:py-2.5 px-3 rounded-full bg-white text-[#111827] hover:bg-[#FAF8F5] hover:scale-105 active:scale-95 text-xs sm:text-[13px] font-medium tracking-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 ease-out delay-75 transform opacity-0 -translate-y-5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto cursor-pointer flex items-center justify-center gap-1.5"
-          >
-            <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
-            <span>WhatsApp Inquiry</span>
           </button>
         </div>
       </div>
@@ -153,13 +136,6 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </div>
         </div>
       </div>
-
-      {/* Direct Customer Inquiry Dialog for this individual product */}
-      <CustomerInquiryModal
-        isOpen={isInquiryModalOpen}
-        onClose={() => setIsInquiryModalOpen(false)}
-        singleProduct={product}
-      />
     </div>
   );
 }
