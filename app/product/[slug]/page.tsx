@@ -76,12 +76,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
     name: product.title,
     description: product.description,
     image: product.images.map((img) => img.url),
-    sku: product.itemCode,
+    sku: product.itemCode || product.slug,
     brand: {
       '@type': 'Brand',
       name: 'Faraz Faheem Atelier',
     },
-    material: product.metal,
+    material: '925 Sterling Silver',
     offers: {
       '@type': 'Offer',
       priceCurrency: 'PKR',

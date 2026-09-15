@@ -8,7 +8,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Filter, X, SlidersHorizontal, RotateCcw, Search, Sparkles } from 'lucide-react';
+import { Filter, X, SlidersHorizontal, RotateCcw, Search, Sparkles, ShieldCheck } from 'lucide-react';
 import { JewelleryProduct } from '@/sanity/mockData';
 import { getWhatsAppLink } from '@/lib/whatsapp';
 import ProductCard from './ProductCard';
@@ -41,8 +41,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
 
   const [selectedCategory, setSelectedCategory] = useState<string>(urlCategory);
   const [searchQuery, setSearchQuery] = useState<string>(urlSearch);
-  const [selectedMetal, setSelectedMetal] = useState<string>('all');
-  const [selectedGemstone, setSelectedGemstone] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('featured');
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
@@ -87,28 +85,10 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
     { label: 'Rings', value: 'rings' },
   ];
 
-  const metals = [
-    { label: 'All Pure Silver', value: 'all' },
-    { label: '925 Sterling Silver (Rhodium Polish)', value: '925' },
-    { label: '18K Yellow Gold Vermeil', value: '18k' },
-    { label: 'Rose Gold Plated', value: 'rose' },
-  ];
-
-  const gemstones = [
-    { label: 'All Stones', value: 'all' },
-    { label: 'Brilliant Zircons', value: 'zircon' },
-    { label: 'Synthetic Emerald', value: 'emerald' },
-    { label: 'Synthetic Pink / Ruby', value: 'pink' },
-    { label: 'GRA Moissanite', value: 'moissanite' },
-    { label: 'Freshwater Pearl', value: 'pearl' },
-  ];
-
   // Reset all filters
   const handleResetFilters = () => {
     setSelectedCategory('all');
     setSearchQuery('');
-    setSelectedMetal('all');
-    setSelectedGemstone('all');
     setSortBy('featured');
     router.push('/shop', { scroll: false });
   };
@@ -116,8 +96,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
   // Active filters count
   const activeFiltersCount =
     (selectedCategory !== 'all' ? 1 : 0) +
-    (selectedMetal !== 'all' ? 1 : 0) +
-    (selectedGemstone !== 'all' ? 1 : 0) +
     (searchQuery ? 1 : 0);
 
   // Filter & Sort Logic
@@ -131,30 +109,13 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           return false;
         }
 
-        // Metal filter
-        if (selectedMetal !== 'all') {
-          const metalStr = (item.metal || '').toLowerCase();
-          if (!metalStr.includes(selectedMetal.toLowerCase())) {
-            return false;
-          }
-        }
-
-        // Gemstone filter
-        if (selectedGemstone !== 'all') {
-          const gemStr = (item.gemstone || '').toLowerCase();
-          if (!gemStr.includes(selectedGemstone.toLowerCase())) {
-            return false;
-          }
-        }
-
         // Search query filter
         if (searchQuery.trim()) {
           const query = searchQuery.toLowerCase().trim();
           const matchTitle = (item.title || '').toLowerCase().includes(query);
           const matchCode = (item.itemCode || '').toLowerCase().includes(query);
-          const matchGem = (item.gemstone || '').toLowerCase().includes(query);
-          const matchMetal = (item.metal || '').toLowerCase().includes(query);
-          if (!matchTitle && !matchCode && !matchGem && !matchMetal) {
+          const matchDesc = (item.description || '').toLowerCase().includes(query);
+          if (!matchTitle && !matchCode && !matchDesc) {
             return false;
           }
         }
@@ -170,7 +131,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
         // Default: featured first
         return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
       });
-  }, [initialProducts, selectedCategory, selectedMetal, selectedGemstone, searchQuery, sortBy]);
+  }, [initialProducts, selectedCategory, searchQuery, sortBy]);
 
   return (
     <div className="py-12 bg-[#FAF8F5]">
@@ -237,7 +198,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search pieces by title, metal, gemstone, or SKU..."
+              placeholder="Search pieces by title or collection..."
               className="w-full h-11 bg-[#FAF8F5] border border-[#E8E2D7] rounded-xl pl-10 pr-9 text-xs sm:text-sm text-[#12141A] placeholder-[#8A90A0] focus:bg-white focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all"
             />
             {searchQuery && (
@@ -350,24 +311,24 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                   </button>
                 </div>
 
-                {/* Metal Filter */}
+                {/* Category Filter */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
-                    Metal &amp; Purity
+                    Category
                   </label>
                   <div className="space-y-1.5">
-                    {metals.map((m) => (
+                    {categories.map((c) => (
                       <button
-                        key={m.value}
-                        onClick={() => setSelectedMetal(m.value)}
+                        key={c.value}
+                        onClick={() => handleCategoryChange(c.value)}
                         className={`w-full text-left text-xs py-2 px-3 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
-                          selectedMetal === m.value
+                          selectedCategory === c.value
                             ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
                             : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
                         }`}
                       >
-                        <span>{m.label}</span>
-                        {selectedMetal === m.value && (
+                        <span>{c.label}</span>
+                        {selectedCategory === c.value && (
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
                         )}
                       </button>
@@ -375,31 +336,18 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                   </div>
                 </div>
 
-                {/* Gemstone Filter */}
+                {/* 100% Pure 925 Silver Guarantee */}
                 <div className="pt-4 border-t border-[#E8E2D7]">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
-                    Gemstone
-                  </label>
-                  <div className="space-y-1.5">
-                    {gemstones.map((g) => (
-                      <button
-                        key={g.value}
-                        onClick={() => setSelectedGemstone(g.value)}
-                        className={`w-full text-left text-xs py-2 px-3 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
-                          selectedGemstone === g.value
-                            ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
-                            : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
-                        }`}
-                      >
-                        <span>{g.label}</span>
-                        {selectedGemstone === g.value && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                        )}
-                      </button>
-                    ))}
+                  <div className="bg-[#FAF8F5] border border-[#E8E2D7] rounded-xl p-3 text-left">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#0D1117] mb-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                      <span>100% Pure 925 Silver</span>
+                    </div>
+                    <p className="text-[11px] text-[#5C6270] leading-relaxed">
+                      Every piece is handcrafted in pure solid 925 sterling silver with tarnish-resistant rhodium finish.
+                    </p>
                   </div>
                 </div>
-
               </div>
 
               {/* Custom Concierge Callout */}
@@ -476,7 +424,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                 <span>Filter Pieces</span>
               </SheetTitle>
               <SheetDescription className="text-xs text-[#5C6270]">
-                Refine by precious metal, gemstone &amp; availability
+                Filter pieces by collection &amp; category
               </SheetDescription>
             </SheetHeader>
           </div>
@@ -505,55 +453,16 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               </div>
             </div>
 
-            {/* Metal Purity */}
+            {/* 100% Pure 925 Silver Guarantee */}
             <div className="pt-4 border-t border-[#E8E2D7]">
-              <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
-                Metal Purity
-              </label>
-              <div className="space-y-1.5">
-                {metals.map((m) => (
-                  <button
-                    key={m.value}
-                    type="button"
-                    onClick={() => setSelectedMetal(m.value)}
-                    className={`w-full text-left text-xs py-2.5 px-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
-                      selectedMetal === m.value
-                        ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold border-[#0D1117]'
-                        : 'bg-white text-[#5C6270] border-[#E8E2D7] hover:border-[#C5A059]'
-                    }`}
-                  >
-                    <span>{m.label}</span>
-                    {selectedMetal === m.value && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Gemstone */}
-            <div className="pt-4 border-t border-[#E8E2D7]">
-              <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
-                Gemstone
-              </label>
-              <div className="space-y-1.5">
-                {gemstones.map((g) => (
-                  <button
-                    key={g.value}
-                    type="button"
-                    onClick={() => setSelectedGemstone(g.value)}
-                    className={`w-full text-left text-xs py-2.5 px-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
-                      selectedGemstone === g.value
-                        ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold border-[#0D1117]'
-                        : 'bg-white text-[#5C6270] border-[#E8E2D7] hover:border-[#C5A059]'
-                    }`}
-                  >
-                    <span>{g.label}</span>
-                    {selectedGemstone === g.value && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
-                    )}
-                  </button>
-                ))}
+              <div className="bg-white border border-[#E8E2D7] rounded-xl p-3.5 text-left">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0D1117] mb-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>100% Pure 925 Sterling Silver</span>
+                </div>
+                <p className="text-[11px] text-[#5C6270] leading-relaxed">
+                  Every creation is handcrafted in solid 925 sterling silver with protective rhodium finish.
+                </p>
               </div>
             </div>
           </div>

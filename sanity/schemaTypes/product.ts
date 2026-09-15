@@ -21,12 +21,6 @@ export const productType = {
       validation: (rule: any) => rule.required(),
     },
     {
-      name: 'itemCode',
-      title: 'SKU / Item Code',
-      type: 'string',
-      description: 'e.g., FF-LS-101 (Used for customer WhatsApp inquiries)',
-    },
-    {
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -59,36 +53,6 @@ export const productType = {
       },
       description: 'Upload product photo',
       validation: (rule: any) => rule.required(),
-    },
-    {
-      name: 'metal',
-      title: 'Metal & Purity',
-      type: 'string',
-      options: {
-        list: [
-          { title: '925 Sterling Silver (Rhodium Polish)', value: '925 Sterling Silver (Rhodium Polish)' },
-          { title: '925 Sterling Silver (18K Gold Vermeil)', value: '18K Yellow Gold Vermeil' },
-          { title: '925 Sterling Silver (Rose Gold Plated)', value: 'Rose Gold Plated 925 Silver' },
-        ],
-      },
-      initialValue: '925 Sterling Silver (Rhodium Polish)',
-    },
-    {
-      name: 'gemstone',
-      title: 'Gemstone Type',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'High-Quality Brilliant Zircon', value: 'High-Quality Brilliant Zircon' },
-          { title: 'Synthetic Pink Sapphire', value: 'Synthetic Pink Sapphire' },
-          { title: 'Synthetic Emerald (Royal Green)', value: 'Synthetic Emerald (Royal Green)' },
-          { title: 'Synthetic Ruby (Dark Pink)', value: 'Synthetic Ruby (Dark Pink)' },
-          { title: 'D Color VVS1 Moissanite (GRA Certified)', value: 'D Color VVS1 Moissanite (GRA Certified)' },
-          { title: 'Freshwater Cultured Pearl', value: 'Freshwater Cultured Pearl' },
-          { title: 'Pure 925 Silver (No Stone)', value: 'Pure 925 Silver (No Stone)' },
-        ],
-      },
-      initialValue: 'High-Quality Brilliant Zircon',
     },
     {
       name: 'isFeatured',

@@ -74,18 +74,16 @@ export default function Navbar() {
     { name: 'Bridal', href: '/shop?category=bridal' },
   ];
 
-  // Real-time matching logic across title, itemCode, gemstone, metal, and description
+  // Real-time matching logic across title and description
   const matchingProducts = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase().trim();
     return products.filter((item) => {
       if (!item) return false;
       const matchTitle = (item.title || '').toLowerCase().includes(q);
-      const matchCode = (item.itemCode || '').toLowerCase().includes(q);
-      const matchGem = (item.gemstone || '').toLowerCase().includes(q);
-      const matchMetal = (item.metal || '').toLowerCase().includes(q);
       const matchDesc = (item.description || '').toLowerCase().includes(q);
-      return matchTitle || matchCode || matchGem || matchMetal || matchDesc;
+      const matchCat = (item.category || '').toLowerCase().includes(q);
+      return matchTitle || matchDesc || matchCat;
     });
   }, [products, searchQuery]);
 
@@ -285,7 +283,7 @@ export default function Navbar() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  placeholder="Search pieces by title, gem, metal, or SKU in real-time..."
+                  placeholder="Search pieces by name or collection in real-time..."
                   className="w-full bg-white border border-[#E8E2D7] rounded-full py-2.5 pl-10 pr-28 text-sm text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-inner"
                   autoFocus
                 />

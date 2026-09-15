@@ -106,14 +106,14 @@ export default function CustomerInquiryModal({
   }, [isOpen]);
 
   // Determine items list
-  const inquiryList: { title: string; itemCode: string; price: number; metal: string; gemstone: string; quantity: number }[] =
+  const inquiryList: { title: string; itemCode?: string; price: number; metal?: string; gemstone?: string; quantity: number }[] =
     singleProduct
       ? [
           {
             title: singleProduct.title,
             itemCode: singleProduct.itemCode,
             price: singleProduct.price,
-            metal: singleProduct.metal,
+            metal: singleProduct.metal || '925 Sterling Silver',
             gemstone: singleProduct.gemstone,
             quantity: 1,
           },
@@ -122,7 +122,7 @@ export default function CustomerInquiryModal({
           title: item.product.title,
           itemCode: item.product.itemCode,
           price: item.product.price,
-          metal: item.product.metal,
+          metal: item.product.metal || '925 Sterling Silver',
           gemstone: item.product.gemstone,
           quantity: item.quantity,
         }));
@@ -134,7 +134,7 @@ export default function CustomerInquiryModal({
     const itemsFormatted = inquiryList
       .map(
         (item, idx) =>
-          `${idx + 1}. *${item.title}* (${item.itemCode})\n   • Metal: ${item.metal}\n   • Gem: ${item.gemstone}\n   • Qty: ${item.quantity}\n   • Est. Price: Rs. ${(item.price * item.quantity).toLocaleString()}`
+          `${idx + 1}. *${item.title}*${item.itemCode ? ` (${item.itemCode})` : ''}\n   • Metal: Pure 925 Sterling Silver\n   • Qty: ${item.quantity}\n   • Est. Price: Rs. ${(item.price * item.quantity).toLocaleString()}`
       )
       .join('\n\n');
 
@@ -218,7 +218,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                   <div>
                     <span className="font-semibold text-[#12141A] block">{item.title}</span>
                     <span className="text-[10px] font-mono text-[#8A90A0]">
-                      {item.itemCode} • {item.metal}
+                      {item.itemCode ? `${item.itemCode} • ` : ''}Pure 925 Silver
                     </span>
                   </div>
                   <span className="font-serif font-bold text-[#0D1117] tabular-nums lining-nums">

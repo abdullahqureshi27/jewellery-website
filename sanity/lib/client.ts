@@ -30,8 +30,6 @@ export async function getProducts(): Promise<JewelleryProduct[]> {
       "slug": slug.current,
       itemCode,
       category,
-      metal,
-      gemstone,
       price,
       isFeatured,
       "inStock": true,

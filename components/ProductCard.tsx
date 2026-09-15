@@ -169,7 +169,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         <div>
           <div className="flex items-center justify-between text-[11px] text-[#8A90A0] uppercase tracking-widest font-medium mb-1">
             <span>{product.category}</span>
-            <span className="font-mono text-[#C5A059]">{product.itemCode}</span>
+            <span className="font-mono text-[#C5A059]">925 Silver</span>
           </div>
 
           <Link href={`/product/${product.slug}`}>
@@ -179,7 +179,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </Link>
 
           <p className="text-xs text-[#5C6270] line-clamp-1 mb-3">
-            {product.metal} • {product.gemstone}
+            {product.description || 'Handcrafted pure 925 sterling silver'}
           </p>
         </div>
 

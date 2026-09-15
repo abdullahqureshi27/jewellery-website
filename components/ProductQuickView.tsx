@@ -139,7 +139,7 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
             <div>
               <div className="flex items-center justify-between gap-2 text-xs text-[#5C6270] mb-2 uppercase tracking-widest font-medium">
                 <span>{product.category}</span>
-                <span className="text-[#C5A059] font-mono">{product.itemCode}</span>
+                <span className="text-[#C5A059] font-mono">{product.itemCode || '925 Sterling Silver'}</span>
               </div>
 
               <DialogTitle className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117] leading-tight mb-2">

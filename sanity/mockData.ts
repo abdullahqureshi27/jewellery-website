@@ -2,10 +2,10 @@ export interface JewelleryProduct {
   _id: string;
   title: string;
   slug: string;
-  itemCode: string;
+  itemCode?: string;
   category: 'locket-sets' | 'pendants' | 'earrings' | 'bracelets' | 'bridal' | 'rings';
-  metal: string;
-  gemstone: string;
+  metal?: string;
+  gemstone?: string;
   caratWeight?: string;
   price: number;
   originalPrice?: number;
