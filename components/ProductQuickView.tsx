@@ -88,7 +88,7 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
       <Dialog open={Boolean(product)} onOpenChange={(open) => { if (!open) onClose(); }}>
         <DialogContent
           showCloseButton={false}
-          className="max-w-4xl bg-[#FAF8F5] p-0 border border-[#E8E2D7] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[88vh]"
+          className="max-w-4xl bg-white p-0 border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[88vh]"
         >
           {/* Close Button */}
           <button
@@ -100,8 +100,8 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
           </button>
 
           {/* Left Column: Image Gallery with thumbnail switcher */}
-          <div className="w-full md:w-1/2 p-5 sm:p-6 bg-[#F5F2EC] flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#E8E2D7] shrink-0">
-            <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-[#E8E2D7] shadow-sm">
+          <div className="w-full md:w-1/2 p-5 sm:p-6 bg-[#F8FAFC] flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#E2E8F0] shrink-0">
+            <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white border border-[#E2E8F0] shadow-sm">
               <Image
                 src={activeImage.url}
                 alt={activeImage.alt || product.title}
@@ -120,8 +120,8 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                     onClick={() => setSelectedImgIndex(idx)}
                     className={`relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all cursor-pointer ${
                       selectedImgIndex === idx
-                        ? 'border-[#C5A059] ring-2 ring-[#C5A059]/30'
-                        : 'border-[#E8E2D7] hover:border-[#C5A059]/60 opacity-70 hover:opacity-100'
+                        ? 'border-[#0F172A] ring-2 ring-slate-400/30'
+                        : 'border-[#E2E8F0] hover:border-slate-400 opacity-70 hover:opacity-100'
                     }`}
                   >
                     <Image src={img.url} alt={img.alt} fill sizes="64px" className="object-cover" />
@@ -156,23 +156,23 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
               </div>
 
               {/* Specifications Matrix */}
-              <div className="space-y-2.5 py-4 border-y border-[#E8E2D7] text-xs">
-                <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
+              <div className="space-y-2.5 py-4 border-y border-[#E2E8F0] text-xs">
+                <div className="flex justify-between py-1 border-b border-[#E2E8F0]/50">
                   <span className="text-[#5C6270] uppercase tracking-wider">Metal &amp; Purity:</span>
                   <span className="font-semibold text-[#12141A]">Solid 925 Sterling Silver</span>
                 </div>
-                <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
+                <div className="flex justify-between py-1 border-b border-[#E2E8F0]/50">
                   <span className="text-[#5C6270] uppercase tracking-wider">Finish:</span>
                   <span className="font-semibold text-[#12141A]">Triple Rhodium Mirror Polish</span>
                 </div>
-                <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
+                <div className="flex justify-between py-1 border-b border-[#E2E8F0]/50">
                   <span className="text-[#5C6270] uppercase tracking-wider">Craftsmanship:</span>
                   <span className="font-semibold text-[#12141A]">Faraz Faheem Atelier</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-[#5C6270] uppercase tracking-wider">Authenticity:</span>
-                  <span className="font-semibold text-[#C5A059] flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5" /> 100% Hallmarked &amp; Certified
+                  <span className="font-semibold text-[#0F172A] flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#0F172A]" /> 100% Hallmarked &amp; Certified
                   </span>
                 </div>
               </div>
@@ -184,15 +184,15 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
             </div>
 
             {/* Actions: Add to Bag + Send Inquiry */}
-            <div className="pt-4 border-t border-[#E8E2D7] space-y-3">
+            <div className="pt-4 border-t border-[#E2E8F0] space-y-3">
               <div className="flex gap-3">
                 {/* Add to Inquiry Bag button */}
                 <button
                   onClick={handleCartToggle}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
                     inCart
-                      ? 'bg-[#C5A059] text-[#0D1117] border-[#C5A059]'
-                      : 'bg-white hover:bg-[#FAF8F5] text-[#0D1117] border-[#E8E2D7]'
+                      ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-xs'
+                      : 'bg-white hover:bg-[#F8FAFC] text-[#0D1117] border-[#E2E8F0]'
                   }`}
                 >
                   {inCart ? <Check className="w-4 h-4 stroke-[2.5]" /> : <ShoppingCart className="w-4 h-4" />}
@@ -202,9 +202,9 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                 {/* Direct Inquiry with Customer Details */}
                 <button
                   onClick={() => setIsInquiryFormOpen(true)}
-                  className="flex-1 flex items-center justify-center gap-2 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md group cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md group cursor-pointer"
                 >
-                  <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
+                  <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
                   <span>Ask Details</span>
                 </button>
               </div>

@@ -64,13 +64,13 @@ export default function MarqueeLoop() {
   const duplicatedItems = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
 
   return (
-    <section className="py-12 bg-[#0D1117] overflow-hidden border-y border-[#C5A059]/20 select-none">
+    <section className="py-12 bg-[#0A0D14] overflow-hidden border-y border-white/10 select-none">
       <div className="max-w-7xl mx-auto px-4 mb-6 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2">
         <div>
-          <span className="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-medium block">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#CBD5E1] font-medium block">
             Curated Collections
           </span>
-          <h3 className="font-serif text-xl sm:text-2xl font-bold uppercase tracking-wider text-[#FAF8F5]">
+          <h3 className="font-serif text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">
             Continuous Showcase
           </h3>
         </div>
@@ -81,15 +81,15 @@ export default function MarqueeLoop() {
 
       <div className="relative w-full overflow-hidden">
         {/* Soft edge gradient fades */}
-        <div className="absolute left-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-r from-[#0D1117] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-l from-[#0D1117] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-r from-[#0A0D14] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-l from-[#0A0D14] to-transparent z-10 pointer-events-none" />
 
         <div className="animate-marquee flex items-center gap-6 py-2">
           {duplicatedItems.map((item, idx) => (
             <Link
               key={`${item.title}-${idx}`}
               href={item.href}
-              className="group relative flex-shrink-0 w-72 sm:w-80 h-44 rounded-xl overflow-hidden bg-[#161B22] border border-[#252D3D] hover:border-[#C5A059] transition-all duration-300 block"
+              className="group relative flex-shrink-0 w-72 sm:w-80 h-44 rounded-xl overflow-hidden bg-[#161B22] border border-white/10 hover:border-slate-400 transition-all duration-300 block"
             >
               <Image
                 src={item.imageUrl}
@@ -98,10 +98,10 @@ export default function MarqueeLoop() {
                 sizes="(max-width: 640px) 288px, 320px"
                 className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-[#0A0D14]/40 to-transparent" />
               
               <div className="absolute top-3 left-3">
-                <span className="inline-block bg-[#0D1117]/80 backdrop-blur-sm border border-[#C5A059]/40 text-[#C5A059] text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full">
+                <span className="inline-block bg-[#0A0D14]/80 backdrop-blur-sm border border-white/20 text-[#CBD5E1] text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full">
                   {item.tag}
                 </span>
               </div>
@@ -110,7 +110,7 @@ export default function MarqueeLoop() {
                 <span className="text-[10px] tracking-widest uppercase text-[#8B949E] block">
                   {item.category}
                 </span>
-                <h4 className="font-serif text-base font-bold text-[#FAF8F5] group-hover:text-[#C5A059] transition-colors">
+                <h4 className="font-serif text-base font-bold text-white group-hover:text-[#CBD5E1] transition-colors">
                   {item.title}
                 </h4>
               </div>

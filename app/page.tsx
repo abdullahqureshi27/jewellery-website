@@ -40,8 +40,8 @@ export default async function HomePage() {
           <EditorialPinnedBanner />
         </div>
 
-        {/* Subsequent Content Layer: 100% Solid Opaque Background (#FAF8F5) that slides over the pinned image */}
-        <div className="relative z-10 bg-[#FAF8F5] border-t border-[#E8E2D7] shadow-[0_-30px_70px_rgba(0,0,0,0.5)]">
+        {/* Subsequent Content Layer: 100% Solid Opaque Background (#FFFFFF) that slides over the pinned image */}
+        <div className="relative z-10 bg-[#FFFFFF] border-t border-[#E2E8F0] shadow-[0_-30px_70px_rgba(0,0,0,0.5)]">
           {/* Visual Categories Grid */}
           <CollectionsGrid />
 

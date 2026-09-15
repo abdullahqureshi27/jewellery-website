@@ -56,7 +56,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
   return (
     <>
-      <div className="py-12 bg-[#FAF8F5]">
+      <div className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Link */}
           <Link
@@ -70,7 +70,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left Column: Image Gallery */}
             <div>
-              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-white border border-[#E8E2D7] shadow-sm">
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#F8FAFC] border border-[#E2E8F0] shadow-sm">
                 <Image
                   src={activeImage.url}
                   alt={activeImage.alt || product.title}
@@ -90,8 +90,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                       onClick={() => setSelectedImgIdx(idx)}
                       className={`relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all cursor-pointer ${
                         selectedImgIdx === idx
-                          ? 'border-[#C5A059] ring-2 ring-[#C5A059]/30'
-                          : 'border-[#E8E2D7] hover:border-[#C5A059]/60 opacity-70 hover:opacity-100'
+                          ? 'border-[#0F172A] ring-2 ring-slate-400/30'
+                          : 'border-[#E2E8F0] hover:border-slate-400 opacity-70 hover:opacity-100'
                       }`}
                     >
                       <Image src={img.url} alt={img.alt} fill sizes="80px" className="object-cover" />
@@ -113,7 +113,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                 </h1>
 
                 {/* Price */}
-                <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#E8E2D7]">
+                <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#E2E8F0]">
                   <span className="font-serif text-3xl font-bold text-[#0D1117] tracking-normal">
                     {formattedPrice}
                   </span>
@@ -125,7 +125,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                 </p>
 
                 {/* Specifications Matrix */}
-                <div className="bg-white rounded-xl p-5 border border-[#E8E2D7] shadow-sm mb-8 space-y-3">
+                <div className="bg-[#F8FAFC] rounded-xl p-5 border border-[#E2E8F0] shadow-sm mb-8 space-y-3">
                   <h3 className="font-serif text-xs font-bold uppercase tracking-wider text-[#0D1117] mb-2">
                     Atelier Specifications
                   </h3>
@@ -144,8 +144,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                     </div>
                     <div>
                       <span className="text-[#8A90A0] uppercase block">Authenticity:</span>
-                      <span className="font-semibold text-[#C5A059] flex items-center gap-1">
-                        <ShieldCheck className="w-3.5 h-3.5" /> 100% 925 Hallmarked
+                      <span className="font-semibold text-[#0F172A] flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#0F172A]" /> 100% 925 Hallmarked
                       </span>
                     </div>
                   </div>
@@ -153,15 +153,15 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               </div>
 
               {/* Actions: Add to Bag & Inquire with Details Form */}
-              <div className="space-y-4 pt-4 border-t border-[#E8E2D7]">
+              <div className="space-y-4 pt-4 border-t border-[#E2E8F0]">
                 <div className="flex flex-col sm:flex-row gap-3">
                   {/* Add to Inquiry Bag */}
                   <button
                     onClick={handleCartToggle}
                     className={`flex-1 flex items-center justify-center gap-2.5 py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 border shadow-sm cursor-pointer ${
                       inCart
-                        ? 'bg-[#C5A059] text-[#0D1117] border-[#C5A059]'
-                        : 'bg-white hover:bg-[#FAF8F5] text-[#0D1117] border-[#E8E2D7]'
+                        ? 'bg-[#0F172A] text-white border-[#0F172A]'
+                        : 'bg-white hover:bg-[#F8FAFC] text-[#0D1117] border-[#E2E8F0]'
                     }`}
                   >
                     {inCart ? <Check className="w-4 h-4 stroke-[2.5]" /> : <ShoppingCart className="w-4 h-4" />}
@@ -171,24 +171,24 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   {/* Open Customer Inquiry Form */}
                   <button
                     onClick={() => setIsInquiryModalOpen(true)}
-                    className="flex-1 flex items-center justify-center gap-2.5 bg-[#0D1117] hover:bg-[#25D366] text-[#FAF8F5] py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-md group cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2.5 bg-[#0F172A] hover:bg-[#1E293B] text-white py-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 shadow-md group cursor-pointer"
                   >
-                    <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:text-white transition-all duration-300 group-hover:scale-110" />
+                    <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
                     <span>Inquire with My Details</span>
                   </button>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 pt-2 text-center text-[11px] text-[#5C6270]">
-                  <div className="p-2 border border-[#E8E2D7] rounded-lg bg-white">
-                    <ShieldCheck className="w-4 h-4 text-[#C5A059] mx-auto mb-1" />
+                  <div className="p-2 border border-[#E2E8F0] rounded-lg bg-[#F8FAFC]">
+                    <ShieldCheck className="w-4 h-4 text-[#0F172A] mx-auto mb-1" />
                     <span>GRA Certified</span>
                   </div>
-                  <div className="p-2 border border-[#E8E2D7] rounded-lg bg-white">
-                    <Award className="w-4 h-4 text-[#C5A059] mx-auto mb-1" />
+                  <div className="p-2 border border-[#E2E8F0] rounded-lg bg-[#F8FAFC]">
+                    <Award className="w-4 h-4 text-[#0F172A] mx-auto mb-1" />
                     <span>Lifetime Care</span>
                   </div>
-                  <div className="p-2 border border-[#E8E2D7] rounded-lg bg-white">
-                    <Clock className="w-4 h-4 text-[#C5A059] mx-auto mb-1" />
+                  <div className="p-2 border border-[#E2E8F0] rounded-lg bg-[#F8FAFC]">
+                    <Clock className="w-4 h-4 text-[#0F172A] mx-auto mb-1" />
                     <span>Custom Sizing</span>
                   </div>
                 </div>

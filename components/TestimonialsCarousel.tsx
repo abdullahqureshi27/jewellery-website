@@ -83,7 +83,7 @@ export default function TestimonialsCarousel() {
 
   return (
     <section
-      className="py-24 bg-[#FAF8F5] relative overflow-hidden"
+      className="py-24 bg-white relative overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-label="Client Testimonials"
@@ -91,43 +91,43 @@ export default function TestimonialsCarousel() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8C6A2E] tracking-[0.25em] uppercase mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#64748B] tracking-[0.25em] uppercase mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#94A3B8]" />
             <span>Verified Atelier Patrons</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wider text-[#0D1117]">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wider text-[#0F172A]">
             Loved by Discerning Collectors
           </h2>
         </div>
 
         {/* Carousel Card */}
-        <div className="relative bg-[#FFFFFF] rounded-3xl p-8 sm:p-14 border border-[#E8E2D7] shadow-xl transition-all duration-500">
-          <Quote className="w-12 h-12 text-[#C5A059]/20 absolute top-6 right-8" />
+        <div className="relative bg-white rounded-3xl p-8 sm:p-14 border border-[#E2E8F0] shadow-xl transition-all duration-500">
+          <Quote className="w-12 h-12 text-[#CBD5E1]/40 absolute top-6 right-8" />
 
           {/* Rating Stars */}
           <div className="flex items-center gap-1 mb-6">
             {[...Array(item.rating)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-[#C5A059] text-[#C5A059]" />
+              <Star key={i} className="w-5 h-5 fill-[#94A3B8] text-[#94A3B8]" />
             ))}
           </div>
 
           {/* Review Quote */}
-          <blockquote className="font-serif text-lg sm:text-2xl text-[#0D1117] leading-relaxed mb-8 min-h-[100px]">
+          <blockquote className="font-serif text-lg sm:text-2xl text-[#0F172A] leading-relaxed mb-8 min-h-[100px]">
             &ldquo;{item.review}&rdquo;
           </blockquote>
 
           {/* Customer Meta */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#E8E2D7]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-[#E2E8F0]">
             <div>
               <div className="flex items-center gap-2">
-                <h4 className="font-bold text-sm text-[#0D1117] tracking-wide">{item.name}</h4>
-                <span className="text-xs text-[#5C6270]">• {item.city}</span>
+                <h4 className="font-bold text-sm text-[#0F172A] tracking-wide">{item.name}</h4>
+                <span className="text-xs text-[#64748B]">• {item.city}</span>
               </div>
-              <p className="text-xs text-[#8C6A2E] font-medium mt-0.5">{item.piece}</p>
+              <p className="text-xs text-[#64748B] font-medium mt-0.5">{item.piece}</p>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 bg-[#FAF8F5] border border-[#C5A059]/30 text-[#8C6A2E] px-3 py-1 rounded-full text-[11px] font-semibold w-fit">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A059]" />
+            <div className="inline-flex items-center gap-1.5 bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] px-3 py-1 rounded-full text-[11px] font-semibold w-fit">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#64748B]" />
               <span>{item.date}</span>
             </div>
           </div>
@@ -142,7 +142,7 @@ export default function TestimonialsCarousel() {
                   onClick={() => setCurrent(idx)}
                   aria-label={`Go to review ${idx + 1}`}
                   className={`h-2 transition-all duration-300 rounded-full cursor-pointer ${
-                    idx === current ? 'w-8 bg-[#C5A059]' : 'w-2 bg-[#E8E2D7] hover:bg-[#C5A059]/50'
+                    idx === current ? 'w-8 bg-[#0F172A]' : 'w-2 bg-[#E2E8F0] hover:bg-[#94A3B8]'
                   }`}
                 />
               ))}
@@ -153,14 +153,14 @@ export default function TestimonialsCarousel() {
               <button
                 onClick={prev}
                 aria-label="Previous Review"
-                className="w-10 h-10 rounded-full border border-[#E8E2D7] hover:border-[#C5A059] bg-[#FAF8F5] hover:bg-[#C5A059] text-[#0D1117] hover:text-[#FAF8F5] flex items-center justify-center transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full border border-[#E2E8F0] hover:border-[#0F172A] bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={next}
                 aria-label="Next Review"
-                className="w-10 h-10 rounded-full border border-[#E8E2D7] hover:border-[#C5A059] bg-[#FAF8F5] hover:bg-[#C5A059] text-[#0D1117] hover:text-[#FAF8F5] flex items-center justify-center transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full border border-[#E2E8F0] hover:border-[#0F172A] bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

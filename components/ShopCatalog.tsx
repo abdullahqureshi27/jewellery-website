@@ -134,11 +134,11 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
   }, [initialProducts, selectedCategory, searchQuery, sortBy]);
 
   return (
-    <div className="py-12 bg-[#FAF8F5]">
+    <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#C5A059] font-bold mb-2">
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#64748B] font-bold mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Curated Showcase</span>
           </div>
@@ -160,8 +160,8 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                 onClick={() => handleCategoryChange(cat.value)}
                 className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex-shrink-0 cursor-pointer ${
                   isSelected
-                    ? 'bg-[#0D1117] text-[#FAF8F5] shadow-md border border-[#0D1117]'
-                    : 'bg-white text-[#5C6270] border border-[#E8E2D7] hover:border-[#C5A059] hover:text-[#0D1117]'
+                    ? 'bg-[#0F172A] text-white shadow-md border border-[#0F172A]'
+                    : 'bg-white text-[#64748B] border border-[#E2E8F0] hover:border-[#0F172A] hover:text-[#0F172A]'
                 }`}
               >
                 {cat.label}
@@ -171,21 +171,21 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
         </div>
 
         {/* FitFlair-Inspired Toolbar: [Filter Toggle] [Big Search Box (flex-1)] [Sort by Select] [Reset Button] */}
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-[#E8E2D7] shadow-sm mb-8 flex flex-col md:flex-row items-stretch md:items-center gap-3 sm:gap-4">
+        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-[#E2E8F0] shadow-sm mb-8 flex flex-col md:flex-row items-stretch md:items-center gap-3 sm:gap-4">
           {/* 1. Most Left: Filter Toggle Button (FitFlair style) */}
           <button
             onClick={handleFilterToggle}
             className={`inline-flex items-center justify-center gap-2 px-4 h-11 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer shrink-0 select-none ${
               isFilterOpen
-                ? 'bg-[#0D1117] text-[#FAF8F5] shadow-sm ring-1 ring-[#C5A059]'
-                : 'bg-[#FAF8F5] hover:bg-[#0D1117] hover:text-[#FAF8F5] text-[#0D1117] border border-[#E8E2D7] hover:border-[#0D1117]'
+                ? 'bg-[#0F172A] text-white shadow-sm ring-1 ring-[#CBD5E1]'
+                : 'bg-[#F8FAFC] hover:bg-[#0F172A] hover:text-white text-[#0F172A] border border-[#E2E8F0] hover:border-[#0F172A]'
             }`}
             title={isFilterOpen ? 'Hide filter sidebar' : 'Show filter sidebar'}
           >
-            <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
+            <SlidersHorizontal className="w-4 h-4 text-[#94A3B8]" />
             <span>{isFilterOpen ? 'Hide Filters' : 'Filter'}</span>
             {activeFiltersCount > 0 && (
-              <span className="ml-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#C5A059] text-[#0D1117]">
+              <span className="ml-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#0F172A] text-white border border-[#CBD5E1]">
                 {activeFiltersCount}
               </span>
             )}
@@ -193,18 +193,18 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
 
           {/* 2. Middle: Big Search Input taking the whole remaining space */}
           <div className="relative flex-1 w-full min-w-0">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8A90A0]" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search pieces by title or collection..."
-              className="w-full h-11 bg-[#FAF8F5] border border-[#E8E2D7] rounded-xl pl-10 pr-9 text-xs sm:text-sm text-[#12141A] placeholder-[#8A90A0] focus:bg-white focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all"
+              className="w-full h-11 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-10 pr-9 text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:bg-white focus:outline-none focus:border-[#475569] focus:ring-1 focus:ring-[#CBD5E1]/40 transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8A90A0] hover:text-[#0D1117] p-1 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#0F172A] p-1 cursor-pointer"
                 title="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
@@ -215,7 +215,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           {/* 3. Right Group: Sort By Select + Reset Button */}
           <div className="flex items-center gap-2.5 w-full md:w-auto shrink-0 justify-between md:justify-end">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#8A90A0] uppercase tracking-wider hidden xl:inline whitespace-nowrap">
+              <span className="text-xs text-[#94A3B8] uppercase tracking-wider hidden xl:inline whitespace-nowrap">
                 Sort by:
               </span>
               <Select
@@ -226,21 +226,21 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               >
                 <SelectTrigger
                   size="default"
-                  className="w-[170px] sm:w-[190px] !h-11 px-4 bg-[#FAF8F5] border-[#E8E2D7] text-xs font-medium text-[#12141A] rounded-xl hover:border-[#C5A059] transition-colors cursor-pointer shadow-sm"
+                  className="w-[170px] sm:w-[190px] !h-11 px-4 bg-[#F8FAFC] border-[#E2E8F0] text-xs font-medium text-[#0F172A] rounded-xl hover:border-[#475569] transition-colors cursor-pointer shadow-sm"
                 >
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-[#E8E2D7] shadow-xl rounded-xl p-1 z-50">
-                  <SelectItem value="featured" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                <SelectContent className="bg-white border-[#E2E8F0] shadow-xl rounded-xl p-1 z-50">
+                  <SelectItem value="featured" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#F8FAFC] rounded-md">
                     Signature &amp; Featured
                   </SelectItem>
-                  <SelectItem value="price-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  <SelectItem value="price-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#F8FAFC] rounded-md">
                     Price: Low to High
                   </SelectItem>
-                  <SelectItem value="price-desc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  <SelectItem value="price-desc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#F8FAFC] rounded-md">
                     Price: High to Low
                   </SelectItem>
-                  <SelectItem value="name-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#FAF8F5] rounded-md">
+                  <SelectItem value="name-asc" className="text-xs py-2 px-3 cursor-pointer hover:bg-[#F8FAFC] rounded-md">
                     Alphabetical (A-Z)
                   </SelectItem>
                 </SelectContent>
@@ -253,8 +253,8 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               title="Reset all filters and search"
               className={`inline-flex items-center gap-1.5 h-11 px-4 rounded-xl border text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
                 activeFiltersCount > 0
-                  ? 'bg-[#FAF8F5] border-[#C5A059] text-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] shadow-sm'
-                  : 'bg-[#FAF8F5] border-[#E8E2D7] text-[#8A90A0] hover:text-[#0D1117] hover:border-[#8A90A0]'
+                  ? 'bg-[#F8FAFC] border-[#0F172A] text-[#0F172A] hover:bg-[#0F172A] hover:text-white shadow-sm'
+                  : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#94A3B8] hover:text-[#0F172A] hover:border-[#94A3B8]'
               }`}
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -268,11 +268,11 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           {/* Desktop Filter Sidebar (FitFlair-Inspired Drawer Sidebar) */}
           {isFilterOpen && (
             <aside className="hidden lg:block lg:col-span-1 space-y-6 animate-fadeIn transition-all duration-300">
-              <div className="bg-white p-6 rounded-2xl border border-[#E8E2D7] shadow-sm space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-[#E8E2D7]">
+              <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] shadow-sm space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
                   <div className="flex items-center gap-2">
-                    <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
-                    <h3 className="font-serif text-sm font-bold uppercase tracking-wider text-[#0D1117]">
+                    <SlidersHorizontal className="w-4 h-4 text-[#94A3B8]" />
+                    <h3 className="font-serif text-sm font-bold uppercase tracking-wider text-[#0F172A]">
                       Filter Pieces
                     </h3>
                   </div>
@@ -280,14 +280,14 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                     {activeFiltersCount > 0 && (
                       <button
                         onClick={handleResetFilters}
-                        className="text-[11px] text-[#C5A059] hover:underline uppercase tracking-wider font-semibold cursor-pointer"
+                        className="text-[11px] text-[#64748B] hover:text-[#0F172A] hover:underline uppercase tracking-wider font-semibold cursor-pointer"
                       >
                         Clear All
                       </button>
                     )}
                     <button
                       onClick={() => setIsFilterOpen(false)}
-                      className="text-[#8A90A0] hover:text-[#0D1117] p-1 rounded-md hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+                      className="text-[#94A3B8] hover:text-[#0F172A] p-1 rounded-md hover:bg-[#F8FAFC] transition-colors cursor-pointer"
                       title="Close filter panel"
                     >
                       <X className="w-4 h-4" />
@@ -299,13 +299,13 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setIsFilterOpen(false)}
-                    className="flex-1 bg-[#0D1117] hover:bg-[#1A202C] text-[#FAF8F5] py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
+                    className="flex-1 bg-[#0F172A] hover:bg-[#1E293B] text-white py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
                   >
                     Apply
                   </button>
                   <button
                     onClick={handleResetFilters}
-                    className="flex-1 bg-[#FAF8F5] border border-[#E8E2D7] hover:bg-[#E8E2D7]/50 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#5C6270] transition-colors cursor-pointer text-center"
+                    className="flex-1 bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#E2E8F0] py-2 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#64748B] transition-colors cursor-pointer text-center"
                   >
                     Reset
                   </button>
@@ -313,7 +313,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
 
                 {/* Category Filter */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-[#0F172A] mb-2.5">
                     Category
                   </label>
                   <div className="space-y-1.5">
@@ -323,13 +323,13 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                         onClick={() => handleCategoryChange(c.value)}
                         className={`w-full text-left text-xs py-2 px-3 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
                           selectedCategory === c.value
-                            ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold'
-                            : 'text-[#5C6270] hover:bg-[#FAF8F5] hover:text-[#0D1117]'
+                            ? 'bg-[#0F172A] text-white font-semibold'
+                            : 'text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
                         }`}
                       >
                         <span>{c.label}</span>
                         {selectedCategory === c.value && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#CBD5E1]" />
                         )}
                       </button>
                     ))}
@@ -337,13 +337,13 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                 </div>
 
                 {/* 100% Pure 925 Silver Guarantee */}
-                <div className="pt-4 border-t border-[#E8E2D7]">
-                  <div className="bg-[#FAF8F5] border border-[#E8E2D7] rounded-xl p-3 text-left">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#0D1117] mb-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                <div className="pt-4 border-t border-[#E2E8F0]">
+                  <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3 text-left">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A] mb-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#94A3B8]" />
                       <span>100% Pure 925 Silver</span>
                     </div>
-                    <p className="text-[11px] text-[#5C6270] leading-relaxed">
+                    <p className="text-[11px] text-[#64748B] leading-relaxed">
                       Every piece is handcrafted in pure solid 925 sterling silver with tarnish-resistant rhodium finish.
                     </p>
                   </div>
@@ -351,19 +351,19 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               </div>
 
               {/* Custom Concierge Callout */}
-              <div className="bg-[#0D1117] text-[#FAF8F5] p-6 rounded-2xl border border-[#C5A059]/30">
-                <Sparkles className="w-5 h-5 text-[#C5A059] mb-2" />
-                <h4 className="font-serif text-sm font-bold uppercase tracking-wider mb-1">
+              <div className="bg-[#0A0D14] text-[#F8FAFC] p-6 rounded-2xl border border-[#334155]/60">
+                <Sparkles className="w-5 h-5 text-[#CBD5E1] mb-2" />
+                <h4 className="font-serif text-sm font-bold uppercase tracking-wider mb-1 text-white">
                   Custom Sizing?
                 </h4>
-                <p className="text-xs text-[#8B949E] leading-relaxed mb-4">
+                <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
                   Pieces can be handcrafted to custom measurements. Connect on WhatsApp for complimentary guidance.
                 </p>
                 <a
                   href={getWhatsAppLink('Hello Faraz Faheem Atelier, I need custom jewellery sizing help.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-center w-full bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"
+                  className="block text-center w-full bg-white hover:bg-[#F1F5F9] text-[#0F172A] py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors"
                 >
                   Inquire on WhatsApp
                 </a>
@@ -374,17 +374,17 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           {/* Products Grid */}
           <main className={isFilterOpen ? "lg:col-span-3" : "w-full"}>
             {filteredProducts.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-[#E8E2D7] p-12 text-center">
-                <Sparkles className="w-8 h-8 text-[#C5A059] mx-auto mb-3" />
-                <h3 className="font-serif text-xl font-bold uppercase text-[#0D1117] mb-2">
+              <div className="bg-white rounded-2xl border border-[#E2E8F0] p-12 text-center">
+                <Sparkles className="w-8 h-8 text-[#94A3B8] mx-auto mb-3" />
+                <h3 className="font-serif text-xl font-bold uppercase text-[#0F172A] mb-2">
                   No Matching Jewels Found
                 </h3>
-                <p className="text-xs text-[#5C6270] max-w-sm mx-auto mb-6">
+                <p className="text-xs text-[#64748B] max-w-sm mx-auto mb-6">
                   No pieces matched your selected filter combination. Try clearing some filters or searching for another gem.
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#C5A059] hover:text-[#0D1117] transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 bg-[#0F172A] text-white px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#334155] transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset All Filters</span>
@@ -415,15 +415,15 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
       <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
         <SheetContent
           side="right"
-          className="w-full max-w-sm sm:max-w-md bg-[#FAF8F5] border-l border-[#E8E2D7] p-0 flex flex-col justify-between"
+          className="w-full max-w-sm sm:max-w-md bg-white border-l border-[#E2E8F0] p-0 flex flex-col justify-between"
         >
-          <div className="p-6 border-b border-[#E8E2D7] bg-white">
+          <div className="p-6 border-b border-[#E2E8F0] bg-white">
             <SheetHeader className="p-0 space-y-1 text-left">
-              <SheetTitle className="font-serif text-lg font-bold uppercase tracking-wider text-[#0D1117] flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
+              <SheetTitle className="font-serif text-lg font-bold uppercase tracking-wider text-[#0F172A] flex items-center gap-2">
+                <SlidersHorizontal className="w-4 h-4 text-[#94A3B8]" />
                 <span>Filter Pieces</span>
               </SheetTitle>
-              <SheetDescription className="text-xs text-[#5C6270]">
+              <SheetDescription className="text-xs text-[#64748B]">
                 Filter pieces by collection &amp; category
               </SheetDescription>
             </SheetHeader>
@@ -432,7 +432,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {/* Category */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-[#0D1117] mb-2.5">
+              <label className="block text-xs font-bold uppercase tracking-widest text-[#0F172A] mb-2.5">
                 Category
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -443,8 +443,8 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                     onClick={() => handleCategoryChange(c.value)}
                     className={`text-left text-xs py-2 px-3 rounded-xl border transition-all cursor-pointer ${
                       selectedCategory === c.value
-                        ? 'bg-[#0D1117] text-[#FAF8F5] font-semibold border-[#0D1117]'
-                        : 'bg-white text-[#5C6270] border-[#E8E2D7] hover:border-[#C5A059]'
+                        ? 'bg-[#0F172A] text-white font-semibold border-[#0F172A]'
+                        : 'bg-white text-[#64748B] border-[#E2E8F0] hover:border-[#0F172A]'
                     }`}
                   >
                     {c.label}
@@ -454,31 +454,31 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
             </div>
 
             {/* 100% Pure 925 Silver Guarantee */}
-            <div className="pt-4 border-t border-[#E8E2D7]">
-              <div className="bg-white border border-[#E8E2D7] rounded-xl p-3.5 text-left">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0D1117] mb-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+            <div className="pt-4 border-t border-[#E2E8F0]">
+              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3.5 text-left">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A] mb-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#94A3B8]" />
                   <span>100% Pure 925 Sterling Silver</span>
                 </div>
-                <p className="text-[11px] text-[#5C6270] leading-relaxed">
+                <p className="text-[11px] text-[#64748B] leading-relaxed">
                   Every creation is handcrafted in solid 925 sterling silver with protective rhodium finish.
                 </p>
               </div>
             </div>
           </div>
 
-          <SheetFooter className="p-4 bg-white border-t border-[#E8E2D7] flex-row gap-3">
+          <SheetFooter className="p-4 bg-white border-t border-[#E2E8F0] flex-row gap-3">
             <button
               type="button"
               onClick={handleResetFilters}
-              className="flex-1 border border-[#E8E2D7] hover:border-[#0D1117] py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-[#5C6270] hover:text-[#0D1117] transition-colors cursor-pointer"
+              className="flex-1 border border-[#E2E8F0] hover:border-[#0F172A] py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-[#64748B] hover:text-[#0F172A] transition-colors cursor-pointer"
             >
               Reset
             </button>
             <button
               type="button"
               onClick={() => setMobileFilterOpen(false)}
-              className="flex-1 bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
+              className="flex-1 bg-[#0F172A] hover:bg-[#334155] text-white py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
             >
               View {filteredProducts.length} Pieces
             </button>

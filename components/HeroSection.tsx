@@ -101,7 +101,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-[85vh] sm:min-h-[88vh] flex items-center bg-[#0D1117] text-[#FAF8F5] overflow-hidden"
+      className="relative min-h-[85vh] sm:min-h-[88vh] flex items-center bg-[#0A0D14] text-[#F8FAFC] overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-label="Editorial Hero Showcase"
@@ -124,8 +124,8 @@ export default function HeroSection() {
             quality={80}
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1117] via-[#0D1117]/85 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0D14] via-[#0A0D14]/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-transparent" />
         </div>
       ))}
 
@@ -133,20 +133,22 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 w-full">
         <div className="max-w-2xl">
           {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 bg-[#161B22]/90 backdrop-blur-md border border-[#C5A059]/40 text-[#C5A059] px-4 py-1.5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase mb-6 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 bg-[#0F172A]/90 backdrop-blur-md border border-[#475569]/50 text-[#CBD5E1] px-4 py-1.5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase mb-6 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#94A3B8]" />
             <span>{slide.eyebrow}</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#FAF8F5] leading-[1.15] mb-6 min-h-[90px] sm:min-h-[140px]">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F8FAFC] leading-[1.15] mb-6 min-h-[90px] sm:min-h-[140px]">
             {slide.titleLight}
-            <span className="text-[#C5A059] italic font-normal">{slide.titleGold}</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#CBD5E1] to-[#94A3B8] italic font-normal">
+              {slide.titleGold}
+            </span>
             {slide.titleSuffix}
           </h1>
 
           {/* Narrative */}
-          <p className="text-sm sm:text-base text-[#8B949E] leading-relaxed mb-8 max-w-xl min-h-[60px]">
+          <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed mb-8 max-w-xl min-h-[60px]">
             {slide.description}
           </p>
 
@@ -154,7 +156,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
             <Link
               href={slide.primaryCtaLink}
-              className="inline-flex items-center justify-center gap-3 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group"
+              className="inline-flex items-center justify-center gap-3 bg-white hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group"
             >
               <span>{slide.primaryCtaText}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -164,7 +166,7 @@ export default function HeroSection() {
               href={getWhatsAppLink(slide.whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 border border-[#E8E2D7]/30 hover:border-[#25D366] bg-[#161B22]/70 hover:bg-[#25D366]/10 text-[#FAF8F5] text-xs font-semibold uppercase tracking-[0.2em] px-7 py-4 rounded-full transition-all duration-300 group"
+              className="inline-flex items-center justify-center gap-2.5 border border-[#334155] hover:border-[#25D366] bg-[#0F172A]/70 hover:bg-[#25D366]/10 text-[#F8FAFC] text-xs font-semibold uppercase tracking-[0.2em] px-7 py-4 rounded-full transition-all duration-300 group"
             >
               <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
               <span>WhatsApp Inquiry</span>
@@ -172,18 +174,18 @@ export default function HeroSection() {
           </div>
 
           {/* Trust points */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-[#252D3D]">
-            <div className="flex items-center gap-2 text-xs text-[#C5A059]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-[#1E293B]">
+            <div className="flex items-center gap-2 text-xs text-[#CBD5E1]">
               <ShieldCheck className="w-4 h-4 flex-shrink-0" />
-              <span className="text-[#FAF8F5]">{slide.trustBadge1}</span>
+              <span className="text-[#F8FAFC]">{slide.trustBadge1}</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-[#C5A059]">
+            <div className="flex items-center gap-2 text-xs text-[#CBD5E1]">
               <Gem className="w-4 h-4 flex-shrink-0" />
-              <span className="text-[#FAF8F5]">{slide.trustBadge2}</span>
+              <span className="text-[#F8FAFC]">{slide.trustBadge2}</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-[#C5A059]">
+            <div className="flex items-center gap-2 text-xs text-[#CBD5E1]">
               <Sparkles className="w-4 h-4 flex-shrink-0" />
-              <span className="text-[#FAF8F5]">{slide.trustBadge3}</span>
+              <span className="text-[#F8FAFC]">{slide.trustBadge3}</span>
             </div>
           </div>
         </div>
@@ -194,7 +196,7 @@ export default function HeroSection() {
         <button
           onClick={prevSlide}
           aria-label="Previous Hero Slide"
-          className="w-10 h-10 rounded-full border border-[#C5A059]/40 bg-[#161B22]/80 hover:bg-[#C5A059] text-[#FAF8F5] hover:text-[#0D1117] flex items-center justify-center transition-colors cursor-pointer"
+          className="w-10 h-10 rounded-full border border-[#475569]/50 bg-[#0F172A]/80 hover:bg-white text-[#F8FAFC] hover:text-[#0F172A] flex items-center justify-center transition-colors cursor-pointer"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -207,7 +209,7 @@ export default function HeroSection() {
               onClick={() => setCurrentSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
               className={`h-1.5 transition-all duration-300 rounded-full cursor-pointer ${
-                idx === currentSlide ? 'w-8 bg-[#C5A059]' : 'w-2 bg-[#FAF8F5]/30 hover:bg-[#FAF8F5]/60'
+                idx === currentSlide ? 'w-8 bg-white' : 'w-2 bg-white/30 hover:bg-white/60'
               }`}
             />
           ))}
@@ -216,7 +218,7 @@ export default function HeroSection() {
         <button
           onClick={nextSlide}
           aria-label="Next Hero Slide"
-          className="w-10 h-10 rounded-full border border-[#C5A059]/40 bg-[#161B22]/80 hover:bg-[#C5A059] text-[#FAF8F5] hover:text-[#0D1117] flex items-center justify-center transition-colors cursor-pointer"
+          className="w-10 h-10 rounded-full border border-[#475569]/50 bg-[#0F172A]/80 hover:bg-white text-[#F8FAFC] hover:text-[#0F172A] flex items-center justify-center transition-colors cursor-pointer"
         >
           <ChevronRight className="w-5 h-5" />
         </button>

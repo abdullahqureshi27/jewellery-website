@@ -61,14 +61,14 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         data-lenis-prevent="true"
-        className="max-w-2xl max-h-[90vh] overflow-y-auto overscroll-contain bg-[#0D1117] text-[#FAF8F5] border border-[#C5A059]/40 p-6 sm:p-8 rounded-2xl shadow-2xl"
+        className="max-w-2xl max-h-[90vh] overflow-y-auto overscroll-contain bg-[#0A0D14] text-white border border-white/10 p-6 sm:p-8 rounded-2xl shadow-2xl"
       >
         <DialogHeader className="text-left mb-6">
-          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#C5A059] tracking-[0.2em] uppercase mb-1">
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#CBD5E1] tracking-[0.2em] uppercase mb-1">
             <Ruler className="w-4 h-4" />
             <span>Atelier Sizing Guide</span>
           </div>
-          <DialogTitle className="font-serif text-2xl sm:text-3xl font-bold uppercase tracking-wider text-[#FAF8F5]">
+          <DialogTitle className="font-serif text-2xl sm:text-3xl font-bold uppercase tracking-wider text-white">
             Find Your Perfect Ring Fit
           </DialogTitle>
           <DialogDescription className="text-xs text-[#8B949E] mt-1">
@@ -77,15 +77,15 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
         </DialogHeader>
 
         {/* 3 Simple Steps Guide */}
-        <div className="bg-[#161B22] border border-[#252D3D] rounded-xl p-5 mb-6">
-          <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-[#C5A059] mb-3 flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5" />
+        <div className="bg-[#131720] border border-white/10 rounded-xl p-5 mb-6">
+          <h4 className="font-serif text-xs font-bold uppercase tracking-wider text-white mb-3 flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#CBD5E1]" />
             <span>How to Measure at Home in 60 Seconds</span>
           </h4>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[#C5CAD4]">
             <div className="flex flex-col">
-              <span className="w-5 h-5 rounded-full bg-[#C5A059]/20 text-[#C5A059] font-bold flex items-center justify-center text-[10px] mb-1.5">
+              <span className="w-5 h-5 rounded-full bg-white/10 text-white font-bold flex items-center justify-center text-[10px] mb-1.5 border border-white/15">
                 1
               </span>
               <p className="leading-relaxed">
@@ -94,7 +94,7 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
             </div>
 
             <div className="flex flex-col">
-              <span className="w-5 h-5 rounded-full bg-[#C5A059]/20 text-[#C5A059] font-bold flex items-center justify-center text-[10px] mb-1.5">
+              <span className="w-5 h-5 rounded-full bg-white/10 text-white font-bold flex items-center justify-center text-[10px] mb-1.5 border border-white/15">
                 2
               </span>
               <p className="leading-relaxed">
@@ -103,7 +103,7 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
             </div>
 
             <div className="flex flex-col">
-              <span className="w-5 h-5 rounded-full bg-[#C5A059]/20 text-[#C5A059] font-bold flex items-center justify-center text-[10px] mb-1.5">
+              <span className="w-5 h-5 rounded-full bg-white/10 text-white font-bold flex items-center justify-center text-[10px] mb-1.5 border border-white/15">
                 3
               </span>
               <p className="leading-relaxed">
@@ -114,35 +114,35 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
         </div>
 
         {/* Sizing Table */}
-        <div className="border border-[#252D3D] rounded-xl overflow-hidden mb-6">
-          <div className="bg-[#161B22] grid grid-cols-4 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#C5A059] border-b border-[#252D3D]">
+        <div className="border border-white/10 rounded-xl overflow-hidden mb-6">
+          <div className="bg-[#131720] grid grid-cols-4 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#CBD5E1] border-b border-white/10">
             <span>PK / Asia</span>
             <span>US Standard</span>
             <span>Inside Diameter</span>
             <span>Circumference</span>
           </div>
 
-          <div className="divide-y divide-[#252D3D] text-xs">
+          <div className="divide-y divide-white/10 text-xs">
             {SIZE_CHART.map((row) => (
               <div
                 key={row.pk}
-                className="grid grid-cols-4 px-4 py-3 text-[#FAF8F5] hover:bg-[#161B22]/60 transition-colors"
+                className="grid grid-cols-4 px-4 py-3 text-white hover:bg-white/5 transition-colors"
               >
-                <span className="font-semibold text-[#FAF8F5]">{row.pk}</span>
+                <span className="font-semibold text-white">{row.pk}</span>
                 <span className="text-[#8B949E]">{row.us}</span>
                 <span className="text-[#8B949E] tabular-nums">{row.diameter}</span>
-                <span className="text-[#C5A059] font-medium tabular-nums">{row.circumference}</span>
+                <span className="text-[#CBD5E1] font-semibold tabular-nums">{row.circumference}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* WhatsApp Assistance Footer */}
-        <div className="bg-[#161B22]/70 border border-[#C5A059]/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-[#131720] border border-white/10 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-left">
-            <HelpCircle className="w-5 h-5 text-[#C5A059] shrink-0" />
+            <HelpCircle className="w-5 h-5 text-[#CBD5E1] shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-[#FAF8F5]">Still not 100% sure of your size?</p>
+              <p className="text-xs font-semibold text-white">Still not 100% sure of your size?</p>
               <p className="text-[11px] text-[#8B949E]">
                 Place an existing ring on a ruler, photograph it, and send it to our gemologist.
               </p>
@@ -153,9 +153,9 @@ export default function RingSizeModal({ isOpen, onClose }: RingSizeModalProps) {
             href={getWhatsAppLink('Hello Faraz Faheem Atelier, I need help confirming my ring size for a jewellery order.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shrink-0 cursor-pointer group"
+            className="inline-flex items-center gap-2 bg-white hover:bg-[#CBD5E1] text-[#0F172A] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shrink-0 cursor-pointer group"
           >
-            <FaWhatsapp className="w-4 h-4 text-[#0D1117] group-hover:scale-110 transition-transform" />
+            <FaWhatsapp className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
             <span>Ask on WhatsApp</span>
           </a>
         </div>

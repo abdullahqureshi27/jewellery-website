@@ -171,14 +171,14 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent
         showCloseButton={false}
-        className="max-w-2xl bg-[#FAF8F5] p-0 border border-[#E8E2D7] rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh] sm:max-h-[90vh]"
+        className="max-w-2xl bg-white p-0 border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh] sm:max-h-[90vh]"
       >
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-[#0D1117] text-[#FAF8F5] flex items-center justify-between border-b border-[#C5A059]/30 shrink-0">
+        <div className="px-6 py-4 bg-[#0A0D14] text-white flex items-center justify-between border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-2.5">
-            <Sparkles className="w-5 h-5 text-[#C5A059] shrink-0" />
+            <Sparkles className="w-5 h-5 text-[#CBD5E1] shrink-0" />
             <div>
-              <DialogTitle className="font-serif text-base sm:text-lg font-bold tracking-wider uppercase text-[#FAF8F5]">
+              <DialogTitle className="font-serif text-base sm:text-lg font-bold tracking-wider uppercase text-white">
                 FFZever Concierge Inquiry
               </DialogTitle>
               <DialogDescription className="text-[11px] text-[#8B949E] tracking-widest uppercase">
@@ -188,7 +188,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-white/10 text-[#FAF8F5] transition-colors cursor-pointer"
+            className="p-1.5 rounded-full hover:bg-white/10 text-white transition-colors cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -200,17 +200,17 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           data-lenis-prevent="true"
-          className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 space-y-5 scrollbar-thin"
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6 space-y-5 scrollbar-thin bg-[#F8FAFC]"
         >
           {/* Selected Items Summary Banner */}
-          <div className="bg-white rounded-xl p-4 border border-[#E8E2D7] shadow-sm">
+          <div className="bg-white rounded-xl p-4 border border-[#E2E8F0] shadow-sm">
             <div className="text-xs font-semibold uppercase tracking-wider text-[#5C6270] mb-2 flex justify-between">
               <span>Items to Inquire:</span>
               <span className="font-serif font-bold text-[#0D1117] tabular-nums lining-nums">
                 Total: Rs. {totalCalculated.toLocaleString()}
               </span>
             </div>
-            <div className="max-h-28 overflow-y-auto space-y-2 pr-1 divide-y divide-[#E8E2D7]/60">
+            <div className="max-h-28 overflow-y-auto space-y-2 pr-1 divide-y divide-[#E2E8F0]">
               {inquiryList.map((item, i) => (
                 <div key={i} className="pt-2 first:pt-0 flex items-center justify-between text-xs">
                   <div>
@@ -242,7 +242,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                   {...register('name')}
                   placeholder="e.g., Sarah Khan"
                   className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
-                    errors.name ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                    errors.name ? 'border-red-400 focus:border-red-500' : 'border-[#E2E8F0] focus:border-[#0F172A]'
                   }`}
                 />
               </div>
@@ -267,7 +267,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                   {...register('phone')}
                   placeholder="e.g., +92 300 1234567"
                   className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
-                    errors.phone ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                    errors.phone ? 'border-red-400 focus:border-red-500' : 'border-[#E2E8F0] focus:border-[#0F172A]'
                   }`}
                 />
               </div>
@@ -292,7 +292,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                   {...register('city')}
                   placeholder="e.g., Karachi / Lahore / Islamabad"
                   className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
-                    errors.city ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                    errors.city ? 'border-red-400 focus:border-red-500' : 'border-[#E2E8F0] focus:border-[#0F172A]'
                   }`}
                 />
               </div>
@@ -317,7 +317,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                   {...register('email')}
                   placeholder="e.g., sarah@example.com"
                   className={`w-full bg-white border rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none shadow-sm transition-colors ${
-                    errors.email ? 'border-red-400 focus:border-red-500' : 'border-[#E8E2D7] focus:border-[#C5A059]'
+                    errors.email ? 'border-red-400 focus:border-red-500' : 'border-[#E2E8F0] focus:border-[#0F172A]'
                   }`}
                 />
               </div>
@@ -340,7 +340,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
               type="text"
               {...register('address')}
               placeholder="e.g., House #12, Street 4, Phase 6 DHA, Karachi"
-              className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 px-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
+              className="w-full bg-white border border-[#E2E8F0] rounded-lg py-2 px-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#0F172A] shadow-sm"
             />
           </div>
 
@@ -356,7 +356,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
                 rows={2}
                 {...register('notes')}
                 placeholder="e.g., Ring Size 14 (PK) / US 7, custom inner laser engraving, or bridal gift packaging..."
-                className="w-full bg-white border border-[#E8E2D7] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059] shadow-sm"
+                className="w-full bg-white border border-[#E2E8F0] rounded-lg py-2 pl-9 pr-3 text-xs text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#0F172A] shadow-sm"
               />
             </div>
           </div>
@@ -366,9 +366,9 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-3 bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D1117] py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-lg shadow-[#C5A059]/20 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] group cursor-pointer disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-3 bg-[#0F172A] hover:bg-[#1E293B] text-white py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-lg shadow-black/10 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] group cursor-pointer disabled:opacity-60"
             >
-              <FaWhatsapp className="w-5 h-5 text-[#0D1117] transition-all duration-300 group-hover:scale-110" />
+              <FaWhatsapp className="w-5 h-5 text-[#25D366] transition-all duration-300 group-hover:scale-110" />
               <span>Send Complete Inquiry to WhatsApp</span>
             </button>
             <p className="text-center text-[10px] text-[#8A90A0] mt-2">

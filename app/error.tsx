@@ -33,14 +33,14 @@ export default function Error({
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={() => reset()}
-          className="inline-flex items-center gap-2 bg-[#0D1117] text-[#FAF8F5] hover:bg-[#C5A059] hover:text-[#0D1117] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors"
+          className="inline-flex items-center gap-2 bg-[#0D1117] text-white hover:bg-[#CBD5E1] hover:text-[#0F172A] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors"
         >
           <RotateCcw className="w-4 h-4" />
           <span>Try Again</span>
         </button>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 border border-[#E8E2D7] hover:border-[#0D1117] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#12141A] transition-colors"
+          className="inline-flex items-center gap-2 border border-[#E2E8F0] hover:border-[#0D1117] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#12141A] transition-colors"
         >
           <Home className="w-4 h-4" />
           <span>Return Home</span>

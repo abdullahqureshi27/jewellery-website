@@ -177,13 +177,13 @@ export default function Navbar() {
   return (
     <>
       {/* Top Luxury Announcement Ribbon */}
-      <div className="bg-[#0D1117] text-[#FAF8F5] text-xs py-2 px-4 border-b border-[#C5A059]/20 tracking-wider">
+      <div className="bg-[#0A0D14] text-[#F8FAFC] text-xs py-2 px-4 border-b border-[#334155]/40 tracking-wider">
         <div className="max-w-7xl mx-auto flex justify-between items-center text-[11px] sm:text-xs">
           <div className="flex items-center gap-2 mx-auto sm:mx-0">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#CBD5E1] animate-pulse" />
             <span>Handcrafted 925 Solid Sterling Silver • Nationwide Insured Delivery</span>
           </div>
-          <div className="hidden sm:flex items-center gap-4 text-[#C5A059] font-medium">
+          <div className="hidden sm:flex items-center gap-4 text-[#CBD5E1] font-medium">
             <span>Since 1982 • Authentic Master Karigars</span>
           </div>
         </div>
@@ -193,8 +193,8 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#FAF8F5]/98 backdrop-blur-md shadow-sm border-b border-[#E8E2D7] py-2.5'
-            : 'bg-[#FAF8F5] border-b border-[#E8E2D7]/60 py-3 sm:py-3.5'
+            ? 'bg-white/98 backdrop-blur-md shadow-sm border-b border-[#E2E8F0] py-2.5'
+            : 'bg-white border-b border-[#E2E8F0]/80 py-3 sm:py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -203,7 +203,7 @@ export default function Navbar() {
             {/* Mobile Menu Hamburger (Visible ONLY on small screens) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 -ml-1.5 text-[#12141A] hover:text-[#C5A059] transition-colors"
+              className="lg:hidden p-1.5 -ml-1.5 text-[#0F172A] hover:text-[#64748B] transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -212,12 +212,12 @@ export default function Navbar() {
             {/* Brand Logo on the Left */}
             <Link href="/" className="flex flex-col items-start group shrink-0">
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300 shrink-0" />
-                <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.08em] sm:tracking-[0.1em] text-[#0D1117] uppercase whitespace-nowrap">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#64748B] group-hover:text-[#0F172A] group-hover:rotate-12 transition-all duration-300 shrink-0" />
+                <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.08em] sm:tracking-[0.1em] text-[#0F172A] uppercase whitespace-nowrap">
                   FFZever
                 </span>
               </div>
-              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#C5A059] uppercase font-medium pl-0.5">
+              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#64748B] uppercase font-medium pl-0.5">
                 Faraz Faheem • Since 1982
               </span>
             </Link>
@@ -232,13 +232,13 @@ export default function Navbar() {
                     value={searchQuery}
                     onChange={(e) => handleSearchChange(e.target.value)}
                     placeholder="SEARCH"
-                    className="w-full bg-transparent border-b border-[#0D1117]/40 hover:border-[#0D1117] focus:border-[#C5A059] py-1 pl-1 pr-7 text-xs uppercase tracking-widest text-[#0D1117] placeholder-[#8A90A0] focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-[#0F172A]/30 hover:border-[#0F172A] focus:border-[#475569] py-1 pl-1 pr-7 text-xs uppercase tracking-widest text-[#0F172A] placeholder-[#94A3B8] focus:outline-none transition-colors"
                   />
                   {searchQuery ? (
                     <button
                       type="button"
                       onClick={handleClearSearch}
-                      className="absolute right-1 text-[#8A90A0] hover:text-[#0D1117] p-0.5 transition-colors cursor-pointer"
+                      className="absolute right-1 text-[#94A3B8] hover:text-[#0F172A] p-0.5 transition-colors cursor-pointer"
                       title="Clear search"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -246,7 +246,7 @@ export default function Navbar() {
                   ) : (
                     <button
                       type="submit"
-                      className="absolute right-1 text-[#0D1117] hover:text-[#C5A059] p-0.5 transition-colors cursor-pointer"
+                      className="absolute right-1 text-[#0F172A] hover:text-[#64748B] p-0.5 transition-colors cursor-pointer"
                       title="Search"
                     >
                       <Search className="w-3.5 h-3.5" />
@@ -256,33 +256,33 @@ export default function Navbar() {
 
                 {/* Real-Time Live Matching Dropdown for Desktop Search */}
                 {searchQuery.trim().length > 0 && (
-                  <div className="absolute right-0 top-full mt-2 w-80 md:w-96 bg-white rounded-2xl border border-[#E8E2D7] shadow-2xl overflow-hidden z-50 animate-fadeIn">
-                    <div className="p-3 bg-[#FAF8F5] border-b border-[#E8E2D7] flex items-center justify-between text-xs text-[#5C6270]">
+                  <div className="absolute right-0 top-full mt-2 w-80 md:w-96 bg-white rounded-2xl border border-[#E2E8F0] shadow-2xl overflow-hidden z-50 animate-fadeIn">
+                    <div className="p-3 bg-[#F8FAFC] border-b border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B]">
                       <span>
                         Found:{' '}
-                        <strong className="text-[#0D1117] font-semibold">
+                        <strong className="text-[#0F172A] font-semibold">
                           {matchingProducts.length}
                         </strong>{' '}
                         piece{matchingProducts.length === 1 ? '' : 's'}
                       </span>
                       {pathname === '/shop' && (
-                        <span className="text-[#C5A059] font-medium flex items-center gap-1 text-[11px]">
-                          <Sparkles className="w-3 h-3" /> Catalog live
+                        <span className="text-[#475569] font-medium flex items-center gap-1 text-[11px]">
+                          <Sparkles className="w-3 h-3 text-[#94A3B8]" /> Catalog live
                         </span>
                       )}
                     </div>
 
                     {matchingProducts.length > 0 ? (
                       <div>
-                        <div className="max-h-80 overflow-y-auto divide-y divide-[#E8E2D7]/50">
+                        <div className="max-h-80 overflow-y-auto divide-y divide-[#E2E8F0]">
                           {matchingProducts.slice(0, 5).map((product) => (
                             <button
                               key={product._id}
                               type="button"
                               onClick={() => handleProductSelect(product.slug)}
-                              className="w-full text-left p-3 hover:bg-[#FAF8F5] transition-colors flex items-center gap-3 group cursor-pointer"
+                              className="w-full text-left p-3 hover:bg-[#F8FAFC] transition-colors flex items-center gap-3 group cursor-pointer"
                             >
-                              <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-[#E8E2D7]/40 shrink-0 border border-[#E8E2D7]">
+                              <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-[#F1F5F9] shrink-0 border border-[#E2E8F0]">
                                 {product.images?.[0]?.url && (
                                   <Image
                                     src={product.images[0].url}
@@ -294,26 +294,26 @@ export default function Navbar() {
                                 )}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="font-serif text-sm font-semibold text-[#0D1117] truncate group-hover:text-[#C5A059] transition-colors">
+                                <p className="font-serif text-sm font-semibold text-[#0F172A] truncate group-hover:text-[#475569] transition-colors">
                                   {product.title}
                                 </p>
-                                <p className="text-xs text-[#5C6270] truncate mt-0.5">
+                                <p className="text-xs text-[#64748B] truncate mt-0.5">
                                   {product.category}
                                 </p>
                               </div>
                               <div className="text-right shrink-0">
-                                <p className="font-serif font-bold text-xs text-[#0D1117] lining-nums">
+                                <p className="font-serif font-bold text-xs text-[#0F172A] lining-nums">
                                   Rs. {product.price.toLocaleString()}
                                 </p>
                               </div>
                             </button>
                           ))}
                         </div>
-                        <div className="p-2.5 bg-[#FAF8F5] border-t border-[#E8E2D7]">
+                        <div className="p-2.5 bg-[#F8FAFC] border-t border-[#E2E8F0]">
                           <button
                             type="button"
                             onClick={handleViewAllResults}
-                            className="w-full py-2 px-4 rounded-xl bg-[#0D1117] hover:bg-[#C5A059] hover:text-[#0D1117] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full py-2 px-4 rounded-xl bg-[#0F172A] hover:bg-[#334155] text-white text-xs font-semibold uppercase tracking-wider transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
                           >
                             <span>View All {matchingProducts.length} Results</span>
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -322,7 +322,7 @@ export default function Navbar() {
                       </div>
                     ) : (
                       <div className="p-6 text-center">
-                        <p className="text-xs text-[#5C6270]">
+                        <p className="text-xs text-[#64748B]">
                           No pieces found matching &ldquo;{searchQuery}&rdquo;
                         </p>
                       </div>
@@ -334,7 +334,7 @@ export default function Navbar() {
               {/* Mobile Search Icon Button */}
               <button
                 onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-                className="sm:hidden p-1.5 text-[#12141A] hover:text-[#C5A059] transition-colors"
+                className="sm:hidden p-1.5 text-[#0F172A] hover:text-[#64748B] transition-colors"
                 aria-label="Search items"
               >
                 <Search className="w-5 h-5" />
@@ -343,13 +343,13 @@ export default function Navbar() {
               {/* Shopping Bag / Inquiry Cart */}
               <button
                 onClick={() => setIsCartDrawerOpen(true)}
-                className="relative p-1.5 text-[#0D1117] hover:text-[#C5A059] transition-colors flex items-center cursor-pointer"
+                className="relative p-1.5 text-[#0F172A] hover:text-[#64748B] transition-colors flex items-center cursor-pointer"
                 aria-label={`Inquiry Bag with ${totalItems} items`}
                 title="View Inquiry Bag"
               >
                 <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.75]" />
                 {mounted && totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#C5A059] text-[#0D1117] font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
+                  <span className="absolute -top-1 -right-1 bg-[#0F172A] text-white font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md animate-scaleIn border border-[#CBD5E1]">
                     {totalItems}
                   </span>
                 )}
@@ -361,7 +361,7 @@ export default function Navbar() {
           <div
             className={`hidden lg:block overflow-hidden transition-all duration-300 ease-in-out ${
               showNavLinks
-                ? 'max-h-16 opacity-100 mt-2.5 pt-2 border-t border-[#E8E2D7]/50 translate-y-0 pointer-events-auto'
+                ? 'max-h-16 opacity-100 mt-2.5 pt-2 border-t border-[#E2E8F0] translate-y-0 pointer-events-auto'
                 : 'max-h-0 opacity-0 mt-0 pt-0 border-t-0 -translate-y-2 pointer-events-none'
             }`}
           >
@@ -381,13 +381,13 @@ export default function Navbar() {
                     href={link.href}
                     className={`text-xs uppercase tracking-[0.14em] font-semibold transition-colors py-1 relative whitespace-nowrap shrink-0 ${
                       isActive
-                        ? 'text-[#0D1117]'
-                        : 'text-[#5C6270] hover:text-[#C5A059]'
+                        ? 'text-[#0F172A]'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
                     }`}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0D1117]" />
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0F172A]" />
                     )}
                   </Link>
                 );
@@ -397,21 +397,21 @@ export default function Navbar() {
 
           {/* Mobile Search Expandable Line */}
           {mobileSearchOpen && (
-            <div className="sm:hidden pt-3 pb-1 border-t border-[#E8E2D7] mt-3 animate-fadeIn">
+            <div className="sm:hidden pt-3 pb-1 border-t border-[#E2E8F0] mt-3 animate-fadeIn">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder="SEARCH..."
-                  className="w-full bg-white border border-[#E8E2D7] rounded-full py-2 pl-4 pr-10 text-xs uppercase tracking-wider text-[#12141A] placeholder-[#8A90A0] focus:outline-none focus:border-[#C5A059]"
+                  className="w-full bg-white border border-[#E2E8F0] rounded-full py-2 pl-4 pr-10 text-xs uppercase tracking-wider text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#475569]"
                   autoFocus
                 />
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={handleClearSearch}
-                    className="absolute right-3 text-[#8A90A0] hover:text-[#0D1117] p-1"
+                    className="absolute right-3 text-[#94A3B8] hover:text-[#0F172A] p-1"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -424,19 +424,19 @@ export default function Navbar() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0D1117]/60 backdrop-blur-sm lg:hidden animate-fadeIn">
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#FAF8F5] p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
+        <div className="fixed inset-0 z-50 bg-[#0A0D14]/70 backdrop-blur-sm lg:hidden animate-fadeIn">
+          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between pb-6 border-b border-[#E8E2D7]">
+              <div className="flex items-center justify-between pb-6 border-b border-[#E2E8F0]">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#C5A059]" />
-                  <span className="font-serif text-xl font-bold tracking-[0.1em] text-[#0D1117] uppercase">
+                  <Sparkles className="w-5 h-5 text-[#64748B]" />
+                  <span className="font-serif text-xl font-bold tracking-[0.1em] text-[#0F172A] uppercase">
                     FFZever
                   </span>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1 text-[#5C6270] hover:text-[#0D1117]"
+                  className="p-1 text-[#64748B] hover:text-[#0F172A]"
                   aria-label="Close menu"
                 >
                   <X className="w-6 h-6" />
@@ -444,21 +444,21 @@ export default function Navbar() {
               </div>
 
               {/* Inquiry Bag Quick Row on Mobile */}
-              <div className="py-4 border-b border-[#E8E2D7]">
+              <div className="py-4 border-b border-[#E2E8F0]">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     setIsCartDrawerOpen(true);
                   }}
-                  className="w-full flex items-center justify-between bg-white border border-[#E8E2D7] p-3 rounded-xl shadow-sm"
+                  className="w-full flex items-center justify-between bg-[#F8FAFC] border border-[#E2E8F0] p-3 rounded-xl shadow-sm"
                 >
                   <div className="flex items-center gap-2.5">
-                    <ShoppingBag className="w-4 h-4 text-[#C5A059]" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#0D1117]">
+                    <ShoppingBag className="w-4 h-4 text-[#0F172A]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
                       Inquiry Bag
                     </span>
                   </div>
-                  <span className="bg-[#0D1117] text-[#FAF8F5] text-xs font-bold px-2.5 py-0.5 rounded-full">
+                  <span className="bg-[#0F172A] text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
                     {totalItems} items
                   </span>
                 </button>
@@ -469,20 +469,20 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="flex items-center justify-between py-3 text-sm font-medium tracking-wider uppercase text-[#12141A] hover:text-[#C5A059] border-b border-[#E8E2D7]/50"
+                    className="flex items-center justify-between py-3 text-sm font-medium tracking-wider uppercase text-[#0F172A] hover:text-[#475569] border-b border-[#E2E8F0]/60"
                   >
                     <span>{link.name}</span>
-                    <ChevronRight className="w-4 h-4 text-[#C5A059]" />
+                    <ChevronRight className="w-4 h-4 text-[#94A3B8]" />
                   </Link>
                 ))}
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[#E8E2D7] space-y-2">
-              <p className="text-center text-xs font-medium text-[#C5A059] tracking-wider uppercase">
+            <div className="pt-6 border-t border-[#E2E8F0] space-y-2">
+              <p className="text-center text-xs font-medium text-[#475569] tracking-wider uppercase">
                 Handcrafted 925 Solid Silver
               </p>
-              <p className="text-center text-[11px] text-[#5C6270]">
+              <p className="text-center text-[11px] text-[#64748B]">
                 FFZever • Since 1982
               </p>
             </div>

@@ -33,14 +33,14 @@ export default function FeaturedCarousel({
   };
 
   return (
-    <section className="py-20 bg-[#FAF8F5]">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="w-4 h-4 text-[#C5A059]" />
-              <span className="text-xs uppercase tracking-[0.25em] text-[#C5A059] font-semibold">
+              <Sparkles className="w-4 h-4 text-[#64748B]" />
+              <span className="text-xs uppercase tracking-[0.25em] text-[#64748B] font-semibold">
                 {subtitle}
               </span>
             </div>
@@ -53,14 +53,14 @@ export default function FeaturedCarousel({
           <div className="flex items-center gap-3 self-end md:self-auto">
             <button
               onClick={() => scroll('left')}
-              className="p-3 rounded-full border border-[#E8E2D7] hover:border-[#0D1117] bg-white hover:bg-[#0D1117] hover:text-[#FAF8F5] transition-all shadow-sm"
+              className="p-3 rounded-full border border-[#E2E8F0] hover:border-[#0F172A] bg-white hover:bg-[#0F172A] hover:text-white transition-all shadow-sm cursor-pointer"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="p-3 rounded-full border border-[#E8E2D7] hover:border-[#0D1117] bg-white hover:bg-[#0D1117] hover:text-[#FAF8F5] transition-all shadow-sm"
+              className="p-3 rounded-full border border-[#E2E8F0] hover:border-[#0F172A] bg-white hover:bg-[#0F172A] hover:text-white transition-all shadow-sm cursor-pointer"
               aria-label="Next slide"
             >
               <ChevronRight className="w-5 h-5" />
