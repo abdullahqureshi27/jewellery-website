@@ -31,7 +31,7 @@ export default function Navbar() {
   const currentCategory = searchParams.get('category');
   const urlSearch = searchParams.get('search') || '';
 
-  const { totalItems, setIsCartDrawerOpen } = useCart();
+  const { totalItems } = useCart();
 
   const [mounted, setMounted] = useState(false);
 
@@ -341,19 +341,19 @@ export default function Navbar() {
               </button>
 
               {/* Shopping Bag / Inquiry Cart */}
-              <button
-                onClick={() => setIsCartDrawerOpen(true)}
-                className="relative p-1.5 text-[#0F172A] hover:text-[#64748B] transition-colors flex items-center cursor-pointer"
+              <Link
+                href="/cart"
+                className="relative p-1.5 text-foreground hover:text-muted-foreground transition-colors flex items-center cursor-pointer"
                 aria-label={`Inquiry Bag with ${totalItems} items`}
                 title="View Inquiry Bag"
               >
                 <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.75]" />
                 {mounted && totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#0F172A] text-white font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md animate-scaleIn border border-[#CBD5E1]">
+                  <span className="absolute -top-1 -right-1 bg-foreground text-background font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md animate-scaleIn border border-border">
                     {totalItems}
                   </span>
                 )}
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -520,24 +520,22 @@ export default function Navbar() {
               </div>
 
               {/* Inquiry Bag Quick Row on Mobile */}
-              <div className="py-4 border-b border-[#E2E8F0]">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setIsCartDrawerOpen(true);
-                  }}
-                  className="w-full flex items-center justify-between bg-[#F8FAFC] border border-[#E2E8F0] p-3 rounded-xl shadow-sm"
+              <div className="py-4 border-b border-border">
+                <Link
+                  href="/cart"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-between bg-muted border border-border p-3 rounded-xl shadow-sm hover:border-foreground transition-colors"
                 >
                   <div className="flex items-center gap-2.5">
-                    <ShoppingBag className="w-4 h-4 text-[#0F172A]" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
-                      Inquiry Bag
+                    <ShoppingBag className="w-4 h-4 text-foreground" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-foreground">
+                      Shopping Bag
                     </span>
                   </div>
-                  <span className="bg-[#0F172A] text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
+                  <span className="bg-foreground text-background text-xs font-bold px-2.5 py-0.5 rounded-full">
                     {totalItems} items
                   </span>
-                </button>
+                </Link>
               </div>
 
               <div className="py-4 space-y-1">

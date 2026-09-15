@@ -22,7 +22,7 @@ interface ProductDetailViewProps {
 export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const [selectedImgIdx, setSelectedImgIdx] = useState(0);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
-  const { addToCart, removeFromCart, isInCart, setIsCartDrawerOpen } = useCart();
+  const { addToCart, removeFromCart, isInCart } = useCart();
 
   const inCart = isInCart(product._id);
   const activeImage =
@@ -58,7 +58,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         description: `${product.title} • Solid 925 Silver`,
         action: {
           label: 'View Bag',
-          onClick: () => setIsCartDrawerOpen(true),
+          onClick: () => {
+            window.location.href = '/cart';
+          },
         },
       });
     }

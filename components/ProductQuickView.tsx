@@ -31,7 +31,7 @@ interface ProductQuickViewProps {
 export default function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
   const [selectedImgIndex, setSelectedImgIndex] = useState(0);
   const [isInquiryFormOpen, setIsInquiryFormOpen] = useState(false);
-  const { addToCart, removeFromCart, isInCart, setIsCartDrawerOpen } = useCart();
+  const { addToCart, removeFromCart, isInCart } = useCart();
 
   // Reset selected image when product changes
   useEffect(() => {
@@ -87,7 +87,9 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
         description: `${product.title} • Solid 925 Silver`,
         action: {
           label: 'View Bag',
-          onClick: () => setIsCartDrawerOpen(true),
+          onClick: () => {
+            window.location.href = '/cart';
+          },
         },
       });
     }
