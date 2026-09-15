@@ -24,28 +24,18 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onQuickView }: ProductCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const { addToCart, removeFromCart, isInCart, setIsCartDrawerOpen } = useCart();
 
   const inCart = isInCart(product._id);
 
   const primaryImage = product?.images?.[0]?.url || 'https://images.unsplash.com/photo-1605100804763-247f67b3557e';
-  const secondaryImage = product?.images?.[1]?.url || primaryImage;
 
   const formattedPrice = new Intl.NumberFormat('en-PK', {
     style: 'currency',
     currency: 'PKR',
     maximumFractionDigits: 0,
   }).format(product?.price || 0);
-
-  const formattedOriginalPrice = product?.originalPrice
-    ? new Intl.NumberFormat('en-PK', {
-      style: 'currency',
-      currency: 'PKR',
-      maximumFractionDigits: 0,
-    }).format(product.originalPrice)
-    : null;
 
   const handleCartClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -59,11 +49,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
   };
 
   return (
-    <div
-      className="group relative bg-white rounded-2xl overflow-hidden border border-[#E8E2D7] luxury-card-shadow flex flex-col justify-between transition-all duration-300"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="group relative bg-white rounded-2xl overflow-hidden border border-[#E8E2D7] luxury-card-shadow flex flex-col justify-between transition-all duration-300">
       {/* Product Image Container */}
       <div className="relative aspect-square w-full bg-[#F5F2EC] overflow-hidden">
         {/* Clickable Image: Clicking anywhere on image navigates to Product Detail Page */}
@@ -72,29 +58,14 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           className="block absolute inset-0 z-0 cursor-pointer"
           aria-label={`View details for ${product.title}`}
         >
-          {/* Primary Studio Shot */}
+          {/* Primary Studio Shot (Single Image with luxury hover zoom) */}
           <Image
             src={primaryImage}
             alt={product.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={`object-cover transition-opacity duration-700 ease-in-out ${
-              isHovered && secondaryImage !== primaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
-            }`}
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-
-          {/* Secondary Model / Angle Shot on Hover */}
-          {secondaryImage !== primaryImage && (
-            <Image
-              src={secondaryImage}
-              alt={`${product.title} lifestyle`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className={`object-cover transition-all duration-700 ease-in-out ${
-                isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-              }`}
-            />
-          )}
         </Link>
 
         {/* 1. TOP-LEFT: Shopping Cart Icon Button (Slides in from left with opacity on hover) */}
@@ -122,15 +93,6 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             )}
           </button>
         </div>
-
-        {/* Top-Right In-Stock / Made to order status */}
-        {!product.inStock && (
-          <div className="absolute top-3.5 right-3.5 z-10 pointer-events-none">
-            <span className="bg-amber-900/80 backdrop-blur-sm text-amber-200 text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
-              Made to Order
-            </span>
-          </div>
-        )}
 
         {/* 2. CENTER OVERLAY: Two White Pill Buttons */}
         {/* On hover: smooth slide-in from top to middle with opacity. On hover out: reverse transition */}
@@ -167,10 +129,9 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
       {/* Product Details Section below image */}
       <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
         <div>
-          <div className="flex items-center justify-between text-[11px] text-[#8A90A0] uppercase tracking-widest font-medium mb-1">
-            <span>{product.category}</span>
-            <span className="font-mono text-[#C5A059]">925 Silver</span>
-          </div>
+          <span className="text-[11px] text-[#8A90A0] uppercase tracking-widest font-medium mb-1 block">
+            {product.category}
+          </span>
 
           <Link href={`/product/${product.slug}`}>
             <h3 className="font-serif text-base font-bold text-[#0D1117] hover:text-[#C5A059] transition-colors line-clamp-1 mb-1">
@@ -179,7 +140,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </Link>
 
           <p className="text-xs text-[#5C6270] line-clamp-1 mb-3">
-            {product.description || 'Handcrafted pure 925 sterling silver'}
+            {product.description}
           </p>
         </div>
 

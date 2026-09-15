@@ -137,10 +137,9 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
             className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between overflow-y-auto overscroll-contain scrollbar-thin"
           >
             <div>
-              <div className="flex items-center justify-between gap-2 text-xs text-[#5C6270] mb-2 uppercase tracking-widest font-medium">
-                <span>{product.category}</span>
-                <span className="text-[#C5A059] font-mono">{product.itemCode || '925 Sterling Silver'}</span>
-              </div>
+              <span className="text-xs text-[#5C6270] mb-2 uppercase tracking-widest font-medium block">
+                {product.category}
+              </span>
 
               <DialogTitle className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117] leading-tight mb-2">
                 {product.title}

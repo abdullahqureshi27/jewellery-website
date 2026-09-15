@@ -104,10 +104,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             {/* Right Column: Details & Inquiry */}
             <div className="flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between text-xs text-[#5C6270] uppercase tracking-widest font-semibold mb-2">
-                  <span>{product.category}</span>
-                  <span className="font-mono text-[#C5A059]">{product.itemCode || '925 Sterling Silver'}</span>
-                </div>
+                <span className="text-xs text-[#5C6270] uppercase tracking-widest font-semibold mb-2 block">
+                  {product.category}
+                </span>
 
                 <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0D1117] leading-tight mb-4">
                   {product.title}
