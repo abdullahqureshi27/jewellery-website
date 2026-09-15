@@ -80,27 +80,27 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
 
   const categories = [
     { label: 'All Pieces', value: 'all' },
-    { label: 'Rings', value: 'rings' },
-    { label: 'Earrings', value: 'earrings' },
+    { label: 'Locket Sets', value: 'locket-sets' },
     { label: 'Pendants', value: 'pendants' },
-    { label: 'Bangles', value: 'bangles' },
+    { label: 'Ear rings', value: 'earrings' },
+    { label: 'Bracelets', value: 'bracelets' },
     { label: 'Bridal Sets', value: 'bridal' },
+    { label: 'Rings', value: 'rings' },
   ];
 
   const metals = [
-    { label: 'All Metals', value: 'all' },
-    { label: '925 Sterling Silver', value: '925' },
+    { label: 'All Pure Silver', value: 'all' },
+    { label: '925 Sterling Silver (Rhodium Polish)', value: '925' },
     { label: '18K Yellow Gold Vermeil', value: '18k' },
     { label: 'Rose Gold Plated', value: 'rose' },
-    { label: 'Platinum Plated', value: 'platinum' },
   ];
 
   const gemstones = [
-    { label: 'All Gemstones', value: 'all' },
+    { label: 'All Stones', value: 'all' },
+    { label: 'Brilliant Zircons', value: 'zircon' },
+    { label: 'Synthetic Emerald', value: 'emerald' },
+    { label: 'Synthetic Pink / Ruby', value: 'pink' },
     { label: 'GRA Moissanite', value: 'moissanite' },
-    { label: 'Emerald', value: 'emerald' },
-    { label: 'Ruby', value: 'ruby' },
-    { label: 'Sapphire', value: 'sapphire' },
     { label: 'Freshwater Pearl', value: 'pearl' },
   ];
 

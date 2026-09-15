@@ -3,7 +3,7 @@ export interface JewelleryProduct {
   title: string;
   slug: string;
   itemCode: string;
-  category: 'rings' | 'earrings' | 'pendants' | 'bangles' | 'bridal';
+  category: 'locket-sets' | 'pendants' | 'earrings' | 'bracelets' | 'bridal' | 'rings';
   metal: string;
   gemstone: string;
   caratWeight?: string;
@@ -21,43 +21,125 @@ export interface JewelleryProduct {
 
 export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
   {
-    _id: 'zn-001',
-    title: 'Aurelia 2.0 CT Moissanite Solitaire Ring',
-    slug: 'aurelia-moissanite-solitaire-ring',
-    itemCode: 'ZN-RNG-1042',
-    category: 'rings',
-    metal: '925 Sterling Silver (Rhodium Plated)',
-    gemstone: 'D Color VVS1 Moissanite (GRA Certified)',
-    caratWeight: '2.00 CT (8.0mm)',
-    price: 34500,
-    originalPrice: 42000,
+    _id: 'ff-001',
+    title: 'Brilliant Zircon Halo Locket Set with Tops',
+    slug: 'brilliant-zircon-halo-locket-set',
+    itemCode: 'FF-LS-101',
+    category: 'locket-sets',
+    metal: '925 Sterling Silver (Rhodium Polish)',
+    gemstone: 'High-Quality Brilliant Zircon',
+    price: 56600,
     inStock: true,
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Aurelia 2.0 CT Moissanite Solitaire Ring close-up on velvet',
+        url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Brilliant Zircon Halo Locket Set with Tops by Faraz Faheem',
       },
       {
-        url: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Solitaire Ring worn on model hand',
+        url: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80',
+        alt: '925 Silver Locket Set with Chain and Matching Tops',
       },
     ],
     description:
-      'Indulge in timeless brilliance. Hand-set with a certified 2.00 CT round brilliant D Color VVS1 moissanite atop a high-polish 925 sterling silver band treated with triple-layer platinum rhodium.',
+      'Handcrafted in pure 925 solid sterling silver with premium anti-tarnish rhodium polish. Features a brilliant-cut center with surrounding high-grade zircons. Complete set includes matching 925 silver chain and matching tops (earrings) presented in official FF Jewellers velvet heirloom box.',
   },
   {
-    _id: 'zn-002',
-    title: 'Emerald Empress Royal Halo Pendant',
-    slug: 'emerald-empress-royal-halo-pendant',
-    itemCode: 'ZN-PND-2089',
-    category: 'pendants',
-    metal: '18K Yellow Gold Vermeil',
-    gemstone: 'Lab-Created Emerald',
-    caratWeight: '3.20 CT Cushion Cut',
-    price: 48000,
-    originalPrice: 56000,
+    _id: 'ff-002',
+    title: 'Imperial Emerald Floral Locket Set with Tops',
+    slug: 'imperial-emerald-floral-locket-set',
+    itemCode: 'FF-LS-102',
+    category: 'locket-sets',
+    metal: '925 Sterling Silver (Rhodium Polish)',
+    gemstone: 'Synthetic Emerald (Royal Green)',
+    price: 37800,
     inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Imperial Emerald Floral Locket Set with Tops by Faraz Faheem',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Emerald Floral Pendant and Tops Set',
+      },
+    ],
+    description:
+      'Exquisite 3-piece locket set featuring deep royal green synthetic emeralds encircled by high-clarity zircon petals. Meticulously handcrafted in 925 solid sterling silver with rhodium polish. Includes matching 925 silver chain and matching floral tops.',
+  },
+  {
+    _id: 'ff-003',
+    title: 'Pink Floral Blossom Tops (Stud Earrings)',
+    slug: 'pink-floral-blossom-tops',
+    itemCode: 'FF-ER-201',
+    category: 'earrings',
+    metal: '925 Sterling Silver (Rhodium Polish)',
+    gemstone: 'Synthetic Pink Sapphire & Zircon Halo',
+    price: 26700,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Pink Floral Blossom Tops by Faraz Faheem',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1000&q=80',
+        alt: '925 Silver Pink Tops on Model',
+      },
+    ],
+    description:
+      'Handcrafted 925 solid sterling silver tops featuring a synthetic pink gemstone surrounded by micro-pave zircons. Finished with triple-pass mirror rhodium polish for long-lasting tarnish resistance. Lightweight and comfortable for both daily elegance and special occasions.',
+  },
+  {
+    _id: 'ff-004',
+    title: 'Ruby Rose Floral Locket Set with Tops',
+    slug: 'ruby-rose-floral-locket-set',
+    itemCode: 'FF-LS-103',
+    category: 'locket-sets',
+    metal: '925 Sterling Silver (Rhodium Polish)',
+    gemstone: 'Synthetic Ruby (Dark Pink)',
+    price: 26600,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1611591475152-4735e1823901?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Ruby Rose Floral Locket Set with Tops by Faraz Faheem',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Dark Pink Floral Locket Set Detail',
+      },
+    ],
+    description:
+      'Captivating dark pink ruby-hued synthetic gemstone locket set hand-set in certified 925 sterling silver. Finished with high-durability rhodium polish. Includes matching silver chain and tops. Handcrafted on order by Faraz Faheem Atelier.',
+  },
+  {
+    _id: 'ff-005',
+    title: 'Soft Pink Halo Pendant with Silver Chain',
+    slug: 'soft-pink-halo-pendant-chain',
+    itemCode: 'FF-PD-301',
+    category: 'pendants',
+    metal: '925 Sterling Silver (Rhodium Polish)',
+    gemstone: 'Synthetic Pink Sapphire',
+    price: 14700,
+    inStock: true,
+    isFeatured: true,
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Soft Pink Halo Pendant with Chain by Faraz Faheem',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80',
+        alt: 'Pink Halo Pendant Detail Shot',
+      },
+    ],
+    description:
+      'Delicate handcrafted 925 pure sterling silver pendant set with a radiant round synthetic pink gemstone and sparkling zircon halo. Includes authentic 925 sterling silver chain. Treated with tarnish-resistant rhodium finish. Delivered across Pakistan in luxury FF Jewellers packaging.',
+  },
     isFeatured: true,
     images: [
       {
@@ -102,7 +184,7 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     title: 'Celeste Tennis Bangle with Channel Setting',
     slug: 'celeste-tennis-bangle-channel-setting',
     itemCode: 'ZN-BNG-4045',
-    category: 'bangles',
+    category: 'bracelets',
     metal: 'Platinum Plated Silver',
     gemstone: 'D Color VVS1 Moissanite (GRA Certified)',
     caratWeight: '4.80 CT Total Weight',

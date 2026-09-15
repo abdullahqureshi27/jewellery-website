@@ -32,11 +32,12 @@ export const productType = {
       type: 'string',
       options: {
         list: [
-          { title: 'Rings', value: 'rings' },
-          { title: 'Earrings', value: 'earrings' },
-          { title: 'Necklaces & Pendants', value: 'pendants' },
-          { title: 'Bracelets & Bangles', value: 'bangles' },
+          { title: 'Locket Sets (Pendant + Chain + Tops)', value: 'locket-sets' },
+          { title: 'Pendants', value: 'pendants' },
+          { title: 'Ear rings (Tops / Studs)', value: 'earrings' },
+          { title: 'Bracelets', value: 'bracelets' },
           { title: 'Bridal Sets', value: 'bridal' },
+          { title: 'Rings (Solitaires & Bands)', value: 'rings' },
         ],
         layout: 'radio',
       },
@@ -48,10 +49,9 @@ export const productType = {
       type: 'string',
       options: {
         list: [
-          { title: '925 Sterling Silver (Rhodium Plated)', value: '925-silver' },
-          { title: '18K Yellow Gold Vermeil', value: '18k-gold-vermeil' },
-          { title: 'Rose Gold Plated 925 Silver', value: 'rose-gold' },
-          { title: 'Platinum Plated Silver', value: 'platinum-silver' },
+          { title: '925 Sterling Silver (Rhodium Polish)', value: '925-silver' },
+          { title: '925 Sterling Silver (18K Gold Vermeil)', value: '18k-gold-vermeil' },
+          { title: '925 Sterling Silver (Rose Gold Plated)', value: 'rose-gold' },
         ],
       },
       initialValue: '925-silver',
@@ -62,15 +62,16 @@ export const productType = {
       type: 'string',
       options: {
         list: [
+          { title: 'High-Quality Zircon (Brilliant Cut)', value: 'zircon' },
+          { title: 'Synthetic Pink Sapphire', value: 'pink-sapphire' },
+          { title: 'Synthetic Emerald (Royal Green)', value: 'synthetic-emerald' },
+          { title: 'Synthetic Ruby (Dark Pink / Red)', value: 'synthetic-ruby' },
           { title: 'D Color VVS1 Moissanite (GRA Certified)', value: 'moissanite' },
-          { title: 'Lab-Created Emerald', value: 'emerald' },
-          { title: 'Natural Burma Ruby', value: 'ruby' },
-          { title: 'Natural Blue Sapphire', value: 'sapphire' },
           { title: 'Freshwater Cultured Pearl', value: 'pearl' },
-          { title: 'No Stone / Plain Metal', value: 'none' },
+          { title: 'No Stone / Pure Silver', value: 'none' },
         ],
       },
-      initialValue: 'moissanite',
+      initialValue: 'zircon',
     },
     {
       name: 'caratWeight',

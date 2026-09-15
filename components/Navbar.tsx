@@ -67,9 +67,10 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'All', href: '/shop' },
-    { name: 'Rings', href: '/shop?category=rings' },
-    { name: 'Earrings', href: '/shop?category=earrings' },
+    { name: 'Locket Sets', href: '/shop?category=locket-sets' },
     { name: 'Pendants', href: '/shop?category=pendants' },
+    { name: 'Ear rings', href: '/shop?category=earrings' },
+    { name: 'Bracelets', href: '/shop?category=bracelets' },
     { name: 'Bridal', href: '/shop?category=bridal' },
   ];
 
