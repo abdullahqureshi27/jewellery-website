@@ -170,7 +170,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
         // Default: featured first
         return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
       });
-  }, [initialProducts, selectedCategory, selectedMetal, selectedGemstone, inStockOnly, searchQuery, sortBy]);
+  }, [initialProducts, selectedCategory, selectedMetal, selectedGemstone, searchQuery, sortBy]);
 
   return (
     <div className="py-12 bg-[#FAF8F5]">
@@ -555,8 +555,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                   </button>
                 ))}
               </div>
-            </div>
-
             </div>
           </div>
 

@@ -7,7 +7,7 @@ export const productType = {
       name: 'title',
       title: 'Product Title',
       type: 'string',
-      description: 'e.g., Royal D VVS1 Moissanite Solitaire Ring',
+      description: 'e.g., Brilliant Zircon Halo Locket Set with Tops',
       validation: (rule: any) => rule.required().max(100),
     },
     {
@@ -24,7 +24,7 @@ export const productType = {
       name: 'itemCode',
       title: 'SKU / Item Code',
       type: 'string',
-      description: 'e.g., ZN-RNG-1049 (Used for customer WhatsApp inquiries)',
+      description: 'e.g., FF-LS-101 (Used for customer WhatsApp inquiries)',
     },
     {
       name: 'category',
@@ -44,17 +44,34 @@ export const productType = {
       validation: (rule: any) => rule.required(),
     },
     {
+      name: 'price',
+      title: 'Price (PKR)',
+      type: 'number',
+      description: 'Price in Pakistani Rupees (e.g. 26600)',
+      validation: (rule: any) => rule.required().min(0),
+    },
+    {
+      name: 'image',
+      title: 'Product Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Upload product photo',
+      validation: (rule: any) => rule.required(),
+    },
+    {
       name: 'metal',
       title: 'Metal & Purity',
       type: 'string',
       options: {
         list: [
-          { title: '925 Sterling Silver (Rhodium Polish)', value: '925-silver' },
-          { title: '925 Sterling Silver (18K Gold Vermeil)', value: '18k-gold-vermeil' },
-          { title: '925 Sterling Silver (Rose Gold Plated)', value: 'rose-gold' },
+          { title: '925 Sterling Silver (Rhodium Polish)', value: '925 Sterling Silver (Rhodium Polish)' },
+          { title: '925 Sterling Silver (18K Gold Vermeil)', value: '18K Yellow Gold Vermeil' },
+          { title: '925 Sterling Silver (Rose Gold Plated)', value: 'Rose Gold Plated 925 Silver' },
         ],
       },
-      initialValue: '925-silver',
+      initialValue: '925 Sterling Silver (Rhodium Polish)',
     },
     {
       name: 'gemstone',
@@ -62,90 +79,37 @@ export const productType = {
       type: 'string',
       options: {
         list: [
-          { title: 'High-Quality Zircon (Brilliant Cut)', value: 'zircon' },
-          { title: 'Synthetic Pink Sapphire', value: 'pink-sapphire' },
-          { title: 'Synthetic Emerald (Royal Green)', value: 'synthetic-emerald' },
-          { title: 'Synthetic Ruby (Dark Pink / Red)', value: 'synthetic-ruby' },
-          { title: 'D Color VVS1 Moissanite (GRA Certified)', value: 'moissanite' },
-          { title: 'Freshwater Cultured Pearl', value: 'pearl' },
-          { title: 'No Stone / Pure Silver', value: 'none' },
+          { title: 'High-Quality Brilliant Zircon', value: 'High-Quality Brilliant Zircon' },
+          { title: 'Synthetic Pink Sapphire', value: 'Synthetic Pink Sapphire' },
+          { title: 'Synthetic Emerald (Royal Green)', value: 'Synthetic Emerald (Royal Green)' },
+          { title: 'Synthetic Ruby (Dark Pink)', value: 'Synthetic Ruby (Dark Pink)' },
+          { title: 'D Color VVS1 Moissanite (GRA Certified)', value: 'D Color VVS1 Moissanite (GRA Certified)' },
+          { title: 'Freshwater Cultured Pearl', value: 'Freshwater Cultured Pearl' },
+          { title: 'Pure 925 Silver (No Stone)', value: 'Pure 925 Silver (No Stone)' },
         ],
       },
-      initialValue: 'zircon',
-    },
-    {
-      name: 'caratWeight',
-      title: 'Carat Weight / Stone Size',
-      type: 'string',
-      description: 'e.g., 1.50 CT (7.5mm) or 2.00 CT',
-    },
-    {
-      name: 'price',
-      title: 'Showcase Price (PKR)',
-      type: 'number',
-      description: 'Leave blank if "Price on Request / Custom Inquiry"',
-    },
-    {
-      name: 'originalPrice',
-      title: 'Original / Compare Price (PKR)',
-      type: 'number',
-      description: 'Optional strike-through price for special promotional showcase',
-    },
-    {
-      name: 'priceOnRequest',
-      title: 'Price on Request',
-      type: 'boolean',
-      description: 'If checked, shows "Inquire for Price" instead of numeric price',
-      initialValue: false,
-    },
-    {
-      name: 'inStock',
-      title: 'Active in Showcase Gallery',
-      type: 'boolean',
-      description: 'Controls visibility in the jewellery showcase',
-      initialValue: true,
+      initialValue: 'High-Quality Brilliant Zircon',
     },
     {
       name: 'isFeatured',
-      title: 'Feature in Homepage Carousel',
+      title: 'Feature on Homepage',
       type: 'boolean',
-      description: 'Highlights this piece on the hero or signature showcase',
+      description: 'Showcase this piece in signature carousels',
       initialValue: false,
     },
     {
-      name: 'images',
-      title: 'Product Images Gallery',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: {
-            hotspot: true, // Enables zoom/focal point directly in Sanity Studio
-          },
-          fields: [
-            {
-              name: 'alt',
-              title: 'Alt Text for Accessibility & SEO',
-              type: 'string',
-            },
-          ],
-        },
-      ],
-      validation: (rule: any) => rule.required().min(1),
-    },
-    {
       name: 'description',
-      title: 'Craftsmanship & Details',
+      title: 'Description & Inclusions',
       type: 'text',
       rows: 4,
-      description: 'Describe the design inspiration, hallmark authenticity, and stone setting.',
+      description: 'e.g. Handcrafted in 925 silver. Includes matching chain & tops. Delivered in FF Jewellers box.',
     },
   ],
   preview: {
     select: {
       title: 'title',
       subtitle: 'category',
-      media: 'images.0',
+      media: 'image',
     },
   },
 };

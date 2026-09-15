@@ -32,16 +32,14 @@ export async function getProducts(): Promise<JewelleryProduct[]> {
       category,
       metal,
       gemstone,
-      caratWeight,
       price,
-      originalPrice,
-      priceOnRequest,
-      inStock,
       isFeatured,
-      "images": images[]{
-        "url": asset->url,
-        "alt": alt
-      },
+      "inStock": true,
+      "images": select(
+        defined(image) => [{"url": image.asset->url, "alt": title}],
+        defined(images) => images[]{"url": asset->url, "alt": coalesce(alt, title)},
+        []
+      ),
       description
     }`;
     const data = await client.fetch(
