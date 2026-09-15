@@ -23,7 +23,7 @@ export default function AtelierStandards() {
             The Standards of Pure Luxury
           </h2>
           <p className="text-sm sm:text-base text-[#8B949E] leading-relaxed">
-            Every creation crafted at our Karachi atelier adheres to strict metallurgical and gemological standards,
+            Every creation crafted at our master atelier adheres to strict metallurgical and gemological standards,
             combining timeless goldsmithing techniques with modern precision.
           </p>
         </div>

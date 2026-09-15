@@ -27,7 +27,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const activeImage =
     product.images?.[selectedImgIdx] ||
     product.images?.[0] || {
-      url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e',
+      url: '/products/ff-zircon-locket-set.jpeg',
       alt: product.title || 'Jewellery piece',
     };
 

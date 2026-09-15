@@ -15,13 +15,13 @@ export default function EditorialPinnedBanner() {
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#0D1117]" aria-label="Editorial Brand Poem">
       {/* Editorial Background Image */}
         <Image
-          src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=2000&q=80"
-          alt="Two souls, one story, sealed in silver and light"
+          src="/products/ff-zircon-locket-set.jpeg"
+          alt="Two souls, one story, sealed in silver and light by FFZever"
           fill
           sizes="(max-width: 768px) 100vw, 1920px"
           loading="lazy"
-          quality={80}
-          className="object-cover object-center grayscale contrast-110 brightness-75 scale-105 transition-transform duration-1000"
+          quality={85}
+          className="object-cover object-center contrast-110 brightness-75 scale-105 transition-transform duration-1000"
         />
 
         {/* Ambient Dark Vignette Overlay */}

@@ -30,8 +30,8 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Brilliant Zircon Halo Locket Set with Tops by Faraz Faheem',
+        url: '/products/ff-zircon-locket-set.jpeg',
+        alt: 'Brilliant Zircon Halo Locket Set with Tops by FFZever',
       },
     ],
     description:
@@ -47,8 +47,8 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Imperial Emerald Floral Locket Set with Tops by Faraz Faheem',
+        url: '/products/ff-emerald-locket-set.jpeg',
+        alt: 'Imperial Emerald Floral Locket Set with Tops by FFZever',
       },
     ],
     description:
@@ -64,8 +64,8 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Pink Floral Blossom Tops by Faraz Faheem',
+        url: '/products/ff-pink-blossom-tops.jpeg',
+        alt: 'Pink Floral Blossom Tops by FFZever',
       },
     ],
     description:
@@ -81,12 +81,12 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1611591475152-4735e1823901?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Ruby Rose Floral Locket Set with Tops by Faraz Faheem',
+        url: '/products/ff-ruby-locket-set.jpeg',
+        alt: 'Ruby Rose Floral Locket Set with Tops by FFZever',
       },
     ],
     description:
-      'Captivating dark pink ruby-hued synthetic gemstone locket set hand-set in certified 925 sterling silver. Finished with high-durability rhodium polish. Includes matching silver chain and tops. Handcrafted on order by Faraz Faheem Atelier.',
+      'Captivating dark pink ruby-hued synthetic gemstone locket set hand-set in certified 925 sterling silver. Finished with high-durability rhodium polish. Includes matching silver chain and tops. Handcrafted on order by FFZever Atelier.',
   },
   {
     _id: 'ff-005',
@@ -98,8 +98,8 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Soft Pink Halo Pendant with Chain by Faraz Faheem',
+        url: '/products/ff-soft-pink-pendant.jpeg',
+        alt: 'Soft Pink Halo Pendant with Chain by FFZever',
       },
     ],
     description:
@@ -107,87 +107,53 @@ export const MOCK_JEWELLERY_PRODUCTS: JewelleryProduct[] = [
   },
   {
     _id: 'ff-006',
-    title: 'Celeste Channel Tennis Bracelet',
-    slug: 'celeste-channel-tennis-bracelet',
-    category: 'bracelets',
-    price: 68000,
+    title: 'Heirloom Zircon Locket Set in Velvet Presentation Case',
+    slug: 'heirloom-zircon-locket-set-box',
+    category: 'locket-sets',
+    price: 56600,
     inStock: true,
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Celeste Channel Tennis Bracelet in 925 silver',
+        url: '/products/ff-zircon-box.jpeg',
+        alt: 'Zircon Halo Locket Set in Velvet Box by FFZever',
       },
     ],
     description:
-      'Precision articulated links engineered for effortless wrist drape in solid 925 sterling silver. Finished with double safety clasp and triple rhodium polish for dazzling everyday wear.',
+      'The signature FFZever Zircon Locket Set showcased in our bespoke velvet presentation case. Pure 925 hallmarked sterling silver, paired with matching Tops earrings and silver chain.',
   },
   {
     _id: 'ff-007',
-    title: 'Noor-e-Jahan Vintage Ruby Bridal Set',
-    slug: 'noor-e-jahan-vintage-ruby-bridal-set',
-    category: 'bridal',
-    price: 135000,
+    title: 'Imperial Emerald Floral Tops & Locket Suite',
+    slug: 'imperial-emerald-floral-tops-locket',
+    category: 'earrings',
+    price: 37800,
     inStock: true,
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Noor-e-Jahan Vintage Ruby Bridal Set in solid 925 silver',
+        url: '/products/ff-emerald-angle.jpeg',
+        alt: 'Imperial Emerald Floral Tops and Locket by FFZever',
       },
     ],
     description:
-      'Inspired by heritage Mughal court jewellery. Handcrafted filigree setting in solid 925 sterling silver with royal crimson gemstones and suspended pearl droplets. Includes matching chandelier jhumkas.',
+      'Side and post angle view highlighting the master craftsmanship, prong precision, and comfort backings of the Imperial Emerald Tops and Locket. Solid 925 pure sterling silver.',
   },
   {
     _id: 'ff-008',
-    title: 'Eternal Solitaire Diamond Cut Ring',
-    slug: 'eternal-solitaire-diamond-cut-ring',
-    category: 'rings',
-    price: 26000,
+    title: 'Artisan Pavé Zircon Craftsmanship Suite',
+    slug: 'artisan-pave-zircon-craftsmanship-suite',
+    category: 'pendants',
+    price: 28500,
     inStock: true,
     isFeatured: true,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Eternal Solitaire Ring in solid 925 sterling silver',
+        url: '/products/ff-zircon-collage.jpeg',
+        alt: 'Artisan Pavé Zircon Craftsmanship Suite by FFZever',
       },
     ],
     description:
-      'A timeless solitaire ring handcrafted in solid 925 sterling silver with mirror rhodium finish. Features a brilliant-cut center gemstone surrounded by pavé setting for unparalleled sparkle.',
-  },
-  {
-    _id: 'ff-009',
-    title: 'Kashmir Blue Sapphire Teardrop Pendant',
-    slug: 'kashmir-blue-sapphire-teardrop-pendant',
-    category: 'pendants',
-    price: 45000,
-    inStock: true,
-    isFeatured: false,
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Kashmir Blue Sapphire Pendant with 925 silver chain',
-      },
-    ],
-    description:
-      'A rich royal blue teardrop gemstone suspended on an authentic 925 sterling silver chain. Protected by anti-tarnish rhodium coating to maintain brilliance forever.',
-  },
-  {
-    _id: 'ff-010',
-    title: 'Royal Teardrop Moissanite Tops',
-    slug: 'royal-teardrop-moissanite-tops',
-    category: 'earrings',
-    price: 52000,
-    inStock: true,
-    isFeatured: false,
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1000&q=80',
-        alt: 'Royal Teardrop Tops in 925 Sterling Silver',
-      },
-    ],
-    description:
-      'Cascading teardrop cuts designed to capture light from every angle. Hand-set in solid 925 sterling silver with comfortable screw-back posts.',
+      'A macro showcase of FFZever stone-setting mastery. Solid 925 sterling silver with mirror rhodium finish, handset micro-pavé zircons, and refined prong alignment.',
   },
 ];

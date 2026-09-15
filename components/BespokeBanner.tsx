@@ -104,8 +104,8 @@ export default function BespokeBanner() {
               {/* Right Column: Visual Showcase Imagery */}
               <div className="lg:col-span-5 relative aspect-[4/5] rounded-2xl overflow-hidden border border-[#C5A059]/30">
                 <Image
-                  src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=85"
-                  alt="Custom handcrafted jewellery piece in atelier"
+                  src="/products/ff-emerald-angle.jpeg"
+                  alt="Custom handcrafted jewellery piece by FFZever"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover object-center"

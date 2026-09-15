@@ -29,7 +29,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
   const inCart = isInCart(product._id);
 
-  const primaryImage = product?.images?.[0]?.url || 'https://images.unsplash.com/photo-1605100804763-247f67b3557e';
+  const primaryImage = product?.images?.[0]?.url || '/products/ff-zircon-locket-set.jpeg';
 
   const formattedPrice = new Intl.NumberFormat('en-PK', {
     style: 'currency',

@@ -56,7 +56,7 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
 
   const inCart = isInCart(product._id);
   const activeImage = product.images?.[selectedImgIndex] || product.images?.[0] || {
-    url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e',
+    url: '/products/ff-zircon-locket-set.jpeg',
     alt: product.title,
   };
 

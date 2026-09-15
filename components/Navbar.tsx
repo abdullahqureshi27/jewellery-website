@@ -476,7 +476,7 @@ export default function Navbar() {
                 Inquire on WhatsApp
               </a>
               <p className="text-center text-[11px] text-[#5C6270]">
-                Karachi Atelier • Made-to-Order Worldwide
+                Pure 925 Silver Atelier • Since 1982
               </p>
             </div>
           </div>

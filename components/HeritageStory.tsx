@@ -15,8 +15,8 @@ export default function HeritageStory() {
           <div className="relative">
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto rounded-2xl overflow-hidden border border-[#E8E2D7] shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80"
-                alt="Jewellery master artisan hand-setting gemstone"
+                src="/products/ff-zircon-collage.jpeg"
+                alt="Jewellery master artisan hand-setting gemstone by FFZever"
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
                 className="object-cover"

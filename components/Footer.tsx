@@ -70,10 +70,10 @@ export default function Footer() {
             </p>
             <div className="pt-2">
               <span className="text-[11px] uppercase tracking-widest text-[#C5A059] block">
-                Atelier Location:
+                Atelier Orders:
               </span>
               <p className="text-xs text-[#8B949E] mt-0.5">
-                Shop No. 5, Gems &amp; Jewellery Trade Centre, Saddar, Karachi.
+                Handcrafted 925 Pure Silver • Nationwide Insured Delivery across Pakistan
               </p>
             </div>
           </div>
@@ -184,7 +184,7 @@ export default function Footer() {
             <span>•</span>
             <span>GRA Certified Moissanite</span>
             <span>•</span>
-            <span>Karachi &amp; Worldwide</span>
+            <span>Nationwide &amp; Worldwide Delivery</span>
           </div>
         </div>
       </div>

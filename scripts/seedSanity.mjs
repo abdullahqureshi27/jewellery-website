@@ -54,165 +54,100 @@ const client = createClient({
 
 const PRODUCTS_TO_SEED = [
   {
-    title: 'Aurelia 2.0 CT Moissanite Solitaire Ring',
-    slug: 'aurelia-moissanite-solitaire-ring',
-    itemCode: 'ZN-RNG-1042',
-    category: 'rings',
-    metal: '925 Sterling Silver (Rhodium Plated)',
-    gemstone: 'D Color VVS1 Moissanite (GRA Certified)',
-    caratWeight: '2.00 CT (8.0mm)',
-    price: 34500,
-    originalPrice: 42000,
-    inStock: true,
+    title: 'Brilliant Zircon Halo Locket Set with Tops',
+    slug: 'brilliant-zircon-halo-locket-set',
+    category: 'locket-sets',
+    price: 56600,
     isFeatured: true,
-    images: [
-      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1000&q=80',
-    ],
+    imagePath: path.resolve(__dirname, '../public/products/ff-zircon-locket-set.jpeg'),
     description:
-      'Indulge in timeless brilliance. Hand-set with a certified 2.00 CT round brilliant D Color VVS1 moissanite atop a high-polish 925 sterling silver band treated with triple-layer platinum rhodium.',
+      'Handcrafted in pure 925 solid sterling silver with premium anti-tarnish rhodium polish. Features a brilliant-cut center with surrounding high-grade zircons. Complete set includes matching 925 silver chain and matching tops presented in official FF Jewellers velvet heirloom box.',
   },
   {
-    title: 'Emerald Empress Royal Halo Pendant',
-    slug: 'emerald-empress-royal-halo-pendant',
-    itemCode: 'ZN-PND-2089',
-    category: 'pendants',
-    metal: '18K Yellow Gold Vermeil',
-    gemstone: 'Lab-Created Emerald',
-    caratWeight: '3.20 CT Cushion Cut',
-    price: 48000,
-    originalPrice: 56000,
-    inStock: true,
+    title: 'Imperial Emerald Floral Locket Set with Tops',
+    slug: 'imperial-emerald-floral-locket-set',
+    category: 'locket-sets',
+    price: 37800,
     isFeatured: true,
-    images: [
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80',
-    ],
+    imagePath: path.resolve(__dirname, '../public/products/ff-emerald-locket-set.jpeg'),
     description:
-      'A breathtaking deep Colombian-green cushion cut emerald wrapped in a sparkling micropavé moissanite halo. Finished with 18k yellow gold vermeil over hallmarked 925 silver.',
+      'Exquisite 3-piece locket set featuring deep royal green synthetic emeralds encircled by high-clarity zircon petals. Meticulously handcrafted in 925 solid sterling silver with rhodium polish. Includes matching 925 silver chain and matching floral tops.',
   },
   {
-    title: 'Seraphina TearDrop Moissanite Drop Earrings',
-    slug: 'seraphina-teardrop-moissanite-drop-earrings',
-    itemCode: 'ZN-EAR-3012',
+    title: 'Pink Floral Blossom Tops (Stud Earrings)',
+    slug: 'pink-floral-blossom-tops',
     category: 'earrings',
-    metal: '925 Sterling Silver (Rhodium Plated)',
-    gemstone: 'D Color VVS1 Moissanite (GRA Certified)',
-    caratWeight: '2.50 CT Each (5.0 CT Total)',
-    price: 52000,
-    inStock: true,
+    price: 26700,
     isFeatured: true,
-    images: [
-      'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80',
-    ],
+    imagePath: path.resolve(__dirname, '../public/products/ff-pink-blossom-tops.jpeg'),
     description:
-      'Cascading teardrop cuts designed to capture evening light from every angle. Guaranteed to never cloud or lose luster, certified by Global Gemological Research (GRA).',
+      'Handcrafted 925 solid sterling silver tops featuring a synthetic pink gemstone surrounded by micro-pave zircons. Finished with triple-pass mirror rhodium polish for long-lasting tarnish resistance. Lightweight and comfortable for daily elegance.',
   },
   {
-    title: 'Celeste Tennis Bangle with Channel Setting',
-    slug: 'celeste-tennis-bangle-channel-setting',
-    itemCode: 'ZN-BNG-4045',
-    category: 'bangles',
-    metal: 'Platinum Plated Silver',
-    gemstone: 'D Color VVS1 Moissanite (GRA Certified)',
-    caratWeight: '4.80 CT Total Weight',
-    price: 68000,
-    originalPrice: 79000,
-    inStock: true,
+    title: 'Ruby Rose Floral Locket Set with Tops',
+    slug: 'ruby-rose-floral-locket-set',
+    category: 'locket-sets',
+    price: 26600,
     isFeatured: true,
-    images: [
-      'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1000&q=80',
-    ],
+    imagePath: path.resolve(__dirname, '../public/products/ff-ruby-locket-set.jpeg'),
     description:
-      'Precision articulated links engineered for effortless wrist drape. Solid double-safety clasp with engraved 925 authenticity hallmark.',
+      'Captivating dark pink ruby-hued synthetic gemstone locket set hand-set in certified 925 sterling silver. Finished with high-durability rhodium polish. Includes matching silver chain and tops. Handcrafted on order by FFZever Atelier.',
   },
   {
-    title: 'Noor-e-Jahan Vintage Ruby Bridal Choker Set',
-    slug: 'noor-e-jahan-vintage-ruby-bridal-choker-set',
-    itemCode: 'ZN-BRD-5099',
-    category: 'bridal',
-    metal: '18K Yellow Gold Vermeil',
-    gemstone: 'Natural Burma Ruby',
-    caratWeight: '8.50 CT Gems + Moissanite Cluster',
-    price: 135000,
-    inStock: false,
-    isFeatured: true,
-    images: [
-      'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=1000&q=80',
-    ],
-    description:
-      'Inspired by Mughal heritage court jewellery. Handcrafted filigree setting with certified pigeon-blood rubies and suspended pearl droplets. Includes matching chandelier jhumkas.',
-  },
-  {
-    title: 'Eternity Pavé Diamond Cut Band',
-    slug: 'eternity-pave-diamond-cut-band',
-    itemCode: 'ZN-RNG-1090',
-    category: 'rings',
-    metal: 'Rose Gold Plated 925 Silver',
-    gemstone: 'D Color VVS1 Moissanite (GRA Certified)',
-    caratWeight: '1.20 CT Total',
-    price: 26000,
-    inStock: true,
-    isFeatured: false,
-    images: [
-      'https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80',
-    ],
-    description:
-      'A seamless circle of continuous light. 360-degree pavé setting crafted with precision microscopes to ensure a flat, snag-free everyday wear.',
-  },
-  {
-    title: 'Kashmir Blue Sapphire Teardrop Pendant',
-    slug: 'kashmir-blue-sapphire-teardrop-pendant',
-    itemCode: 'ZN-PND-2033',
+    title: 'Soft Pink Halo Pendant with Silver Chain',
+    slug: 'soft-pink-halo-pendant-chain',
     category: 'pendants',
-    metal: '925 Sterling Silver (Rhodium Plated)',
-    gemstone: 'Natural Blue Sapphire',
-    caratWeight: '2.80 CT Pear Cut',
-    price: 45000,
-    inStock: true,
-    isFeatured: false,
-    images: [
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80',
-    ],
+    price: 14700,
+    isFeatured: true,
+    imagePath: path.resolve(__dirname, '../public/products/ff-soft-pink-pendant.jpeg'),
     description:
-      'A rich royal blue sapphire suspended on an Italian sterling silver box chain. Rhodium dip protects against oxidation and guarantees a lasting mirror sheen.',
+      'Delicate handcrafted 925 pure sterling silver pendant set with a radiant round synthetic pink gemstone and sparkling zircon halo. Includes authentic 925 sterling silver chain. Treated with tarnish-resistant rhodium finish.',
   },
   {
-    title: 'Baroque Cultured Pearl & Moissanite Studs',
-    slug: 'baroque-cultured-pearl-moissanite-studs',
-    itemCode: 'ZN-EAR-3055',
-    category: 'earrings',
-    metal: '18K Yellow Gold Vermeil',
-    gemstone: 'Freshwater Cultured Pearl',
-    caratWeight: '9.0mm Luster Pearls',
-    price: 29000,
-    inStock: true,
-    isFeatured: false,
-    images: [
-      'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80',
-    ],
+    title: 'Heirloom Zircon Locket Set in Velvet Presentation Case',
+    slug: 'heirloom-zircon-locket-set-box',
+    category: 'locket-sets',
+    price: 56600,
+    isFeatured: true,
+    imagePath: path.resolve(__dirname, '../public/products/ff-zircon-box.jpeg'),
     description:
-      'Selected for their deep iridescent luster and satiny overtone. Crowned with miniature moissanite florets in warm 18K yellow gold vermeil.',
+      'The signature FFZever Zircon Locket Set showcased in our bespoke velvet presentation case. Pure 925 hallmarked sterling silver, paired with matching Tops earrings and silver chain.',
+  },
+  {
+    title: 'Imperial Emerald Floral Tops & Locket Suite',
+    slug: 'imperial-emerald-floral-tops-locket',
+    category: 'earrings',
+    price: 37800,
+    isFeatured: true,
+    imagePath: path.resolve(__dirname, '../public/products/ff-emerald-angle.jpeg'),
+    description:
+      'Side and post angle view highlighting the master craftsmanship, prong precision, and comfort backings of the Imperial Emerald Tops and Locket. Solid 925 pure sterling silver.',
+  },
+  {
+    title: 'Artisan Pavé Zircon Craftsmanship Suite',
+    slug: 'artisan-pave-zircon-craftsmanship-suite',
+    category: 'pendants',
+    price: 28500,
+    isFeatured: true,
+    imagePath: path.resolve(__dirname, '../public/products/ff-zircon-collage.jpeg'),
+    description:
+      'A macro showcase of FFZever stone-setting mastery. Solid 925 sterling silver with mirror rhodium finish, handset micro-pavé zircons, and refined prong alignment.',
   },
 ];
 
-async function uploadImageFromUrl(imageUrl, filename) {
+async function uploadLocalImage(filePath, filename) {
   try {
-    const res = await fetch(imageUrl);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const buffer = Buffer.from(await res.arrayBuffer());
+    if (!fs.existsSync(filePath)) {
+      console.warn(`Local file not found: ${filePath}`);
+      return null;
+    }
+    const buffer = fs.readFileSync(filePath);
     const asset = await client.assets.upload('image', buffer, {
       filename: filename || 'jewel.jpg',
     });
     return asset._id;
   } catch (err) {
-    console.warn(`Failed to upload image ${imageUrl}:`, err.message);
+    console.warn(`Failed to upload local image ${filePath}:`, err.message);
     return null;
   }
 }
@@ -223,20 +158,18 @@ async function seed() {
   for (const item of PRODUCTS_TO_SEED) {
     console.log(`💎 Processing: ${item.title}...`);
 
-    // Upload images to Sanity Asset Lake
-    const imageAssets = [];
-    for (let i = 0; i < item.images.length; i++) {
-      const assetId = await uploadImageFromUrl(item.images[i], `${item.slug}-${i}.jpg`);
+    let imageAsset = null;
+    if (item.imagePath) {
+      const assetId = await uploadLocalImage(item.imagePath, `${item.slug}.jpg`);
       if (assetId) {
-        imageAssets.push({
-          _key: `img_${Date.now()}_${i}`,
+        imageAsset = {
           _type: 'image',
           asset: {
             _type: 'reference',
             _ref: assetId,
           },
           alt: item.title,
-        });
+        };
       }
     }
 
@@ -247,18 +180,11 @@ async function seed() {
         _type: 'slug',
         current: item.slug,
       },
-      itemCode: item.itemCode,
       category: item.category,
-      metal: item.metal,
-      gemstone: item.gemstone,
-      caratWeight: item.caratWeight,
       price: item.price,
-      originalPrice: item.originalPrice,
-      priceOnRequest: false,
-      inStock: item.inStock,
       isFeatured: item.isFeatured,
       description: item.description,
-      images: imageAssets,
+      image: imageAsset,
     };
 
     try {
@@ -269,7 +195,7 @@ async function seed() {
     }
   }
 
-  console.log('\n🎉 Seeding complete! All 8 pieces are now in your Sanity Studio.\n');
+  console.log('\n🎉 Seeding complete! All FFZever pieces are now in your Sanity Studio.\n');
 }
 
 seed();
