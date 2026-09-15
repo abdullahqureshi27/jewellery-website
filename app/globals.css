@@ -111,6 +111,14 @@
   transform: translateX(100%) !important;
 }
 
+[data-slot="sheet-content"][data-side="left"] {
+  transform: translateX(0) !important;
+}
+[data-slot="sheet-content"][data-side="left"][data-starting-style],
+[data-slot="sheet-content"][data-side="left"][data-ending-style] {
+  transform: translateX(-100%) !important;
+}
+
 
 @theme inline {
   --font-serif: var(--font-serif);

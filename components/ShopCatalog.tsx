@@ -432,15 +432,15 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           side="right"
           showCloseButton={true}
           data-lenis-prevent="true"
-          className="w-[80vw] max-w-[80vw] sm:w-full sm:max-w-md bg-white border-l border-[#E2E8F0] p-0 flex flex-col justify-between"
+          className="w-[80vw] max-w-[80vw] sm:w-full sm:max-w-md bg-background border-l border-border p-0 flex flex-col justify-between"
         >
-          <div className="p-6 border-b border-[#E2E8F0] bg-white pr-12">
+          <div className="p-6 border-b border-border bg-background pr-12">
             <SheetHeader className="p-0 space-y-1 text-left">
-              <SheetTitle className="font-serif text-lg font-bold uppercase tracking-wider text-[#0F172A] flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-[#94A3B8]" />
+              <SheetTitle className="font-serif text-lg font-bold uppercase tracking-wider text-foreground flex items-center gap-2">
+                <SlidersHorizontal className="w-4 h-4 text-silver" />
                 <span>Filter Pieces</span>
               </SheetTitle>
-              <SheetDescription className="text-xs text-[#64748B]">
+              <SheetDescription className="text-xs text-muted-foreground">
                 Filter pieces by collection &amp; category
               </SheetDescription>
             </SheetHeader>
@@ -449,7 +449,7 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {/* Category */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-widest text-[#0F172A] mb-2.5">
+              <label className="block text-xs font-bold uppercase tracking-widest text-foreground mb-2.5">
                 Category
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -460,8 +460,8 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                     onClick={() => handleCategoryChange(c.value)}
                     className={`text-left text-xs py-2 px-3 rounded-xl border transition-all cursor-pointer ${
                       selectedCategory === c.value
-                        ? 'bg-[#0F172A] text-white font-semibold border-[#0F172A]'
-                        : 'bg-white text-[#64748B] border-[#E2E8F0] hover:border-[#0F172A]'
+                        ? 'bg-foreground text-background font-semibold border-foreground'
+                        : 'bg-card text-muted-foreground border-border hover:border-foreground'
                     }`}
                   >
                     {c.label}
@@ -471,31 +471,31 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
             </div>
 
             {/* 100% Pure 925 Silver Guarantee */}
-            <div className="pt-4 border-t border-[#E2E8F0]">
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3.5 text-left">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A] mb-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#94A3B8]" />
+            <div className="pt-4 border-t border-border">
+              <div className="bg-muted border border-border rounded-xl p-3.5 text-left">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-foreground mb-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-silver" />
                   <span>100% Pure 925 Sterling Silver</span>
                 </div>
-                <p className="text-[11px] text-[#64748B] leading-relaxed">
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
                   Every creation is handcrafted in solid 925 sterling silver with protective rhodium finish.
                 </p>
               </div>
             </div>
           </div>
 
-          <SheetFooter className="p-4 bg-white border-t border-[#E2E8F0] flex-row gap-3">
+          <SheetFooter className="p-4 bg-background border-t border-border flex-row gap-3">
             <button
               type="button"
               onClick={handleResetFilters}
-              className="flex-1 border border-[#E2E8F0] hover:border-[#0F172A] py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-[#64748B] hover:text-[#0F172A] transition-colors cursor-pointer"
+              className="flex-1 border border-border hover:border-foreground py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
             >
               Reset
             </button>
             <button
               type="button"
               onClick={() => setMobileFilterOpen(false)}
-              className="flex-1 bg-[#0F172A] hover:bg-[#334155] text-white py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
+              className="flex-1 bg-foreground hover:bg-muted-foreground text-background py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center"
             >
               View {filteredProducts.length} Pieces
             </button>

@@ -17,6 +17,12 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { Sparkles, Menu, X, Search, ChevronRight, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { JewelleryProduct, MOCK_JEWELLERY_PRODUCTS } from '@/sanity/mockData';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 
 export default function Navbar() {
   const router = useRouter();
@@ -498,71 +504,79 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0A0D14]/70 backdrop-blur-sm lg:hidden animate-fadeIn">
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
-            <div>
-              <div className="flex items-center justify-between pb-6 border-b border-[#E2E8F0]">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#64748B]" />
-                  <span className="font-serif text-xl font-bold tracking-[0.1em] text-[#0F172A] uppercase">
-                    FFZever
+      {/* Mobile Drawer Navigation via shadcn Sheet */}
+      <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <SheetContent
+          side="left"
+          showCloseButton={true}
+          data-lenis-prevent="true"
+          className="w-[80vw] max-w-[80vw] sm:w-full sm:max-w-md bg-background border-r border-border p-0 flex flex-col justify-between"
+        >
+          {/* Header */}
+          <div className="p-6 border-b border-border pr-12 bg-background">
+            <SheetHeader className="p-0 space-y-1 text-left">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-muted-foreground" />
+                <SheetTitle className="font-serif text-xl font-bold tracking-[0.1em] text-foreground uppercase">
+                  FFZever
+                </SheetTitle>
+              </div>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
+                Faraz Faheem • Since 1982
+              </p>
+            </SheetHeader>
+          </div>
+
+          {/* Body */}
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            {/* Shopping Bag Quick Row on Mobile */}
+            <div className="pb-4 border-b border-border">
+              <Link
+                href="/cart"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center justify-between bg-muted border border-border p-3 rounded-xl shadow-sm hover:border-foreground transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <ShoppingBag className="w-4 h-4 text-foreground" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-foreground">
+                    Shopping Bag
                   </span>
                 </div>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-1 text-[#64748B] hover:text-[#0F172A]"
-                  aria-label="Close menu"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              {/* Inquiry Bag Quick Row on Mobile */}
-              <div className="py-4 border-b border-border">
-                <Link
-                  href="/cart"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-between bg-muted border border-border p-3 rounded-xl shadow-sm hover:border-foreground transition-colors"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <ShoppingBag className="w-4 h-4 text-foreground" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-foreground">
-                      Shopping Bag
-                    </span>
-                  </div>
-                  <span className="bg-foreground text-background text-xs font-bold px-2.5 py-0.5 rounded-full">
-                    {totalItems} items
-                  </span>
-                </Link>
-              </div>
-
-              <div className="py-4 space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="flex items-center justify-between py-3 text-sm font-medium tracking-wider uppercase text-[#0F172A] hover:text-[#475569] border-b border-[#E2E8F0]/60"
-                  >
-                    <span>{link.name}</span>
-                    <ChevronRight className="w-4 h-4 text-[#94A3B8]" />
-                  </Link>
-                ))}
-              </div>
+                <span className="bg-foreground text-background text-xs font-bold px-2.5 py-0.5 rounded-full">
+                  {totalItems} items
+                </span>
+              </Link>
             </div>
 
-            <div className="pt-6 border-t border-[#E2E8F0] space-y-2">
-              <p className="text-center text-xs font-medium text-[#475569] tracking-wider uppercase">
-                Handcrafted 925 Solid Silver
-              </p>
-              <p className="text-center text-[11px] text-[#64748B]">
-                FFZever • Since 1982
-              </p>
+            <div className="pt-2 space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground block mb-2">
+                Filter by Category
+              </span>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-3 text-xs font-bold tracking-wider uppercase text-foreground hover:text-muted-foreground border-b border-border/60 transition-colors"
+                >
+                  <span>{link.name}</span>
+                  <ChevronRight className="w-4 h-4 text-silver" />
+                </Link>
+              ))}
             </div>
           </div>
-        </div>
-      )}
+
+          {/* Footer */}
+          <div className="p-6 border-t border-border bg-muted space-y-1.5">
+            <p className="text-center text-xs font-bold text-foreground tracking-wider uppercase">
+              Handcrafted 925 Solid Silver
+            </p>
+            <p className="text-center text-[11px] text-muted-foreground">
+              FFZever • Faraz Faheem Atelier
+            </p>
+          </div>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }

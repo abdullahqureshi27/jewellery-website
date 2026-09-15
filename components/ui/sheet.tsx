@@ -28,7 +28,7 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
     <SheetPrimitive.Backdrop
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm transition-opacity duration-300 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0",
+        "fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm transition-opacity duration-300 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 cursor-pointer",
         className
       )}
       {...props}
@@ -72,7 +72,7 @@ function SheetContent({
             render={
               <button
                 type="button"
-                className="absolute top-4 right-4 z-30 p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors focus:outline-none"
+                className="absolute top-4 right-4 z-30 p-2 rounded-full text-foreground/70 hover:text-foreground hover:bg-muted transition-colors focus:outline-none cursor-pointer"
                 aria-label="Close"
               />
             }
