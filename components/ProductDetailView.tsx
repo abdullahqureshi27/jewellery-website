@@ -131,15 +131,6 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                       )}
                     </>
                   )}
-                  <span
-                    className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ml-auto ${
-                      product.inStock
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                        : 'bg-amber-50 text-amber-700 border border-amber-200'
-                    }`}
-                  >
-                    {product.inStock ? 'In Stock (Ready to Ship)' : 'Made to Order (7-10 Days)'}
-                  </span>
                 </div>
 
                 {/* Narrative */}

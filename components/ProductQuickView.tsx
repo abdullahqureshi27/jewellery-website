@@ -167,15 +167,6 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
                     )}
                   </>
                 )}
-                <span
-                  className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ml-auto whitespace-nowrap ${
-                    product.inStock
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                      : 'bg-amber-50 text-amber-700 border border-amber-200'
-                  }`}
-                >
-                  {product.inStock ? 'Ready to Ship' : 'Made to Order (7-10d)'}
-                </span>
               </div>
 
               {/* Specifications Matrix */}

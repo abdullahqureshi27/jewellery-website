@@ -100,9 +100,9 @@ export const productType = {
     },
     {
       name: 'inStock',
-      title: 'In Stock / Ready to Ship',
+      title: 'Active in Showcase Gallery',
       type: 'boolean',
-      description: 'If false, displays "Made to Order (7-10 Days)"',
+      description: 'Controls visibility in the jewellery showcase',
       initialValue: true,
     },
     {

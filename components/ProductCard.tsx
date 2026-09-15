@@ -203,10 +203,6 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
               </div>
             )}
           </div>
-
-          <span className="text-[10px] sm:text-[11px] font-semibold text-[#C5A059] uppercase tracking-wider whitespace-nowrap shrink-0">
-            {product.inStock ? 'Ready to Ship' : 'Made to Order'}
-          </span>
         </div>
       </div>
 

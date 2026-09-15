@@ -43,7 +43,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
   const [searchQuery, setSearchQuery] = useState<string>(urlSearch);
   const [selectedMetal, setSelectedMetal] = useState<string>('all');
   const [selectedGemstone, setSelectedGemstone] = useState<string>('all');
-  const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<string>('featured');
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
@@ -110,7 +109,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
     setSearchQuery('');
     setSelectedMetal('all');
     setSelectedGemstone('all');
-    setInStockOnly(false);
     setSortBy('featured');
     router.push('/shop', { scroll: false });
   };
@@ -120,7 +118,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
     (selectedCategory !== 'all' ? 1 : 0) +
     (selectedMetal !== 'all' ? 1 : 0) +
     (selectedGemstone !== 'all' ? 1 : 0) +
-    (inStockOnly ? 1 : 0) +
     (searchQuery ? 1 : 0);
 
   // Filter & Sort Logic
@@ -148,11 +145,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
           if (!gemStr.includes(selectedGemstone.toLowerCase())) {
             return false;
           }
-        }
-
-        // In Stock filter
-        if (inStockOnly && !item.inStock) {
-          return false;
         }
 
         // Search query filter
@@ -408,18 +400,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
                   </div>
                 </div>
 
-                {/* Availability Toggle */}
-                <div className="pt-4 border-t border-[#E8E2D7]">
-                  <label className="flex items-center gap-2.5 cursor-pointer text-xs font-medium text-[#12141A]">
-                    <input
-                      type="checkbox"
-                      checked={inStockOnly}
-                      onChange={(e) => setInStockOnly(e.target.checked)}
-                      className="rounded border-[#E8E2D7] text-[#C5A059] focus:ring-[#C5A059] w-4 h-4 cursor-pointer"
-                    />
-                    <span>Ready to Ship Only</span>
-                  </label>
-                </div>
               </div>
 
               {/* Custom Concierge Callout */}
@@ -577,17 +557,6 @@ export default function ShopCatalog({ initialProducts }: ShopCatalogProps) {
               </div>
             </div>
 
-            {/* In Stock */}
-            <div className="pt-4 border-t border-[#E8E2D7]">
-              <label className="flex items-center gap-2.5 cursor-pointer text-xs font-medium text-[#12141A] p-2.5 bg-white rounded-xl border border-[#E8E2D7]">
-                <input
-                  type="checkbox"
-                  checked={inStockOnly}
-                  onChange={(e) => setInStockOnly(e.target.checked)}
-                  className="rounded border-[#E8E2D7] text-[#C5A059] focus:ring-[#C5A059] w-4 h-4 cursor-pointer"
-                />
-                <span>Ready to Ship Only (In Stock)</span>
-              </label>
             </div>
           </div>
 
