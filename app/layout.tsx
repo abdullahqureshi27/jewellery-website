@@ -27,18 +27,19 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ffzever.com"),
   title: {
-    default: "Faraz Faheem | Handcrafted Fine Jewellery & Moissanite Atelier",
-    template: "%s | Faraz Faheem Atelier",
+    default: "FFZever | Faraz Faheem Handcrafted 925 Silver Jewellery (Since 1982)",
+    template: "%s | FFZever — Faraz Faheem",
   },
   description:
-    "Faraz Faheem (FF Zever) — Premier handcrafted jewellery atelier in Pakistan (ffzever.com). Featuring certified Moissanite solitaires, heirloom 925 sterling silver, and bespoke bridal jewellery crafted to perfection on order. Insured nationwide delivery.",
+    "FFZever (Since 1982) by Faraz Faheem — Premier handcrafted 925 sterling silver jewellery atelier in Pakistan (ffzever.com). Featuring pure solid silver locket sets, pendants, tops, and bespoke bridal collections with insured nationwide delivery.",
   keywords: [
-    "Faraz Faheem",
-    "Faraz Faheem Zever",
+    "FFZever",
     "FF Zever",
     "ffzever",
     "ffzever.com",
     "www.ffzever.com",
+    "Faraz Faheem",
+    "Faraz Faheem Zever",
     "Faraz Faheem Jewellery",
     "Pakistani jewellery",
     "handcrafted jewellery Pakistan",
@@ -49,26 +50,26 @@ export const metadata: Metadata = {
     "custom engagement rings Pakistan",
     "pure silver jewellery Lahore Karachi Islamabad",
   ],
-  authors: [{ name: "Faraz Faheem Atelier" }],
+  authors: [{ name: "FFZever Atelier" }],
   creator: "Faraz Faheem",
-  publisher: "Faraz Faheem Atelier",
+  publisher: "FFZever",
   alternates: {
     canonical: "https://www.ffzever.com",
   },
   openGraph: {
-    title: "Faraz Faheem | Handcrafted Fine Jewellery & Moissanite Atelier (FF Zever)",
+    title: "FFZever | Faraz Faheem Handcrafted 925 Silver Jewellery (Since 1982)",
     description:
-      "Explore Faraz Faheem's heirloom jewellery showcase on ffzever.com. Handcrafted 925 sterling silver, certified D VVS1 Moissanites, and bespoke bridal sets in Pakistan.",
+      "Explore FFZever's handcrafted jewellery showcase on ffzever.com. Pure solid 925 sterling silver, certified moissanites, and bespoke bridal sets in Pakistan since 1982.",
     url: "https://www.ffzever.com",
-    siteName: "Faraz Faheem Atelier",
+    siteName: "FFZever",
     locale: "en_PK",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Faraz Faheem | Fine Jewellery Atelier (FF Zever)",
+    title: "FFZever | Handcrafted Jewellery Since 1982 (Faraz Faheem)",
     description:
-      "Handcrafted 925 sterling silver, certified moissanite, and custom bridal jewellery made to order across Pakistan.",
+      "Handcrafted 925 sterling silver, certified moissanite, and custom bridal jewellery made to order across Pakistan by FFZever.",
   },
   robots: {
     index: true,
@@ -92,13 +93,13 @@ const jsonLd = {
     {
       "@type": "JewelryStore",
       "@id": "https://www.ffzever.com/#store",
-      name: "Faraz Faheem Atelier",
-      alternateName: ["FF Zever", "Faraz Faheem Jewellery", "FFZever", "Faraz Faheem", "ffzever.com"],
+      name: "FFZever",
+      alternateName: ["FF Zever", "Faraz Faheem Jewellery", "FFZever Atelier", "Faraz Faheem", "ffzever.com", "www.ffzever.com"],
       url: "https://www.ffzever.com",
       logo: "https://www.ffzever.com/favicon.ico",
       description:
-        "Luxury handcrafted jewellery atelier based in Karachi, Pakistan. Specializing in certified Moissanite solitaires, pure 925 sterling silver, bespoke bridal sets, and custom heirloom pieces.",
-      priceRange: "PKR 15,000 - PKR 250,000",
+        "FFZever (Since 1982) by Faraz Faheem — Premier handcrafted 925 sterling silver jewellery atelier based in Karachi, Pakistan. Specializing in hallmarked 925 silver, locket sets, pendants, earrings, bracelets, and bridal jewellery.",
+      priceRange: "PKR 14,000 - PKR 250,000",
       currenciesAccepted: "PKR",
       paymentAccepted: "Cash on Delivery, Bank Transfer",
       address: {
@@ -116,8 +117,8 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://www.ffzever.com/#website",
       url: "https://www.ffzever.com",
-      name: "Faraz Faheem | FF Zever",
-      alternateName: ["FF Zever", "Faraz Faheem", "ffzever.com"],
+      name: "FFZever",
+      alternateName: ["FF Zever", "Faraz Faheem", "FFZever Jewellery", "ffzever.com"],
       publisher: {
         "@id": "https://www.ffzever.com/#store",
       },

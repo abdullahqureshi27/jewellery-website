@@ -31,7 +31,7 @@ interface HeroSlide {
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'moissanite-silver',
-    eyebrow: 'Master Jewellery Atelier • Karachi Since 1947',
+    eyebrow: 'FFZever Master Atelier • Karachi Since 1982',
     titleLight: 'Elegance Forged in ',
     titleGold: '925 Pure Silver',
     titleSuffix: ' & Celestial Fire.',

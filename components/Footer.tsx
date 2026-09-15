@@ -61,12 +61,12 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[#C5A059]" />
               <span className="font-serif text-2xl font-bold tracking-[0.1em] text-[#FAF8F5] uppercase">
-                Faraz Faheem
+                FFZever
               </span>
             </div>
             <p className="text-xs text-[#8B949E] leading-relaxed">
               Crafting heirloom-grade sterling silver, natural gemstone, and certified moissanite jewellery
-              since 1947. Every facet polished to mirror perfection.
+              since 1982. Every facet polished to mirror perfection.
             </p>
             <div className="pt-2">
               <span className="text-[11px] uppercase tracking-widest text-[#C5A059] block">
@@ -178,7 +178,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#8B949E] gap-4">
-          <p>© {new Date().getFullYear()} Faraz Faheem Fine Jewellery Atelier (FF Zever). All rights reserved.</p>
+          <p>© {new Date().getFullYear()} FFZever (Faraz Faheem Atelier). All rights reserved.</p>
           <div className="flex items-center space-x-6 text-[#C5A059]">
             <span>925 Sterling Silver</span>
             <span>•</span>

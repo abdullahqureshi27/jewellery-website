@@ -35,9 +35,9 @@ export default function HeritageStory() {
             {/* Floating Luxury Stamp */}
             <div className="absolute -bottom-6 -left-2 sm:-left-6 bg-[#0D1117] text-[#FAF8F5] p-5 rounded-2xl border border-[#C5A059]/40 shadow-2xl hidden sm:block max-w-[200px]">
               <Sparkles className="w-6 h-6 text-[#C5A059] mb-2" />
-              <p className="font-serif text-2xl font-bold text-[#C5A059]">75+ Yrs</p>
+              <p className="font-serif text-2xl font-bold text-[#C5A059]">Since 1982</p>
               <p className="text-[11px] text-[#8B949E] uppercase tracking-wider">
-                Unbroken family lineage of jewellery master craftsmen
+                Over 40 years of master jewellery craftsmanship
               </p>
             </div>
           </div>
@@ -50,13 +50,13 @@ export default function HeritageStory() {
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0D1117] leading-tight">
-              Why Choose Faraz Faheem Atelier?
+              Why Choose FFZever?
             </h2>
 
             <p className="text-sm text-[#5C6270] leading-relaxed">
-              Unlike mass-manufactured commercial alloy jewellery that tarnishes within weeks, every Faraz Faheem
-              piece begins with certified **925 solid sterling silver** or **18k gold vermeil**. We treat every
-              piece with a triple-pass rhodium mirror dipping for permanent tarnish resistance.
+              Unlike mass-manufactured commercial alloy jewellery that tarnishes within weeks, every FFZever
+              piece begins with certified **925 solid sterling silver**. We treat every piece with a triple-pass
+              rhodium mirror dipping for permanent tarnish resistance.
             </p>
 
             <div className="space-y-4 pt-4">

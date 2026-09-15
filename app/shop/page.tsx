@@ -10,16 +10,16 @@ import { getProducts } from '@/sanity/lib/client';
  */
 
 export const metadata: Metadata = {
-  title: 'All Jewellery Showcase | Faraz Faheem Atelier',
+  title: 'All Jewellery Showcase | FFZever (Since 1982)',
   description:
-    'Browse our full jewellery showcase of handcrafted 925 sterling silver rings, certified moissanite pendants, teardrop earrings, and bridal sets by Faraz Faheem (FF Zever).',
+    'Browse our full jewellery showcase of handcrafted 925 sterling silver locket sets, pendants, earrings, bracelets, and bridal sets by FFZever (Faraz Faheem).',
   alternates: {
     canonical: 'https://www.ffzever.com/shop',
   },
   openGraph: {
-    title: 'All Jewellery Showcase | Faraz Faheem Atelier',
+    title: 'All Jewellery Showcase | FFZever (Since 1982)',
     description:
-      'Browse our handcrafted 925 sterling silver, certified moissanite, and bespoke bridal sets in Pakistan.',
+      'Browse our handcrafted 925 sterling silver, locket sets, and bespoke bridal jewellery across Pakistan by FFZever.',
     url: 'https://www.ffzever.com/shop',
   },
 };

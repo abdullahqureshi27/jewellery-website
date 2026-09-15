@@ -188,12 +188,12 @@ export default function Navbar() {
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-300 shrink-0" />
                 <span className="font-serif text-xl sm:text-2xl xl:text-3xl font-bold tracking-[0.08em] sm:tracking-[0.1em] text-[#0D1117] uppercase whitespace-nowrap">
-                  Faraz Faheem
+                  FFZever
                 </span>
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059] group-hover:-rotate-12 transition-transform duration-300 shrink-0" />
               </div>
               <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#C5A059] uppercase font-medium">
-                Fine Atelier • Est. 1947
+                Faraz Faheem • Since 1982
               </span>
             </Link>
 

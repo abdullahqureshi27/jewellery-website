@@ -141,7 +141,7 @@ export default function CustomerInquiryModal({
     const totalFormatted = `Rs. ${totalCalculated.toLocaleString()}`;
 
     // Structured message template without informal emojis
-    const textMessage = `*FARAZ FAHEEM ATELIER (FF ZEVER) — SHOWCASE INQUIRY*
+    const textMessage = `*FFZEVER (SINCE 1982) — SHOWCASE INQUIRY*
 -----------------------------------------
 *CUSTOMER DETAILS:*
 • *Name:* ${data.name}
@@ -158,10 +158,8 @@ ${itemsFormatted}
 -----------------------------------------
 _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
 
-    const whatsappUrl = getWhatsAppLink(textMessage);
-
-    // Open WhatsApp in new tab
-    window.open(whatsappUrl, '_blank');
+    // Open WhatsApp with pre-filled message
+    window.open(getWhatsAppLink(textMessage), '_blank', 'noopener,noreferrer');
 
     if (onInquirySent) {
       onInquirySent();
@@ -181,7 +179,7 @@ _Please confirm piece availability, sizing schedule, and dispatch timeline._`;
             <Sparkles className="w-5 h-5 text-[#C5A059] shrink-0" />
             <div>
               <DialogTitle className="font-serif text-base sm:text-lg font-bold tracking-wider uppercase text-[#FAF8F5]">
-                Atelier Concierge Inquiry
+                FFZever Concierge Inquiry
               </DialogTitle>
               <DialogDescription className="text-[11px] text-[#8B949E] tracking-widest uppercase">
                 {inquiryList.length} Selected Piece{inquiryList.length > 1 ? 's' : ''}
