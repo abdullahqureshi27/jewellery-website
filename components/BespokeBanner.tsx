@@ -1,23 +1,15 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
-import { Sparkles, Camera, PenTool, CheckCircle, Ruler } from 'lucide-react';
+import { Sparkles, Camera, PenTool, CheckCircle } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { getWhatsAppLink } from '@/lib/whatsapp';
-import RingSizeModal from './RingSizeModal';
 
 /**
- * Client Component: Bespoke Custom Orders & 1-Click WhatsApp Atelier Consultation Banner.
- * Promotes custom made-to-order bridal suites, custom engagement solitaires, and sizing assistance.
+ * Bespoke Custom Orders & 1-Click WhatsApp Atelier Consultation Banner.
  */
 
 export default function BespokeBanner() {
-  const [isRingModalOpen, setIsRingModalOpen] = useState(false);
-
   return (
-    <>
-      <section className="py-20 bg-[#FAF8F5] border-t border-b border-[#E8E2D7]" aria-label="Bespoke Jewellery Concierge">
+    <section className="py-20 bg-[#FAF8F5] border-t border-b border-[#E8E2D7]" aria-label="Bespoke Jewellery Concierge">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#0D1117] rounded-3xl overflow-hidden border border-[#C5A059]/30 shadow-2xl relative">
             {/* Ambient gold glow */}
@@ -90,14 +82,6 @@ export default function BespokeBanner() {
                     <FaWhatsapp className="w-4 h-4 text-[#0D1117] group-hover:scale-110 transition-transform" />
                     <span>Send Reference on WhatsApp</span>
                   </a>
-
-                  <button
-                    onClick={() => setIsRingModalOpen(true)}
-                    className="inline-flex items-center justify-center gap-2 border border-[#E8E2D7]/30 hover:border-[#C5A059] bg-[#161B22]/70 hover:bg-[#161B22] text-[#FAF8F5] text-xs font-semibold uppercase tracking-[0.2em] px-6 py-4 rounded-full transition-all cursor-pointer"
-                  >
-                    <Ruler className="w-4 h-4 text-[#C5A059]" />
-                    <span>Ring Sizing Guide</span>
-                  </button>
                 </div>
               </div>
 
@@ -116,7 +100,7 @@ export default function BespokeBanner() {
                     100% Bespoke Guarantee
                   </p>
                   <p className="text-[10px] text-[#8B949E] mt-0.5">
-                    GRA Moissanite • Solid 925 Silver • Lifetime Rhodium
+                    Solid 925 Pure Silver • Triple Rhodium Polish • Since 1982
                   </p>
                 </div>
               </div>
@@ -124,9 +108,5 @@ export default function BespokeBanner() {
           </div>
         </div>
       </section>
-
-      {/* Interactive Ring Sizing Modal */}
-      <RingSizeModal isOpen={isRingModalOpen} onClose={() => setIsRingModalOpen(false)} />
-    </>
   );
 }

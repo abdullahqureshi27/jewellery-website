@@ -1,6 +1,4 @@
 import HeroSection from '@/components/HeroSection';
-import MarqueeLoop from '@/components/MarqueeLoop';
-import OccasionsBanner from '@/components/OccasionsBanner';
 import FeaturedCarousel from '@/components/FeaturedCarousel';
 import AtelierStandards from '@/components/AtelierStandards';
 import EditorialPinnedBanner from '@/components/EditorialPinnedBanner';
@@ -12,8 +10,7 @@ import { getFeaturedProducts } from '@/sanity/lib/client';
 
 /**
  * Server Component: Homepage of the Jewellery Showcase.
- * Features the Zanvari-inspired fullscreen sticky pinned editorial section
- * where the image locks into place upon scrolling, and subsequent content slides over top.
+ * Clean, uncluttered layout showcasing exclusively authentic 925 sterling silver pieces.
  */
 
 export const revalidate = 60; // Revalidate at most every 60 seconds
@@ -26,21 +23,15 @@ export default async function HomePage() {
       {/* 1. Cinematic Multi-Slide Editorial Hero Carousel */}
       <HeroSection />
 
-      {/* 2. FitFlair-inspired Infinite Marquee Looping Ribbon */}
-      <MarqueeLoop />
-
-      {/* 3. Shop by Occasion & Curated Milestone Edits */}
-      <OccasionsBanner />
-
-      {/* 4. The Atelier Standards (Materials, Hallmarks & Authenticity Spotlight) */}
-      <AtelierStandards />
-
-      {/* 5. Interactive Signature Pieces Carousel */}
+      {/* 2. Interactive Signature Pieces Carousel with Real Products */}
       <FeaturedCarousel
         products={featuredProducts}
-        title="Signature Atelier Pieces"
-        subtitle="Exclusive Certified Moissanites & Hand-Set Gemstones"
+        title="Signature 925 Silver Pieces"
+        subtitle="Pure Sterling Silver Handcrafted with Anti-Tarnish Rhodium Polish"
       />
+
+      {/* 3. The Atelier Standards (Materials, Hallmarks & Authenticity Spotlight) */}
+      <AtelierStandards />
 
       {/* 6. Zanvari-Inspired Sticky Pinned Editorial Section with Solid Curtain Reveal */}
       <div className="relative">
