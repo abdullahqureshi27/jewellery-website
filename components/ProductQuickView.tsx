@@ -151,43 +151,28 @@ export default function ProductQuickView({ product, onClose }: ProductQuickViewP
 
               {/* Price section */}
               <div className="flex items-baseline gap-3 mb-6">
-                {product.priceOnRequest ? (
-                  <span className="font-serif text-xl font-bold text-[#0D1117]">
-                    Price on Request
-                  </span>
-                ) : (
-                  <>
-                    <span className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117] tracking-normal">
-                      {formattedPrice}
-                    </span>
-                    {formattedOriginalPrice && (
-                      <span className="text-base text-[#8A90A0] line-through font-serif">
-                        {formattedOriginalPrice}
-                      </span>
-                    )}
-                  </>
-                )}
+                <span className="font-serif text-2xl sm:text-3xl font-bold text-[#0D1117] tracking-normal">
+                  {formattedPrice}
+                </span>
               </div>
 
               {/* Specifications Matrix */}
               <div className="space-y-2.5 py-4 border-y border-[#E8E2D7] text-xs">
                 <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
-                  <span className="text-[#5C6270] uppercase tracking-wider">Metal Purity:</span>
-                  <span className="font-medium text-[#12141A]">{product.metal}</span>
+                  <span className="text-[#5C6270] uppercase tracking-wider">Metal &amp; Purity:</span>
+                  <span className="font-semibold text-[#12141A]">Solid 925 Sterling Silver</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
-                  <span className="text-[#5C6270] uppercase tracking-wider">Gemstone:</span>
-                  <span className="font-medium text-[#12141A]">{product.gemstone}</span>
+                  <span className="text-[#5C6270] uppercase tracking-wider">Finish:</span>
+                  <span className="font-semibold text-[#12141A]">Triple Rhodium Mirror Polish</span>
                 </div>
-                {product.caratWeight && (
-                  <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
-                    <span className="text-[#5C6270] uppercase tracking-wider">Stone Weight:</span>
-                    <span className="font-medium text-[#12141A]">{product.caratWeight}</span>
-                  </div>
-                )}
+                <div className="flex justify-between py-1 border-b border-[#E8E2D7]/50">
+                  <span className="text-[#5C6270] uppercase tracking-wider">Craftsmanship:</span>
+                  <span className="font-semibold text-[#12141A]">Faraz Faheem Atelier</span>
+                </div>
                 <div className="flex justify-between py-1">
                   <span className="text-[#5C6270] uppercase tracking-wider">Authenticity:</span>
-                  <span className="font-medium text-[#C5A059] flex items-center gap-1">
+                  <span className="font-semibold text-[#C5A059] flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5" /> 100% Hallmarked &amp; Certified
                   </span>
                 </div>

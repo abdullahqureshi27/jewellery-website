@@ -186,22 +186,9 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         {/* Pricing & Stock Footer */}
         <div className="pt-3 border-t border-[#E8E2D7]/60 flex items-center justify-between gap-2">
           <div className="min-w-0">
-            {product.priceOnRequest ? (
-              <span className="font-serif text-sm font-bold text-[#0D1117]">
-                Price on Request
-              </span>
-            ) : (
-              <div className="flex items-baseline gap-2">
-                <span className="font-serif text-base sm:text-lg font-bold text-[#0D1117] tracking-normal">
-                  {formattedPrice}
-                </span>
-                {formattedOriginalPrice && (
-                  <span className="font-serif text-xs text-[#8A90A0] line-through">
-                    {formattedOriginalPrice}
-                  </span>
-                )}
-              </div>
-            )}
+            <span className="font-serif text-base sm:text-lg font-bold text-[#0D1117] tracking-normal">
+              {formattedPrice}
+            </span>
           </div>
         </div>
       </div>

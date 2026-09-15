@@ -85,28 +85,33 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs text-[#8B949E]">
               <li>
-                <Link href="/shop?category=rings" className="hover:text-[#FAF8F5] transition-colors">
-                  Moissanite Solitaire Rings
+                <Link href="/shop?category=locket-sets" className="hover:text-[#FAF8F5] transition-colors">
+                  925 Silver Locket Sets
                 </Link>
               </li>
               <li>
                 <Link href="/shop?category=pendants" className="hover:text-[#FAF8F5] transition-colors">
-                  Natural Emerald &amp; Ruby Pendants
+                  Pendants &amp; Chains
                 </Link>
               </li>
               <li>
                 <Link href="/shop?category=earrings" className="hover:text-[#FAF8F5] transition-colors">
-                  Teardrop &amp; Cluster Studs
+                  Ear rings &amp; Tops
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=bangles" className="hover:text-[#FAF8F5] transition-colors">
-                  Channel Tennis Bangles
+                <Link href="/shop?category=bracelets" className="hover:text-[#FAF8F5] transition-colors">
+                  Tennis Bracelets
                 </Link>
               </li>
               <li>
                 <Link href="/shop?category=bridal" className="hover:text-[#FAF8F5] transition-colors">
-                  Bridal Choker Sets
+                  Bridal Sets
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop?category=rings" className="hover:text-[#FAF8F5] transition-colors">
+                  Solitaire &amp; Eternity Rings
                 </Link>
               </li>
             </ul>

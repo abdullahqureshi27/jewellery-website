@@ -115,22 +115,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
                 {/* Price */}
                 <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#E8E2D7]">
-                  {product.priceOnRequest ? (
-                    <span className="font-serif text-2xl font-bold text-[#0D1117]">
-                      Price on Request
-                    </span>
-                  ) : (
-                    <>
-                      <span className="font-serif text-3xl font-bold text-[#0D1117] tracking-normal">
-                        {formattedPrice}
-                      </span>
-                      {formattedOriginalPrice && (
-                        <span className="text-lg text-[#8A90A0] line-through font-serif">
-                          {formattedOriginalPrice}
-                        </span>
-                      )}
-                    </>
-                  )}
+                  <span className="font-serif text-3xl font-bold text-[#0D1117] tracking-normal">
+                    {formattedPrice}
+                  </span>
                 </div>
 
                 {/* Narrative */}
@@ -145,22 +132,22 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   </h3>
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div>
-                      <span className="text-[#8A90A0] uppercase block">Metal Purity:</span>
-                      <span className="font-semibold text-[#12141A]">{product.metal}</span>
+                      <span className="text-[#8A90A0] uppercase block">Metal &amp; Purity:</span>
+                      <span className="font-semibold text-[#12141A]">Solid 925 Sterling Silver</span>
                     </div>
                     <div>
-                      <span className="text-[#8A90A0] uppercase block">Gemstone Type:</span>
-                      <span className="font-semibold text-[#12141A]">{product.gemstone}</span>
+                      <span className="text-[#8A90A0] uppercase block">Plating &amp; Finish:</span>
+                      <span className="font-semibold text-[#12141A]">Triple Rhodium Mirror Polish</span>
                     </div>
-                    {product.caratWeight && (
-                      <div>
-                        <span className="text-[#8A90A0] uppercase block">Carat / Cut:</span>
-                        <span className="font-semibold text-[#12141A]">{product.caratWeight}</span>
-                      </div>
-                    )}
                     <div>
-                      <span className="text-[#8A90A0] uppercase block">Plating:</span>
-                      <span className="font-semibold text-[#12141A]">Triple Rhodium Mirror Dip</span>
+                      <span className="text-[#8A90A0] uppercase block">Craftsmanship:</span>
+                      <span className="font-semibold text-[#12141A]">Faraz Faheem Atelier</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8A90A0] uppercase block">Authenticity:</span>
+                      <span className="font-semibold text-[#C5A059] flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5" /> 100% 925 Hallmarked
+                      </span>
                     </div>
                   </div>
                 </div>

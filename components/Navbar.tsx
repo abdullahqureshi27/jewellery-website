@@ -72,6 +72,7 @@ export default function Navbar() {
     { name: 'Ear rings', href: '/shop?category=earrings' },
     { name: 'Bracelets', href: '/shop?category=bracelets' },
     { name: 'Bridal', href: '/shop?category=bridal' },
+    { name: 'Rings', href: '/shop?category=rings' },
   ];
 
   // Real-time matching logic across title and description
